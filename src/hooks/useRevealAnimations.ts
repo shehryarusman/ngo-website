@@ -20,19 +20,16 @@ export function useRevealAnimations() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          const target = entry.target as HTMLElement;
-          const isVisible = target.classList.contains("visible");
-
-          if (!isVisible && entry.intersectionRatio >= 0.24) {
+          if (entry.isIntersecting) {
             entry.target.classList.add("visible");
-          } else if (isVisible && entry.intersectionRatio <= 0.08) {
+          } else {
             entry.target.classList.remove("visible");
           }
         });
       },
       {
-        threshold: [0, 0.08, 0.18, 0.24, 0.4, 0.65, 1],
-        rootMargin: "0px 0px -2% 0px",
+        threshold: [0, 0.01],
+        rootMargin: "0px",
       }
     );
 

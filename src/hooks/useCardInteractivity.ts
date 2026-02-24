@@ -22,6 +22,8 @@ export function useCardInteractivity() {
       let targetY = 0;
       let currentX = 0;
       let currentY = 0;
+      let targetLift = 0;
+      let currentLift = 0;
       let isHovering = false;
       let startX = 0;
       let startY = 0;
@@ -30,6 +32,7 @@ export function useCardInteractivity() {
       const animate = () => {
         currentX += (targetX - currentX) * 0.14;
         currentY += (targetY - currentY) * 0.14;
+        currentLift += (targetLift - currentLift) * 0.16;
 
         card.style.setProperty("--card-move-x", `${currentX.toFixed(2)}px`);
         card.style.setProperty("--card-move-y", `${currentY.toFixed(2)}px`);
@@ -37,11 +40,27 @@ export function useCardInteractivity() {
         const tiltY = Math.max(-2.4, Math.min(2.4, -currentY * 0.15));
         card.style.setProperty("--card-tilt-x", `${tiltX.toFixed(2)}deg`);
         card.style.setProperty("--card-tilt-y", `${tiltY.toFixed(2)}deg`);
+        card.style.setProperty("--card-lift", `${currentLift.toFixed(2)}px`);
+
+        const nearX = Math.max(-12, Math.min(12, -currentX * 0.7));
+        const nearY = 14 + currentY * 1.1 + currentLift * 0.8;
+        const farX = Math.max(-20, Math.min(20, -currentX * 1.35));
+        const farY = 34 + currentY * 1.8 + currentLift * 1.5;
+        card.style.setProperty("--card-shadow-near-x", `${nearX.toFixed(2)}px`);
+        card.style.setProperty("--card-shadow-near-y", `${nearY.toFixed(2)}px`);
+        card.style.setProperty("--card-shadow-far-x", `${farX.toFixed(2)}px`);
+        card.style.setProperty("--card-shadow-far-y", `${farY.toFixed(2)}px`);
+
+        const glossX = Math.max(8, Math.min(92, 50 + currentX * 2.4));
+        const glossY = Math.max(4, Math.min(84, 22 + currentY * 1.5));
+        card.style.setProperty("--card-gloss-x", `${glossX.toFixed(2)}%`);
+        card.style.setProperty("--card-gloss-y", `${glossY.toFixed(2)}%`);
 
         const xDiff = Math.abs(targetX - currentX);
         const yDiff = Math.abs(targetY - currentY);
+        const liftDiff = Math.abs(targetLift - currentLift);
 
-        if (xDiff < 0.08 && yDiff < 0.08) {
+        if (xDiff < 0.08 && yDiff < 0.08 && liftDiff < 0.08) {
           frameId = 0;
           return;
         }
@@ -62,6 +81,7 @@ export function useCardInteractivity() {
         startY = event.clientY;
         targetX = 0;
         targetY = hoverSettleY;
+        targetLift = 7;
         schedule();
       };
 
@@ -83,6 +103,7 @@ export function useCardInteractivity() {
         isHovering = false;
         targetX = 0;
         targetY = 0;
+        targetLift = 0;
         schedule();
       };
 
@@ -94,8 +115,15 @@ export function useCardInteractivity() {
         if (frameId !== 0) {
           window.cancelAnimationFrame(frameId);
         }
+        card.style.setProperty("--card-lift", "0px");
         card.style.setProperty("--card-tilt-x", "0deg");
         card.style.setProperty("--card-tilt-y", "0deg");
+        card.style.setProperty("--card-shadow-near-x", "0px");
+        card.style.setProperty("--card-shadow-near-y", "14px");
+        card.style.setProperty("--card-shadow-far-x", "0px");
+        card.style.setProperty("--card-shadow-far-y", "34px");
+        card.style.setProperty("--card-gloss-x", "40%");
+        card.style.setProperty("--card-gloss-y", "16%");
         card.removeEventListener("mouseenter", handleMouseEnter);
         card.removeEventListener("mousemove", handleMouseMove);
         card.removeEventListener("mouseleave", handleMouseLeave);

@@ -107,13 +107,17 @@ export function ParallaxImage({
 
       if (visiblePixels <= 0 || maxVisiblePixels <= 0) {
         targetOpacityRef.current = 0;
-      } else if (rect.top >= 0 && rect.bottom <= viewportHeight) {
-        targetOpacityRef.current = 1;
       } else {
-        targetOpacityRef.current = Math.max(
-          0,
-          Math.min(1, visiblePixels / maxVisiblePixels)
-        );
+        if (rect.height > viewportHeight) {
+          targetOpacityRef.current = 1;
+        } else {
+          const hiddenTop = Math.max(0, -rect.top);
+          const hiddenBottom = Math.max(0, rect.bottom - viewportHeight);
+          const clipped = Math.max(hiddenTop, hiddenBottom);
+          const fadeDistance = Math.max(70, Math.min(190, rect.height * 0.36));
+          const fadeProgress = Math.max(0, Math.min(1, clipped / fadeDistance));
+          targetOpacityRef.current = 1 - fadeProgress;
+        }
       }
 
       if (frameRef.current === 0) {

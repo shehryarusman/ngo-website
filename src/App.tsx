@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { SiteFooter } from "./components/layout/SiteFooter";
 import { SiteHeader } from "./components/layout/SiteHeader";
+import { useButtonInteractivity } from "./hooks/useButtonInteractivity";
 import { useCardInteractivity } from "./hooks/useCardInteractivity";
 import { useRevealAnimations } from "./hooks/useRevealAnimations";
 import { AboutPage } from "./pages/AboutPage";
@@ -20,6 +21,7 @@ function App() {
 
   useRevealAnimations();
   useCardInteractivity();
+  useButtonInteractivity();
 
   useEffect(() => {
     const timer = window.setTimeout(() => setIsBooting(false), 480);
