@@ -1,6 +1,5 @@
 :root {
   --bg: #f2f4f6;
-  --bg-image: url("https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=2800&q=90");
   --surface: #ffffff;
   --surface-strong: #f8fafc;
   --ink: #0d1b2a;
@@ -40,12 +39,9 @@ body::before {
   inset: 0;
   z-index: -3;
   background-image:
-    linear-gradient(rgba(242, 244, 246, 0.38), rgba(242, 244, 246, 0.54)),
-    var(--bg-image);
-  background-size: cover;
-  background-position: center 28%;
-  background-attachment: fixed;
-  filter: saturate(1.02) contrast(1.01) brightness(0.97);
+    linear-gradient(135deg, rgba(10, 90, 115, 0.08), transparent 34%),
+    linear-gradient(225deg, rgba(200, 155, 95, 0.12), transparent 38%),
+    linear-gradient(180deg, #f7f9fb 0%, #eef3f6 100%);
 }
 
 a {
@@ -145,9 +141,9 @@ p {
   border: 1px solid var(--line);
   box-shadow: 0 10px 28px rgba(13, 27, 42, 0.08);
   backdrop-filter: blur(10px);
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(110px, 1fr) auto minmax(180px, 1fr);
   align-items: center;
-  justify-content: space-between;
   gap: 1rem;
   position: sticky;
   top: 0.75rem;
@@ -166,28 +162,93 @@ p {
 .header-nav {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 0.9rem;
+  justify-content: center;
+  gap: 0.28rem;
 }
 
-.header-nav a {
+.nav-menu {
+  position: relative;
+}
+
+.header-nav a,
+.nav-link {
   text-decoration: none;
   color: var(--ink-muted);
   font-weight: 600;
   font-size: 0.9rem;
-  padding: 0.35rem 0.5rem;
+  padding: 0.46rem 0.66rem;
   border-radius: 999px;
   transition: background 0.2s ease, color 0.2s ease;
 }
 
-.header-nav a:hover {
+.header-nav a:hover,
+.nav-menu:focus-within .nav-link {
   background: #eef2f6;
   color: var(--ink);
+}
+
+.nav-dropdown {
+  position: absolute;
+  top: calc(100% + 0.48rem);
+  left: 50%;
+  min-width: 230px;
+  padding: 0.22rem;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 8px);
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease;
+}
+
+.nav-dropdown::before {
+  content: none;
+}
+
+.nav-dropdown a {
+  display: block;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.62);
+  border-radius: 999px;
+  padding: 0.68rem 0.86rem;
+  margin-top: 0.42rem;
+  color: #183246;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.76);
+  box-shadow:
+    0 12px 28px rgba(13, 27, 42, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  white-space: nowrap;
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.nav-dropdown a:hover {
+  background: rgba(255, 255, 255, 0.94);
+  border-color: rgba(10, 90, 115, 0.22);
+  box-shadow: 0 16px 34px rgba(13, 27, 42, 0.16);
+  transform: translateY(-1px);
+}
+
+.nav-dropdown.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
 }
 
 .header-cta {
   display: flex;
   gap: 0.62rem;
+  justify-content: flex-end;
 }
 
 .btn {
@@ -284,6 +345,7 @@ p {
 .section-block {
   display: grid;
   gap: 0.95rem;
+  scroll-margin-top: 120px;
 }
 
 .section-heading {
@@ -612,6 +674,14 @@ p {
   background: linear-gradient(145deg, #ffffff 0%, #f7fafc 100%);
 }
 
+.about-story-grid .about-story-card {
+  grid-column: span 6;
+  min-height: 230px;
+  display: grid;
+  align-content: center;
+  gap: 0.58rem;
+}
+
 .metrics-grid .metric-card {
   grid-column: span 3;
   min-height: 170px;
@@ -739,6 +809,73 @@ p {
 .leader-role {
   font-weight: 700;
   color: #345063;
+}
+
+.board-preview-grid {
+  align-items: stretch;
+}
+
+.board-preview-grid .board-preview-card {
+  grid-column: span 6;
+  min-height: 310px;
+  display: grid;
+  align-content: start;
+  gap: 0.66rem;
+}
+
+.board-preview-card .btn {
+  width: fit-content;
+  margin-top: 0.25rem;
+}
+
+.board-page .section-heading-card {
+  grid-column: span 12;
+}
+
+.board-profile-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.board-profile-card {
+  display: grid;
+  gap: 1rem;
+  padding: clamp(1.15rem, 2.8vw, 1.8rem);
+}
+
+.board-profile-header {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 0.9rem;
+}
+
+.board-pronouns {
+  margin-top: 0.18rem;
+  color: #5a7082;
+  font-weight: 700;
+}
+
+.board-profile-intro {
+  color: #233d52;
+  font-size: 1.02rem;
+}
+
+.board-profile-sections {
+  display: grid;
+  gap: 0.86rem;
+}
+
+.board-profile-sections section {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.board-profile-sections h3 {
+  color: #16354b;
+  font-size: 1.04rem;
 }
 
 .timeline-grid .timeline-card {
@@ -1050,10 +1187,29 @@ p {
 }
 
 .footer-column a {
+  width: fit-content;
   text-decoration: none;
-  color: #335166;
-  font-weight: 600;
+  color: #21445d;
+  font-weight: 750;
   font-size: 0.92rem;
+  border: 1px solid rgba(13, 27, 42, 0.1);
+  border-radius: 999px;
+  padding: 0.4rem 0.68rem;
+  background: #f8fbfd;
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease,
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.footer-column a:hover {
+  color: #0f3448;
+  border-color: rgba(10, 90, 115, 0.22);
+  background: #ffffff;
+  box-shadow: 0 10px 20px rgba(13, 27, 42, 0.08);
+  transform: translateY(-1px);
 }
 
 .footer-column p {
@@ -1094,21 +1250,33 @@ p {
 @media (max-width: 1120px) {
   .site-header {
     border-radius: 20px;
-    flex-direction: column;
-    align-items: stretch;
+    grid-template-columns: 1fr;
+    align-items: center;
   }
 
   .header-nav {
     justify-content: center;
+    flex-wrap: wrap;
   }
 
   .header-cta {
-    justify-content: flex-end;
+    justify-content: center;
+  }
+
+  .nav-dropdown {
+    left: 0;
+    transform: translate(0, 8px);
+  }
+
+  .nav-dropdown.is-open {
+    transform: translate(0, 0);
   }
 
   .page-hero .hero-main,
   .page-hero .hero-image,
   .page-hero .hero-side,
+  .about-story-grid .about-story-card,
+  .board-preview-grid .board-preview-card,
   .insight-linked-grid > .section-heading-card,
   .insight-rotator-card,
   .insight-action-card,

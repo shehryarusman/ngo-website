@@ -23,7 +23,7 @@ export function DonationPage() {
   const [frequency, setFrequency] = useState<DonationFrequency>("monthly");
   const [selectedAmount, setSelectedAmount] = useState<number>(100);
   const [customAmount, setCustomAmount] = useState<string>("");
-  const [campaignId, setCampaignId] = useState("healthcare");
+  const [campaignId, setCampaignId] = useState("research-internship");
   const [note, setNote] = useState("");
   const [donor, setDonor] = useState<DonorProfile>(initialDonor);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -93,7 +93,7 @@ export function DonationPage() {
               Back To Home
             </Link>
             <Link to="/impact" className="btn btn-primary">
-              View Impact
+              View How We Work
             </Link>
           </div>
         </BentoCard>
@@ -108,8 +108,8 @@ export function DonationPage() {
         </BentoCard>
         <BentoCard className="donation-media reveal">
           <ParallaxImage
-            src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=1800&q=88"
-            alt="Field healthcare support"
+            src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=1800&q=84"
+            alt="Science laboratory workspace"
             intensity={14}
           />
         </BentoCard>
@@ -174,10 +174,10 @@ export function DonationPage() {
               value={campaignId}
               onChange={(event) => setCampaignId(event.target.value)}
             >
-              <option value="healthcare">Healthcare Access</option>
-              <option value="education">Education Equity</option>
-              <option value="livelihoods">Livelihood Growth</option>
-              <option value="water">Clean Water Infrastructure</option>
+              <option value="research-internship">Research Internship</option>
+              <option value="arts-programs">Arts Programs</option>
+              <option value="science-mentorship">Science Mentorship</option>
+              <option value="general-support">General Support</option>
               <option value="emergency">Emergency Response</option>
             </select>
           </label>

@@ -9,30 +9,30 @@ export function ImpactPage() {
   return (
     <main className="page-container">
       <PageHero
-        eyebrow="Impact"
-        title="Evidence over assumptions."
-        description="We track outcomes at program, partner, and community levels to ensure decisions are grounded in measurable evidence."
-        imageSrc="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=1800&q=88"
-        imageAlt="Field data collection meeting"
-        primaryCta={{ label: "Read Stories", to: "/stories" }}
+        eyebrow="How We Work"
+        title="Clear governance for student opportunity."
+        description="We track programs, funding, partner commitments, and student-facing outcomes so ARISE can grow with discipline and transparency."
+        imageSrc="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1800&q=84"
+        imageAlt="Documents and reporting dashboard"
+        primaryCta={{ label: "Read Our Story", to: "/about#story" }}
         secondaryCta={{ label: "Support This Work", to: "/donate" }}
         rightContent={
           <>
             <p className="eyebrow">Reporting Cycle</p>
             <h3>Quarterly And Annual Reviews</h3>
             <p>
-              Country teams report KPI progress, budget variance, and operational
-              risks to a central governance board each quarter.
+              Program progress, budget variance, and operational risks are
+              reviewed against board-approved expectations.
             </p>
           </>
         }
       />
 
-      <section className="section-block">
+      <section id="operations" className="section-block">
         <SectionHeading
-          eyebrow="Latest Results"
-          title="Operational Metrics"
-          description="Recent impact and delivery indicators from active portfolios."
+          eyebrow="Operations"
+          title="Operating Snapshot"
+          description="Current organizational and program indicators for ARISE."
         />
         <div className="bento-grid impact-snapshots-grid">
           {impactSnapshots.map((snapshot) => (
@@ -44,11 +44,11 @@ export function ImpactPage() {
         </div>
       </section>
 
-      <section className="section-block">
+      <section id="financials" className="section-block">
         <SectionHeading
-          eyebrow="Reports"
+          eyebrow="Financials"
           title="Public Documentation"
-          description="Core reports shared with funders, partners, and communities."
+          description="Core reports prepared for donors, partners, and community stakeholders."
         />
         <div className="bento-grid reports-grid">
           {reports.map((report) => (
@@ -63,18 +63,18 @@ export function ImpactPage() {
           <BentoCard className="report-media-card reveal">
             <ParallaxImage
               src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1800&q=88"
-              alt="Impact analyst reviewing reports"
+              alt="Program reporting documents"
               intensity={13}
             />
           </BentoCard>
         </div>
       </section>
 
-      <section className="section-block">
+      <section id="funding" className="section-block">
         <div className="bento-grid">
           <BentoCard className="wide-cta-card reveal">
             <p className="eyebrow">Support The Next Cycle</p>
-            <h2>Funding enables scaled, measurable program delivery.</h2>
+            <h2>Funding opens access to serious educational opportunity.</h2>
             <p>
               Contributions are tied to program budgets and reviewed in public
               reporting cycles.

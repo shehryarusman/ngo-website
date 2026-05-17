@@ -25,9 +25,8 @@ export function useCardInteractivity() {
       let targetLift = 0;
       let currentLift = 0;
       let isHovering = false;
-      let startX = 0;
-      let startY = 0;
-      const hoverSettleY = 4;
+      let entryX = 0;
+      let entryY = 0;
 
       const animate = () => {
         currentX += (targetX - currentX) * 0.14;
@@ -77,10 +76,19 @@ export function useCardInteractivity() {
 
       const handleMouseEnter = (event: MouseEvent) => {
         isHovering = true;
-        startX = event.clientX;
-        startY = event.clientY;
-        targetX = 0;
-        targetY = hoverSettleY;
+        const rect = card.getBoundingClientRect();
+        entryX = event.clientX - rect.left;
+        entryY = event.clientY - rect.top;
+        const fromLeft = entryX;
+        const fromRight = rect.width - entryX;
+        const fromTop = entryY;
+        const fromBottom = rect.height - entryY;
+        const closestEdge = Math.min(fromLeft, fromRight, fromTop, fromBottom);
+
+        targetX =
+          closestEdge === fromLeft ? 7 : closestEdge === fromRight ? -7 : 0;
+        targetY =
+          closestEdge === fromTop ? 7 : closestEdge === fromBottom ? -7 : 0;
         targetLift = 7;
         schedule();
       };
@@ -91,11 +99,21 @@ export function useCardInteractivity() {
         }
 
         const rect = card.getBoundingClientRect();
-        const dx = (event.clientX - startX) / rect.width;
-        const dy = (event.clientY - startY) / rect.height;
+        const localX = event.clientX - rect.left;
+        const localY = event.clientY - rect.top;
+        const centeredX = localX / rect.width - 0.5;
+        const centeredY = localY / rect.height - 0.5;
+        const entryInfluenceX = (event.clientX - rect.left - entryX) / rect.width;
+        const entryInfluenceY = (event.clientY - rect.top - entryY) / rect.height;
 
-        targetX = Math.max(-11, Math.min(11, dx * 20));
-        targetY = Math.max(-2, Math.min(12, hoverSettleY + dy * 16));
+        targetX = Math.max(
+          -11,
+          Math.min(11, centeredX * 12 + entryInfluenceX * 7)
+        );
+        targetY = Math.max(
+          -11,
+          Math.min(11, centeredY * 12 + entryInfluenceY * 7)
+        );
         schedule();
       };
 

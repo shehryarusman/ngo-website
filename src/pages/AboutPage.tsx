@@ -1,102 +1,109 @@
+import { Link } from "react-router-dom";
 import { BentoCard } from "../components/common/BentoCard";
 import { PageHero } from "../components/common/PageHero";
-import { ParallaxImage } from "../components/common/ParallaxImage";
 import { SectionHeading } from "../components/common/SectionHeading";
-import { aboutValues, leadership } from "../data/siteContent";
-
-const timeline = [
-  {
-    year: "2015",
-    detail: "Organization founded with a rural maternal healthcare initiative.",
-  },
-  {
-    year: "2018",
-    detail: "Education continuity program launched across 3 regions.",
-  },
-  {
-    year: "2021",
-    detail: "Unified impact measurement and donor reporting platform deployed.",
-  },
-  {
-    year: "2024",
-    detail: "Cross-country livelihoods strategy expanded to 12 countries.",
-  },
-];
+import { leadership } from "../data/siteContent";
 
 export function AboutPage() {
   return (
     <main className="page-container">
       <PageHero
-        eyebrow="About"
-        title="Built for accountability, not optics."
-        description="We are an independent NGO focused on durable social outcomes through long-term partnerships, program discipline, and transparent reporting."
-        imageSrc="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1800&q=88"
-        imageAlt="Team meeting in field office"
-        primaryCta={{ label: "Read Impact", to: "/impact" }}
-        secondaryCta={{ label: "View Programs", to: "/programs" }}
+        eyebrow="Who We Are"
+        title="Opening access to arts, science, and research."
+        description="ARISE Foundation is built to connect students with high-quality educational opportunities through disciplined programs, trusted partners, and transparent governance."
+        imageSrc="https://images.unsplash.com/photo-1581093458791-9f3c3900df7b?auto=format&fit=crop&w=1800&q=84"
+        imageAlt="Research workspace with laboratory glassware"
+        primaryCta={{ label: "Meet The Board", to: "/board" }}
+        secondaryCta={{ label: "View What We Do", to: "/programs" }}
         rightContent={
           <>
-            <p className="eyebrow">Compliance</p>
-            <h3>Governance Standards</h3>
+            <p className="eyebrow">Mission</p>
+            <h3>Accessible Opportunity</h3>
             <p>
-              Independent audits, safeguarding controls, and quarterly finance
-              disclosures guide our operations.
+              We focus on practical access to scientific, artistic, and
+              research-based environments where students can build confidence
+              and capability.
             </p>
           </>
         }
       />
 
-      <section className="section-block">
+      <section id="story" className="section-block">
         <SectionHeading
-          eyebrow="Principles"
-          title="How We Operate"
-          description="Field execution decisions are shaped by evidence, local leadership, and strict governance."
+          eyebrow="Story"
+          title="About The Bigger Picture"
+          description="ARISE was created to make serious educational opportunity easier to reach for students with curiosity, discipline, and creative ambition."
+        />
+        <div className="bento-grid about-story-grid">
+          <BentoCard className="about-story-card reveal">
+            <h3>Inspired By Access</h3>
+            <p>
+              The foundation's work is centered on opening doors to places and
+              programs that can change how students see their own futures:
+              research labs, arts spaces, mentorship networks, and educational
+              communities built around real participation.
+            </p>
+          </BentoCard>
+          <BentoCard className="about-story-card reveal">
+            <h3>Built For Trust</h3>
+            <p>
+              Programs are designed with institutional partners and community
+              spaces so each initiative has a clear purpose, accountable
+              oversight, and a path for students to keep growing after the
+              program ends.
+            </p>
+          </BentoCard>
+        </div>
+      </section>
+
+      <section id="role" className="section-block">
+        <SectionHeading
+          eyebrow="Role"
+          title="Mission And Current Activities"
+          description="ARISE is beginning with focused 2026 programming that connects students to hands-on research, arts, and mentorship opportunities."
         />
         <div className="bento-grid value-grid">
-          {aboutValues.map((value) => (
-            <BentoCard key={value.title} className="value-card reveal">
-              <h3>{value.title}</h3>
-              <p>{value.text}</p>
+          {[
+            [
+              "Science Access",
+              "Students enter real research environments and learn through guided, hands-on exposure.",
+            ],
+            [
+              "Arts Opportunity",
+              "Creative students gain pathways to mentorship, preparation, and program support.",
+            ],
+            [
+              "Research Readiness",
+              "Programs emphasize preparation, professionalism, curiosity, and ethical participation.",
+            ],
+            [
+              "Community Partnerships",
+              "Local institutions and community spaces help keep opportunities practical and accountable.",
+            ],
+          ].map(([title, text]) => (
+            <BentoCard key={title} className="value-card reveal">
+              <h3>{title}</h3>
+              <p>{text}</p>
             </BentoCard>
           ))}
         </div>
       </section>
 
-      <section className="section-block">
+      <section id="board" className="section-block">
         <SectionHeading
-          eyebrow="Leadership"
-          title="Executive Team"
-          description="Cross-sector expertise in healthcare systems, education strategy, and partnerships."
+          eyebrow="Board"
+          title="Board of Directors"
+          description="ARISE is led by directors with scientific, educational, and artistic experience."
         />
-        <div className="bento-grid leadership-grid">
+        <div className="bento-grid board-preview-grid">
           {leadership.map((member) => (
-            <BentoCard key={member.name} className="leader-card reveal">
-              <div className="leader-image">
-                <ParallaxImage
-                  src={member.image}
-                  alt={member.name}
-                  intensity={36}
-                />
-              </div>
+            <BentoCard key={member.name} className="board-preview-card reveal">
               <h3>{member.name}</h3>
               <p className="leader-role">{member.role}</p>
               <p>{member.bio}</p>
-            </BentoCard>
-          ))}
-        </div>
-      </section>
-
-      <section className="section-block">
-        <SectionHeading
-          eyebrow="Timeline"
-          title="Organizational Milestones"
-          description="A concise overview of expansion and operational maturity."
-        />
-        <div className="bento-grid timeline-grid">
-          {timeline.map((item) => (
-            <BentoCard key={item.year} className="timeline-card reveal">
-              <h3>{item.year}</h3>
-              <p>{item.detail}</p>
+              <Link className="btn btn-soft" to="/board">
+                Read Full Bio
+              </Link>
             </BentoCard>
           ))}
         </div>

@@ -9,30 +9,30 @@ export function ProgramsPage() {
   return (
     <main className="page-container">
       <PageHero
-        eyebrow="Programs"
-        title="Integrated programs designed for real delivery."
-        description="Our portfolio combines healthcare, education, infrastructure, and livelihoods to address linked community needs."
-        imageSrc="https://images.unsplash.com/photo-1527525443983-6e60c75fff46?auto=format&fit=crop&w=1800&q=88"
-        imageAlt="Program team in field"
+        eyebrow="What We Do"
+        title="Programs that connect students to real opportunity."
+        description="Our portfolio begins with research internships, arts preparation, mentorship, and community-based educational support."
+        imageSrc="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=1800&q=84"
+        imageAlt="Students working in a science laboratory"
         primaryCta={{ label: "Support Programs", to: "/donate" }}
-        secondaryCta={{ label: "See Outcomes", to: "/impact" }}
+        secondaryCta={{ label: "See How We Work", to: "/impact" }}
         rightContent={
           <>
             <p className="eyebrow">Model</p>
-            <h3>Country Portfolio Structure</h3>
+            <h3>Partner-Led Access</h3>
             <p>
-              Every country implementation plan includes local partners,
-              measurable KPIs, and annual review milestones.
+              Each program is built with educational institutions and community
+              spaces so participation is practical, accountable, and meaningful.
             </p>
           </>
         }
       />
 
-      <section className="section-block">
+      <section id="areas" className="section-block">
         <SectionHeading
-          eyebrow="Program Areas"
-          title="Core Delivery Streams"
-          description="Each program line has dedicated teams, budget controls, and impact measurement."
+          eyebrow="Areas"
+          title="Core Program Areas"
+          description="Each area is designed for clear student benefit, partner accountability, and future reporting."
         />
         <div className="bento-grid program-areas-grid">
           {programAreas.map((area, index) => (
@@ -51,14 +51,15 @@ export function ProgramsPage() {
         </div>
       </section>
 
-      <section className="section-block">
+      <section id="programs" className="section-block">
         <div className="bento-grid">
-          <BentoCard className="wide-cta-card reveal">
+          <BentoCard id="internship" className="wide-cta-card reveal">
             <p className="eyebrow">Implementation Approach</p>
-            <h2>Program teams coordinate through shared field operations.</h2>
+            <h2>Internship program</h2>
             <p>
-              Health, education, and livelihoods leads work from one country
-              operations model to reduce overhead and improve continuity.
+              ARISE's first active program welcomes students into a structured
+              summer research experience with hands-on laboratory exposure,
+              mentorship, and clear expectations for professional growth.
             </p>
             <div className="button-row">
               <Link className="btn btn-primary" to="/contact">
@@ -69,6 +70,39 @@ export function ProgramsPage() {
               </Link>
             </div>
           </BentoCard>
+        </div>
+      </section>
+
+      <section id="locations-history" className="section-block">
+        <SectionHeading
+          eyebrow="Locations & History"
+          title="Programs are shaped by trusted partnerships."
+          description="ARISE is beginning with focused local collaborations and a summer 2026 research opening."
+        />
+        <div className="bento-grid timeline-grid">
+          {[
+            [
+              "Philadelphia Region",
+              "Initial programming centers on accessible education, science, and research-based opportunity.",
+            ],
+            [
+              "Penn Research Access",
+              "Students are welcomed into a hands-on mRNA research environment during the summer 2026 opening.",
+            ],
+            [
+              "Community Spaces",
+              "Local partners help identify, prepare, and support students across arts and science pathways.",
+            ],
+            [
+              "2025-2026",
+              "ARISE launches from governance formation into its first active student-facing programs.",
+            ],
+          ].map(([title, detail]) => (
+            <BentoCard key={title} className="timeline-card reveal">
+              <h3>{title}</h3>
+              <p>{detail}</p>
+            </BentoCard>
+          ))}
         </div>
       </section>
     </main>

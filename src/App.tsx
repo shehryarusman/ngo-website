@@ -6,6 +6,7 @@ import { useButtonInteractivity } from "./hooks/useButtonInteractivity";
 import { useCardInteractivity } from "./hooks/useCardInteractivity";
 import { useRevealAnimations } from "./hooks/useRevealAnimations";
 import { AboutPage } from "./pages/AboutPage";
+import { BoardPage } from "./pages/BoardPage";
 import { ContactPage } from "./pages/ContactPage";
 import { DonationPage } from "./pages/DonationPage";
 import { GetInvolvedPage } from "./pages/GetInvolvedPage";
@@ -13,7 +14,6 @@ import { HomePage } from "./pages/HomePage";
 import { ImpactPage } from "./pages/ImpactPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { ProgramsPage } from "./pages/ProgramsPage";
-import { StoriesPage } from "./pages/StoriesPage";
 
 function App() {
   const [isBooting, setIsBooting] = useState(true);
@@ -48,7 +48,7 @@ function App() {
       {isBooting ? (
         <div className="app-loader" aria-hidden="true">
           <div className="loader-orb" />
-          <p>Preparing impact dashboard</p>
+          <p>Preparing ARISE Foundation</p>
         </div>
       ) : null}
       <div className="noise-layer" />
@@ -56,9 +56,9 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/board" element={<BoardPage />} />
         <Route path="/programs" element={<ProgramsPage />} />
         <Route path="/impact" element={<ImpactPage />} />
-        <Route path="/stories" element={<StoriesPage />} />
         <Route path="/get-involved" element={<GetInvolvedPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/donate" element={<DonationPage />} />

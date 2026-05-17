@@ -14,7 +14,7 @@ export function ContactPage() {
         imageSrc="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1800&q=88"
         imageAlt="Professional team collaboration"
         primaryCta={{ label: "Donate", to: "/donate" }}
-        secondaryCta={{ label: "View Programs", to: "/programs" }}
+        secondaryCta={{ label: "View What We Do", to: "/programs" }}
         rightContent={
           <>
             <p className="eyebrow">Response SLA</p>

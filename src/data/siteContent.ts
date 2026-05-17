@@ -1,172 +1,143 @@
-export const homeMetrics = [
-  { value: "12", label: "Countries with active field operations" },
-  { value: "152", label: "Local partners under multi-year agreements" },
-  { value: "$18.4M", label: "Annual program spend directly deployed" },
-  { value: "93%", label: "Program budget allocated to field execution" },
-];
-
-export const priorities = [
-  {
-    title: "Primary Healthcare",
-    description:
-      "Maternal care, mobile clinics, diagnostics, and treatment continuity in low-access districts.",
-  },
-  {
-    title: "Education Continuity",
-    description:
-      "School retention support, safe infrastructure, and practical digital learning pathways.",
-  },
-  {
-    title: "Economic Resilience",
-    description:
-      "Skills pipelines, micro-enterprise grants, and local market linkages for family income stability.",
-  },
-];
-
-export const aboutValues = [
-  {
-    title: "Local Ownership",
-    text: "Programs are co-designed with local governments, civil society, and community councils.",
-  },
-  {
-    title: "Measurable Results",
-    text: "Every initiative has baseline metrics, quarterly checkpoints, and annual public outcomes.",
-  },
-  {
-    title: "Financial Transparency",
-    text: "We publish spend breakdowns by region, program type, and funding source.",
-  },
-  {
-    title: "Operational Discipline",
-    text: "Cross-functional risk controls govern procurement, safeguarding, and compliance.",
-  },
-];
-
 export const leadership = [
   {
-    name: "Dr. Laila Rahman",
-    role: "Executive Director",
-    bio: "Public health specialist with 16 years leading maternal care and vaccination systems.",
-    image:
-      "https://images.unsplash.com/photo-1573497019236-61f323342eb9?auto=format&fit=crop&w=1200&q=88",
+    name: "Dr. Elena Atochina-Vasserman, M.D., Ph.D.",
+    role: "President, Executive Director",
+    bio: "Elena oversees the design and evaluation of science-focused grant programs supporting emerging researchers, and welcomes collaboration with educators, students, and partners devoted to advancing science and research.",
   },
   {
-    name: "Marcus Dunn",
-    role: "Director, Education Programs",
-    bio: "Former national curriculum advisor focused on school retention in fragile contexts.",
-    image:
-      "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=1200&q=88",
+    name: "Jessica Vasserman, B.S.",
+    role: "Director, Arts Programs",
+    bio: "Jess leads the evaluation and preparation of arts-related grant submissions, and welcomes collaborations and discussions regarding ARISE's arts and science initiatives.",
+  },
+];
+
+export const boardMembers = [
+  {
+    name: "Dr. Elena Atochina-Vasserman, M.D., Ph.D.",
+    role: "President, Executive Director",
+    pronouns: "she/her",
+    intro:
+      "As a distinguished scientist and educator with more than three decades of experience in immunology, pulmonary biology, and advanced therapeutic delivery systems, working extensively with mRNA vaccine technology, Elena brings deep scientific insight and a commitment to fostering education and research to the ARISE Foundation.",
+    sections: [
+      {
+        title: "Professional Background",
+        body:
+          "As a Research Assistant Professor of Medicine in the Infectious Diseases Division at the University of Pennsylvania, Elena has made extensive contributions to inflammatory lung disease, innate immunity, and targeted drug-delivery systems, including major studies in surfactant protein biology, endothelial inflammation, and molecular mechanisms underlying pulmonary dysfunction. In recent years, she has led innovative work developing next-generation, one-component platforms for mRNA delivery, advancing solutions for scalability, accessibility, and precision targeting in vaccines. Her publications appear in leading journals including Science, JACS, and Nature Communications. She has also served on numerous scientific review committees, including NIH panels and national research foundations.",
+      },
+      {
+        title: "Why She Serves",
+        body:
+          "Elena's dedication to the ARISE Foundation is grounded in her belief that science and education are transformative forces. Having mentored young researchers for decades, she is committed to supporting students pursuing careers in science by providing access to resources and opportunities that accelerate their development.",
+      },
+      {
+        title: "Personal Touch",
+        body:
+          "Originally trained in medicine and biophysics, Elena has conducted research across Russia and the United States for more than three decades. She is known for her collaborative spirit, scientific rigor, and dedication to nurturing future scientists.",
+      },
+      {
+        title: "Role at ARISE",
+        body:
+          "Elena oversees the design and evaluation of science-focused grant programs supporting emerging researchers, and welcomes collaboration with educators, students, and partners devoted to advancing science and research.",
+      },
+    ],
   },
   {
-    name: "Asha Omondi",
-    role: "Chief Partnerships Officer",
-    bio: "Builds institutional funding, local coalition strategy, and cross-border implementation agreements.",
-    image:
-      "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=1200&q=88",
+    name: "Jessica Vasserman, B.S.",
+    role: "Director, Arts Programs",
+    pronouns: "she/her",
+    intro:
+      "Jess is an emerging leader in biomedical research and a passionate advocate for increasing accessibility to science and the arts. With experience in cutting-edge mRNA research and personal foundation in creative expression, Jess brings an interdisciplinary perspective to the ARISE Foundation.",
+    sections: [
+      {
+        title: "Professional Background",
+        body:
+          "Recently graduated with a Bachelor of Science in Biology from Drexel University, concentrated in Pathobiology with a minor in Japanese, Jess continues her pursuit of science in the Dr. Drew Weissman Lab at the Penn Institute for RNA Innovation, producing, evaluating, and purifying modified mRNA for next-generation vaccine platforms. Her work includes cell culture, mRNA optimization, and comparative analysis of delivery technologies. Earlier, she completed research through Drexel's STAR Scholars Program, studying ion channel localization in descending neurons using Drosophila models. She has co-authored multiple peer-reviewed publications and possesses extensive laboratory and analytical experience. In her spare time, she bridges her passions for biology and art as a freelance visual artist and scientific illustrator. Her illustrations have appeared across various scientific publications including the Lancet, Frontiers in Physiology, and the cover of Springer's Cardiac Bioelectric Therapy textbook.",
+      },
+      {
+        title: "Why She Serves",
+        body:
+          "Jess's passion for ARISE is rooted in her belief that both science and the arts are essential to nurturing curiosity, personal growth, and self-identity. Her academic and artistic journey inspires her commitment to supporting students who demonstrate talent in the arts and sciences.",
+      },
+      {
+        title: "Personal Touch",
+        body:
+          "Jess is an accomplished painter and musician. She's fluent in English and Russian and conversational in Japanese; she studied abroad in Tokyo and continues to practice her language skills by tutoring Japanese. She values community engagement, creativity, and interdisciplinary collaboration.",
+      },
+      {
+        title: "Role at ARISE",
+        body:
+          "Jess leads the evaluation and preparation of arts-related grant submissions, and welcomes collaborations and discussions regarding ARISE's arts and science initiatives.",
+      },
+    ],
   },
 ];
 
 export const programAreas = [
   {
-    title: "Maternal And Child Health",
+    title: "Research Internships",
     summary:
-      "Mobile prenatal screening, safe delivery support, and neonatal referrals.",
+      "Hands-on exposure to laboratory environments, scientific practice, and mentorship.",
     image:
-      "https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=1600&q=88",
+      "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=1600&q=84",
   },
   {
-    title: "School Access And Retention",
+    title: "Arts Preparation",
     summary:
-      "Attendance grants, transport safety, and teacher enablement for underserved schools.",
+      "Support for students developing portfolios, creative confidence, and artistic direction.",
     image:
-      "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1600&q=88",
+      "https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=1600&q=84",
   },
   {
-    title: "Water And Sanitation",
+    title: "Scientific Mentorship",
     summary:
-      "Community water points, filtration systems, and hygiene awareness infrastructure.",
+      "Guided conversations with educators and researchers about academic pathways.",
     image:
-      "https://images.unsplash.com/photo-1469571486292-b53601020f40?auto=format&fit=crop&w=1600&q=88",
+      "https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&w=1600&q=84",
   },
   {
-    title: "Livelihoods And Skills",
+    title: "Community Partnerships",
     summary:
-      "Vocational training, entrepreneurship grants, and market integration partnerships.",
+      "Collaboration with educational institutions and community spaces.",
     image:
-      "https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&w=1600&q=88",
+      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1600&q=84",
   },
   {
-    title: "Emergency Recovery",
+    title: "Student Readiness",
     summary:
-      "Rapid response logistics and continuity planning for post-crisis restoration.",
+      "Practical preparation for professional communication, expectations, and follow-through.",
     image:
-      "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=1600&q=88",
+      "https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?auto=format&fit=crop&w=1600&q=84",
   },
   {
-    title: "Digital Public Service Access",
+    title: "Grant Support",
     summary:
-      "Simple digital systems that connect communities to health and education services.",
+      "Evaluation and preparation of arts and science grant opportunities.",
     image:
-      "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1600&q=88",
+      "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1600&q=84",
   },
 ];
 
 export const impactSnapshots = [
-  { metric: "91,800+", context: "People served in 2025 programs" },
-  { metric: "1,460", context: "Frontline workers trained and certified" },
-  { metric: "68%", context: "Increase in prenatal screening reach" },
-  { metric: "37%", context: "Reduction in preventable clinic emergencies" },
-  { metric: "12,200", context: "Students supported with continuity grants" },
-  { metric: "84%", context: "Community projects still active after 24 months" },
+  { metric: "2025", context: "Independent NGO established" },
+  { metric: "2026", context: "First summer student programs opening" },
+  { metric: "##", context: "Students planned for hands-on mRNA research exposure" },
+  { metric: "2", context: "Initial focus areas: arts and science" },
+  { metric: "Quarterly", context: "Finance and program disclosure cadence" },
+  { metric: "Local", context: "Educational institution and community-space partnerships" },
 ];
 
 export const reports = [
   {
-    name: "2025 Annual Impact Report",
-    detail: "Program coverage, outcomes, and audited spending summaries.",
+    name: "2026 Program Opening Brief",
+    detail: "Student eligibility, partner structure, and program expectations.",
   },
   {
-    name: "Q4 2025 Financial Transparency Brief",
-    detail: "Country-level spend, partner disbursements, and operating costs.",
+    name: "Quarterly Finance Disclosure",
+    detail: "Donation allocation, operating costs, and program spend summaries.",
   },
   {
-    name: "Safeguarding And Compliance Review",
-    detail: "Risk controls, response protocols, and governance status updates.",
-  },
-];
-
-export const stories = [
-  {
-    title: "From Distance To Daily Care",
-    quote:
-      "The clinic used to be four hours away. Now community nurses visit each week and pregnancies are monitored early.",
-    person: "Mariam, Northern District",
-    image:
-      "https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=1800&q=88",
-  },
-  {
-    title: "School Attendance Recovered",
-    quote:
-      "Our retention support helped girls return to school safely and complete their term with consistent attendance.",
-    person: "Regional Education Coordinator",
-    image:
-      "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1800&q=88",
-  },
-  {
-    title: "Small Enterprise, Stable Income",
-    quote:
-      "A tailoring grant and market mentorship allowed three households to build reliable monthly income.",
-    person: "Community Enterprise Lead",
-    image:
-      "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1800&q=88",
-  },
-  {
-    title: "Water System, Health Gains",
-    quote:
-      "After installing filtration and safe water points, clinic data showed a clear drop in waterborne cases.",
-    person: "Public Health Officer",
-    image:
-      "https://images.unsplash.com/photo-1469571486292-b53601020f40?auto=format&fit=crop&w=1800&q=88",
+    name: "Safeguarding And Governance Review",
+    detail: "Student protection, partner expectations, and compliance status updates.",
   },
 ];
 
@@ -200,18 +171,8 @@ export const partnerList = [
 
 export const contactOffices = [
   {
-    city: "Washington, DC",
-    address: "1204 Unity Ave, Washington, DC 20005",
-    phone: "+1 (202) 555-0182",
-  },
-  {
-    city: "Nairobi",
-    address: "Westlands Service Hub, Waiyaki Way",
-    phone: "+254 20 555 0104",
-  },
-  {
-    city: "Lahore",
-    address: "Civic Impact Center, Gulberg III",
-    phone: "+92 42 555 0171",
+    city: "Head of Operations",
+    address: "1427 Byberry Rd, Huntingdon Valley, PA 19006",
+    phone: "ilya@arisegiving.org",
   },
 ];

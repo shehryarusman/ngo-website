@@ -28,9 +28,9 @@ export function GetInvolvedPage() {
         }
       />
 
-      <section className="section-block">
+      <section id="get-chosen" className="section-block">
         <SectionHeading
-          eyebrow="Support Tracks"
+          eyebrow="Get Chosen"
           title="How You Can Participate"
           description="Choose the involvement model aligned with your capabilities."
         />
@@ -44,9 +44,9 @@ export function GetInvolvedPage() {
         </div>
       </section>
 
-      <section className="section-block">
+      <section id="wanna-help" className="section-block">
         <SectionHeading
-          eyebrow="Partners"
+          eyebrow="Wanna Help?"
           title="Current Network"
           description="Representative partners in program delivery, funding, and research."
         />

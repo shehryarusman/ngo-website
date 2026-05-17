@@ -8,7 +8,23 @@ interface ParallaxImageProps {
 }
 
 const FALLBACK_IMAGE =
-  "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1800&q=88";
+  "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1200&q=74";
+
+function optimizeUnsplashUrl(src: string) {
+  if (!src.includes("images.unsplash.com")) {
+    return src;
+  }
+
+  try {
+    const url = new URL(src);
+    const requestedWidth = Number(url.searchParams.get("w")) || 1400;
+    url.searchParams.set("w", String(Math.min(requestedWidth, 1400)));
+    url.searchParams.set("q", "74");
+    return url.toString();
+  } catch {
+    return src;
+  }
+}
 
 export function ParallaxImage({
   src,
@@ -22,10 +38,10 @@ export function ParallaxImage({
   const currentRef = useRef(0);
   const targetOpacityRef = useRef(0);
   const currentOpacityRef = useRef(0);
-  const [resolvedSrc, setResolvedSrc] = useState(src);
+  const [resolvedSrc, setResolvedSrc] = useState(() => optimizeUnsplashUrl(src));
 
   useEffect(() => {
-    setResolvedSrc(src);
+    setResolvedSrc(optimizeUnsplashUrl(src));
   }, [src]);
 
   useEffect(() => {
@@ -125,15 +141,31 @@ export function ParallaxImage({
       }
     };
 
-    updateTarget();
-    window.addEventListener("scroll", updateTarget, { passive: true });
+    let isTracking = false;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isTracking = entry.isIntersecting;
+        if (isTracking) {
+          updateTarget();
+          window.addEventListener("scroll", updateTarget, { passive: true });
+        } else {
+          window.removeEventListener("scroll", updateTarget);
+        }
+      },
+      { rootMargin: "220px 0px" }
+    );
+
+    observer.observe(imageRef.current);
     window.addEventListener("resize", updateTarget, { passive: true });
 
     return () => {
       if (frameRef.current !== 0) {
         window.cancelAnimationFrame(frameRef.current);
       }
-      window.removeEventListener("scroll", updateTarget);
+      observer.disconnect();
+      if (isTracking) {
+        window.removeEventListener("scroll", updateTarget);
+      }
       window.removeEventListener("resize", updateTarget);
     };
   }, [intensity]);
@@ -144,6 +176,7 @@ export function ParallaxImage({
       src={resolvedSrc}
       alt={alt}
       loading="lazy"
+      decoding="async"
       onError={() => setResolvedSrc(FALLBACK_IMAGE)}
       className={["parallax-image", className].filter(Boolean).join(" ")}
     />
