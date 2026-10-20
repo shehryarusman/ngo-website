@@ -564,6 +564,9 @@ p {
   padding: 0;
   position: relative;
   isolation: isolate;
+  /* overlay stays in flow so the card grows instead of clipping long headlines */
+  display: grid;
+  align-content: end;
 }
 
 .landing-hero-grid .landing-hero-card::after {
@@ -585,10 +588,7 @@ p {
 }
 
 .landing-hero-overlay {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  position: relative;
   z-index: 2;
   padding: clamp(1.2rem, 3vw, 2rem);
   display: grid;
