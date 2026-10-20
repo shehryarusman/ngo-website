@@ -60,8 +60,13 @@ export function SiteHeader() {
 
   return (
     <header className="site-header">
-      <Link to="/" className="brand-mark">
-        ARISE
+      <Link to="/" className="brand-mark" aria-label="ARISE Foundation home">
+        <img
+          src="/brand/arise-horizontal-600.png"
+          alt="ARISE Foundation — Arts, Research, Innovation, Science and Education"
+          width={600}
+          height={236}
+        />
       </Link>
       <nav className="header-nav" aria-label="Main navigation">
         {navItems.map((item) => (
