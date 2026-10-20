@@ -100,7 +100,6 @@ export function DonationPage() {
         <BentoCard className="donation-trust reveal">
           <h3>Trust Signals</h3>
           <ul>
-            <li>Quarterly public financial audits</li>
             <li>Campaign-level allocation tracking</li>
             <li>API-ready donation intent architecture</li>
             <li>Secure checkout handoff compatibility</li>

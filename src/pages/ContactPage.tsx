@@ -73,13 +73,18 @@ export function ContactPage() {
             </form>
           </BentoCard>
           <BentoCard className="office-list-card reveal">
-            <h3>Regional Offices</h3>
+            <h3>Contact Information</h3>
             <div className="office-list">
               {contactOffices.map((office) => (
                 <article key={office.city}>
                   <h4>{office.city}</h4>
                   <p>{office.address}</p>
-                  <p>{office.phone}</p>
+                  <p>
+                    <a href={`tel:${office.phone.replace(/[^\d+]/g, "")}`}>{office.phone}</a>
+                  </p>
+                  <p>
+                    <a href={`mailto:${office.email}`}>{office.email}</a>
+                  </p>
                 </article>
               ))}
             </div>

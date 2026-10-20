@@ -41,9 +41,8 @@ export function HomePage() {
           <p className="eyebrow">Current Cycle</p>
           <h3>2026 Opening</h3>
           <p>
-            Our first programs are in action this 2026 summer. We're welcoming
-            ## students to Penn's finest mRNA research institution for real,
-            hands-on laboratory experience.
+            Our first programs are in action in 2026, including the ARISE High
+            School Scholars pilot in Thailand this November.
           </p>
         </BentoCard>
       </section>

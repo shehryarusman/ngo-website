@@ -19,7 +19,7 @@ export function ImpactPage() {
         rightContent={
           <>
             <p className="eyebrow">Reporting Cycle</p>
-            <h3>Quarterly And Annual Reviews</h3>
+            <h3>Annual Reviews</h3>
             <p>
               Program progress, budget variance, and operational risks are
               reviewed against board-approved expectations.

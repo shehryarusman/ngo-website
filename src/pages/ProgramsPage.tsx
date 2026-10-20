@@ -77,7 +77,7 @@ export function ProgramsPage() {
         <SectionHeading
           eyebrow="Locations & History"
           title="Programs are shaped by trusted partnerships."
-          description="ARISE is beginning with focused local collaborations and a summer 2026 research opening."
+          description="ARISE is beginning with focused local collaborations."
         />
         <div className="bento-grid timeline-grid">
           {[
@@ -86,15 +86,15 @@ export function ProgramsPage() {
               "Initial programming centers on accessible education, science, and research-based opportunity.",
             ],
             [
-              "Penn Research Access",
-              "Students are welcomed into a hands-on mRNA research environment during the summer 2026 opening.",
+              "University Research Labs",
+              "University-affiliated research labs offer hands-on experience with real technology in laboratory spaces.",
             ],
             [
               "Community Spaces",
               "Local partners help identify, prepare, and support students across arts and science pathways.",
             ],
             [
-              "2025-2026",
+              "2025–2026",
               "ARISE launches from governance formation into its first active student-facing programs.",
             ],
           ].map(([title, detail]) => (
