@@ -23,7 +23,7 @@ export function DonationPage() {
   const [frequency, setFrequency] = useState<DonationFrequency>("monthly");
   const [selectedAmount, setSelectedAmount] = useState<number>(100);
   const [customAmount, setCustomAmount] = useState<string>("");
-  const [campaignId, setCampaignId] = useState("research-internship");
+  const [campaignId, setCampaignId] = useState("general-support");
   const [note, setNote] = useState("");
   const [donor, setDonor] = useState<DonorProfile>(initialDonor);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -82,11 +82,10 @@ export function DonationPage() {
       <section className="bento-grid donation-hero">
         <BentoCard className="donation-copy reveal">
           <p className="eyebrow">Donation Center</p>
-          <h1>Secure giving, built for real API integration.</h1>
+          <h1>Support science and arts education.</h1>
           <p>
-            This donation page is ready for backend connection using
-            `VITE_API_BASE_URL`. Without it, a realistic mock flow keeps front
-            end development moving.
+            ARISE Foundation is a 501(c)(3) public charity. Contributions are
+            tax-deductible to the extent allowed by law.
           </p>
           <div className="button-row">
             <Link to="/" className="btn btn-soft">
@@ -98,11 +97,11 @@ export function DonationPage() {
           </div>
         </BentoCard>
         <BentoCard className="donation-trust reveal">
-          <h3>Trust Signals</h3>
+          <h3>Other Ways To Give</h3>
           <ul>
-            <li>Campaign-level allocation tracking</li>
-            <li>API-ready donation intent architecture</li>
-            <li>Secure checkout handoff compatibility</li>
+            <li>By check to ARISE Foundation, 1427 Byberry Rd, Huntingdon Valley, PA 19006</li>
+            <li>Through a donor-advised fund</li>
+            <li>Questions and receipts: info@arisegiving.org</li>
           </ul>
         </BentoCard>
         <BentoCard className="donation-media reveal">
@@ -121,6 +120,7 @@ export function DonationPage() {
             <button
               type="button"
               className={frequency === "monthly" ? "chip active" : "chip"}
+              aria-pressed={frequency === "monthly"}
               onClick={() => setFrequency("monthly")}
             >
               Monthly
@@ -128,6 +128,7 @@ export function DonationPage() {
             <button
               type="button"
               className={frequency === "one-time" ? "chip active" : "chip"}
+              aria-pressed={frequency === "one-time"}
               onClick={() => setFrequency("one-time")}
             >
               One-time
@@ -143,6 +144,7 @@ export function DonationPage() {
                 key={amount}
                 type="button"
                 className={activeAmount === amount ? "chip active" : "chip"}
+                aria-pressed={activeAmount === amount}
                 onClick={() => {
                   setCustomAmount("");
                   setSelectedAmount(amount);
@@ -173,11 +175,11 @@ export function DonationPage() {
               value={campaignId}
               onChange={(event) => setCampaignId(event.target.value)}
             >
-              <option value="research-internship">Research Internship</option>
-              <option value="arts-programs">Arts Programs</option>
-              <option value="science-mentorship">Science Mentorship</option>
               <option value="general-support">General Support</option>
-              <option value="emergency">Emergency Response</option>
+              <option value="research-internship">Research Internships</option>
+              <option value="fellowships">Graduate and Postdoctoral Fellowships</option>
+              <option value="travel-grants">Travel Grants</option>
+              <option value="arts-programs">Arts Education and Exhibitions</option>
             </select>
           </label>
           <label className="input-block">
@@ -268,18 +270,17 @@ export function DonationPage() {
           <h2>
             ${activeAmount} / {frequency === "monthly" ? "month" : "one-time"}
           </h2>
-          <p>Campaign: {campaignId}</p>
           <p>
-            Next step: Create donation intent, then redirect to your secure
-            payment processor checkout.
+            Online giving is coming soon. In the meantime, you can give by
+            check or through a donor-advised fund.
           </p>
           <button className="btn btn-primary submit-btn" disabled={isSubmitting}>
-            {isSubmitting ? "Preparing Checkout..." : "Continue To Secure Checkout"}
+            {isSubmitting ? "Checking..." : "Continue"}
           </button>
           {error ? <p className="form-feedback error">{error}</p> : null}
           {result ? (
             <p className="form-feedback success">
-              {result.message} Intent ID: {result.donationIntentId}
+              {result.message}
             </p>
           ) : null}
         </BentoCard>

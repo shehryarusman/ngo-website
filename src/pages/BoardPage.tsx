@@ -10,6 +10,7 @@ export function BoardPage() {
           eyebrow="Who We Are"
           title="Board of Directors"
           description="Leadership profiles for the ARISE Foundation board."
+          level={1}
         />
       </section>
 

@@ -55,9 +55,14 @@ export function ImpactPage() {
             <BentoCard key={report.name} className="report-card reveal">
               <h3>{report.name}</h3>
               <p>{report.detail}</p>
-              <button type="button" className="btn btn-soft">
+              <a
+                className="btn btn-soft"
+                href={`mailto:info@arisegiving.org?subject=${encodeURIComponent(
+                  `Document request: ${report.name}`
+                )}`}
+              >
                 Request PDF
-              </button>
+              </a>
             </BentoCard>
           ))}
           <BentoCard className="report-media-card reveal">
