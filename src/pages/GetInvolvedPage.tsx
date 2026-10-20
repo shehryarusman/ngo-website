@@ -48,7 +48,7 @@ export function GetInvolvedPage() {
         <SectionHeading
           eyebrow="Wanna Help?"
           title="Current Network"
-          description="Representative partners in program delivery, funding, and research."
+          description="Partners in the ARISE High School Scholars – Thailand Pilot 2026."
         />
         <div className="bento-grid">
           <BentoCard className="partners-card reveal">

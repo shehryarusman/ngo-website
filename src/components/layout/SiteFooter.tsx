@@ -4,7 +4,7 @@ export function SiteFooter() {
   return (
     <footer className="site-footer">
       <div className="footer-topline">
-        <p className="eyebrow">ARISE Giving</p>
+        <p className="eyebrow">ARISE Foundation</p>
         <p>Independent NGO, established 2025</p>
       </div>
 
@@ -14,8 +14,7 @@ export function SiteFooter() {
           <p>
             We partner with local educational institutions and community spaces
             to deliver initiatives opening doors to accessible arts, science,
-            and research-based opportunities. Finance reports are shared through
-            quarterly disclosure cycles.
+            and research-based opportunities.
           </p>
         </div>
 
@@ -34,16 +33,15 @@ export function SiteFooter() {
         </div>
 
         <div className="footer-column footer-contact">
-          <h4>Head of Operations</h4>
+          <h4>Headquarters</h4>
           <p>1427 Byberry Rd, Huntingdon Valley, PA 19006</p>
-          <p>ilya@arisegiving.org</p>
-          <p>elena@arisegiving.org</p>
-          <p>jessica@arisegiving.org</p>
+          <p>info@arisegiving.org</p>
+          <p>+1 (215) 901-8722</p>
         </div>
       </div>
 
       <div className="footer-bottomline">
-        <p>2026 ARISE Giving. All rights reserved.</p>
+        <p>© 2026 ARISE Foundation. All rights reserved.</p>
         <p>Safeguarding, compliance, and donor privacy standards in effect.</p>
       </div>
     </footer>
