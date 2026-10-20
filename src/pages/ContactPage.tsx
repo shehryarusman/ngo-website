@@ -4,6 +4,34 @@ import { PageHero } from "../components/common/PageHero";
 import { SectionHeading } from "../components/common/SectionHeading";
 import { contactOffices } from "../data/siteContent";
 
+const topicLabels: Record<string, string> = {
+  partnership: "Partnership",
+  media: "Media",
+  grants: "Grants",
+  programs: "Programs and applications",
+  other: "Other",
+};
+
+// No form backend yet: open the visitor's email client addressed to info@.
+function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  event.preventDefault();
+  const data = new FormData(event.currentTarget);
+  const field = (key: string) => String(data.get(key) ?? "").trim();
+  const topic = topicLabels[field("topic")] ?? "General";
+  const body = [
+    field("message"),
+    "",
+    `Name: ${field("name")}`,
+    `Email: ${field("email")}`,
+    field("organization") ? `Organization: ${field("organization")}` : "",
+  ]
+    .filter((line, index) => index < 2 || line)
+    .join("\n");
+  window.location.href = `mailto:${contactOffices[0].email}?subject=${encodeURIComponent(
+    `[${topic}] Website inquiry`
+  )}&body=${encodeURIComponent(body)}`;
+}
+
 export function ContactPage() {
   return (
     <main className="page-container">
@@ -17,11 +45,11 @@ export function ContactPage() {
         secondaryCta={{ label: "View What We Do", to: "/programs" }}
         rightContent={
           <>
-            <p className="eyebrow">Response SLA</p>
-            <h3>48-Hour First Response</h3>
+            <p className="eyebrow">Get In Touch</p>
+            <h3>We read every message</h3>
             <p>
-              Dedicated teams handle institutional inquiries and urgent field
-              matters with a defined response window.
+              Questions about programs, partnerships, or giving are routed to
+              the director who handles them.
             </p>
           </>
         }
@@ -31,41 +59,39 @@ export function ContactPage() {
         <SectionHeading
           eyebrow="Inquiry Form"
           title="Send A Direct Request"
-          description="Form structure is ready to connect to a backend ticketing API."
+          description="Send us a message and we will get back to you by email."
         />
         <div className="bento-grid contact-page-grid">
           <BentoCard className="contact-form-card reveal">
             <form
               className="contact-form"
-              onSubmit={(event: FormEvent<HTMLFormElement>) =>
-                event.preventDefault()
-              }
+              onSubmit={handleSubmit}
             >
               <label className="input-block">
                 Full name
-                <input type="text" required />
+                <input type="text" name="name" autoComplete="name" required />
               </label>
               <label className="input-block">
-                Work email
-                <input type="email" required />
+                Email
+                <input type="email" name="email" autoComplete="email" required />
               </label>
               <label className="input-block">
                 Organization
-                <input type="text" />
+                <input type="text" name="organization" autoComplete="organization" />
               </label>
               <label className="input-block">
                 Topic
-                <select defaultValue="partnership">
+                <select name="topic" defaultValue="partnership">
                   <option value="partnership">Partnership</option>
                   <option value="media">Media</option>
                   <option value="grants">Grants</option>
-                  <option value="volunteering">Volunteering</option>
+                  <option value="programs">Programs and applications</option>
                   <option value="other">Other</option>
                 </select>
               </label>
               <label className="input-block">
                 Message
-                <textarea rows={5} required />
+                <textarea name="message" rows={5} required />
               </label>
               <button type="submit" className="btn btn-primary">
                 Send Request

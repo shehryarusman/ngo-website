@@ -29,18 +29,31 @@ function App() {
   }, []);
 
   useEffect(() => {
+    const behavior: ScrollBehavior = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches
+      ? "auto"
+      : "smooth";
+
     if (location.hash) {
       const targetId = decodeURIComponent(location.hash.slice(1));
       window.requestAnimationFrame(() => {
-        document.getElementById(targetId)?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
+        const target = document.getElementById(targetId);
+        if (target) {
+          // Offset manually: scrollIntoView ignores scroll-margin on some cards.
+          const offset = parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
+          window.scrollTo({
+            top: target.getBoundingClientRect().top + window.scrollY - offset,
+            behavior,
+          });
+        } else {
+          window.scrollTo({ top: 0, behavior });
+        }
       });
       return;
     }
 
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior });
   }, [location.pathname, location.hash]);
 
   return (
@@ -51,8 +64,12 @@ function App() {
           <p>Preparing ARISE Foundation</p>
         </div>
       ) : null}
+      <a className="skip-link" href="#main-content">
+        Skip to main content
+      </a>
       <div className="noise-layer" />
       <SiteHeader />
+      <div id="main-content" tabIndex={-1}>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
@@ -64,6 +81,7 @@ function App() {
         <Route path="/donate" element={<DonationPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      </div>
       <SiteFooter />
     </div>
   );

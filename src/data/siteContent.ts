@@ -122,7 +122,7 @@ export const impactSnapshots = [
   { metric: "2026", context: "First summer student programs opening" },
   { metric: "501(c)(3)", context: "IRS-recognized public charity" },
   { metric: "2", context: "Initial focus areas: arts and science" },
-  { metric: "US & Asia", context: "Programs in the United States, beginning in Thailand in 2026" },
+  { metric: "US & Asia", context: "Programs in the United States and Asia, beginning with Thailand in 2026" },
   { metric: "Local", context: "Educational institution and community-space partnerships" },
 ];
 
@@ -148,7 +148,7 @@ export const involvementTracks = [
   },
   {
     title: "Institutional Partnerships",
-    text: "Co-fund and co-deliver initiatives with clear KPI and reporting frameworks.",
+    text: "Co-fund and co-deliver initiatives with clear goals and reporting.",
   },
   {
     title: "Corporate Engagement",

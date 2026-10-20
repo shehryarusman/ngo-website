@@ -54,7 +54,7 @@ export function ProgramsPage() {
       <section id="programs" className="section-block">
         <div className="bento-grid">
           <BentoCard id="internship" className="wide-cta-card reveal">
-            <p className="eyebrow">Implementation Approach</p>
+            <p className="eyebrow">How It Works</p>
             <h2>Internship program</h2>
             <p>
               ARISE's first active program welcomes students into a structured

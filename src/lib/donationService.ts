@@ -11,7 +11,7 @@ function createMockIntent(
         donationIntentId: `demo_${Date.now().toString(36)}`,
         status: "created",
         checkoutUrl: "/donate",
-        message: `Prepared ${payload.frequency} donation of $${payload.amount}. Connect backend to replace this demo intent.`,
+        message: `Online giving is coming soon. To give $${payload.amount} now, please email info@arisegiving.org or mail a check to our headquarters.`,
       });
     }, 700);
   });
