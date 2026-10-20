@@ -285,6 +285,13 @@ export function DonationPage() {
           ) : null}
         </BentoCard>
       </form>
+
+      <p className="legal-disclosure">
+        The official registration and financial information of ARISE
+        Foundation may be obtained from the Pennsylvania Department of State by
+        calling toll-free, within Pennsylvania, 1 (800) 732-0999. Registration
+        does not imply endorsement.
+      </p>
     </main>
   );
 }

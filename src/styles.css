@@ -58,6 +58,13 @@ a {
   color: inherit;
 }
 
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
 h1,
 h2,
 h3,
@@ -869,6 +876,14 @@ p {
   padding-left: 1rem;
   display: grid;
   gap: 0.42rem;
+  color: var(--ink-muted);
+}
+
+.legal-disclosure {
+  margin: 0;
+  max-width: 72ch;
+  font-size: 0.85rem;
+  line-height: 1.55;
   color: var(--ink-muted);
 }
 
