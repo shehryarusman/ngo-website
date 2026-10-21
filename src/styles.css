@@ -58,6 +58,8 @@
   --green: #3f6b3a;
   --cream: #fbf7ef;
   --cream-deep: #f4ecdd;
+  /* Page background: a warm sand, so white cards read as the nearest surface. */
+  --page: #efe5d3;
   --white: #ffffff;
   --ink: #2a2522;
   --ink-muted: #5f5550;
@@ -105,7 +107,7 @@ html {
 
 body {
   margin: 0;
-  background: var(--cream);
+  background: var(--page);
   color: var(--ink);
   font-family: var(--font-body);
   line-height: 1.6;
