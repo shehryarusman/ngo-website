@@ -1,3 +1,5 @@
+import type { PhotoName } from "./images";
+
 export const leadership = [
   {
     name: "Dr. Elena Atochina-Vasserman, M.D., Ph.D.",
@@ -92,106 +94,57 @@ export const boardMembers: Array<{
 export const programAreas: Array<{
   title: string;
   summary: string;
-  image: string;
+  image: PhotoName;
   to?: string;
 }> = [
   {
     title: "Art",
     summary: "Furthering culture and expression by fostering creativity and community.",
-    image:
-      "https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=1600&q=84",
+    image: "art-brushes",
   },
   {
     title: "Research",
     summary:
       "Opening doors and destabilizing barriers to research by funding travel to conferences, as well as fellowship opportunities.",
-    image:
-      "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=1600&q=84",
+    image: "lab-glassware",
   },
   {
     title: "Innovation",
     summary: "Pushing boundaries of what is known by promoting discovery of the unknown.",
-    image:
-      "https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&w=1600&q=84",
+    image: "cells-microscopy",
   },
   {
     title: "Science",
     summary:
       "Expanding knowledge and advancing science through educational and research-based programs.",
-    image:
-      "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=1600&q=84",
+    image: "lab-pipette",
   },
   {
     title: "Education",
     summary:
       "Extending horizons for young academics by creating opportunities for accessible education.",
-    image:
-      "https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?auto=format&fit=crop&w=1600&q=84",
+    image: "graduation",
   },
   {
     title: "Mission",
     summary:
       "Read about ARISE Foundation's mission to impassion, inspire, and educate across Arts, Research, Innovation, Science, and Education.",
-    image:
-      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1600&q=84",
+    image: "students-collaborating",
     to: "/about",
   },
 ];
 
-export const impactSnapshots = [
-  { metric: "2025", context: "Independent NGO established" },
-  { metric: "2026", context: "First summer student programs opening" },
-  { metric: "501(c)(3)", context: "IRS-recognized public charity" },
-  { metric: "2", context: "Initial focus areas: arts and science" },
-  { metric: "US & Asia", context: "Programs in the United States and Asia, beginning with Thailand in 2026" },
-  { metric: "Local", context: "Educational institution and community-space partnerships" },
+// Figures shown on How We Work; each comes from the client's documents.
+export const organizationFacts = [
+  { figure: "2025", label: "ARISE Foundation established" },
+  { figure: "501(c)(3)", label: "IRS-recognized public charity" },
+  { figure: "4", label: "Programs, from high school through postdoctoral research and the arts" },
+  { figure: "US & Asia", label: "Programs in the United States and Asia, beginning with Thailand in 2026" },
 ];
 
-export const reports = [
-  {
-    name: "2026 Program Opening Brief",
-    detail: "Student eligibility, partner structure, and program expectations.",
-  },
-  {
-    name: "Annual Financial Summary",
-    detail: "A one-page summary of donations, operating costs, and program spending.",
-  },
-  {
-    name: "Safeguarding And Governance Review",
-    detail: "Student protection, partner expectations, and compliance status updates.",
-  },
-];
-
-export const involvementTracks = [
-  {
-    title: "Skilled Volunteering",
-    text: "Support projects in health, education, design, engineering, and communications.",
-  },
-  {
-    title: "Institutional Partnerships",
-    text: "Co-fund and co-deliver initiatives with clear goals and reporting.",
-  },
-  {
-    title: "Corporate Engagement",
-    text: "Employee volunteering, matching campaigns, and strategic sponsorship programs.",
-  },
-  {
-    title: "Regional Advocacy",
-    text: "Join policy roundtables and knowledge-sharing events with local leaders.",
-  },
-];
-
+// Partners approved for publication (Thailand Pilot 2026).
 export const partnerList = [
   "Chula VRC",
   "University of Pennsylvania Alumni Club of Thailand",
   "The Weissman Family",
-];
-
-export const contactOffices = [
-  {
-    city: "Headquarters",
-    address: "1427 Byberry Rd, Huntingdon Valley, PA 19006",
-    phone: "+1 (215) 901-8722",
-    email: "info@arisegiving.org",
-  },
 ];

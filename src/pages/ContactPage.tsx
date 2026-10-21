@@ -1,23 +1,17 @@
 import { FormEvent } from "react";
-import { BentoCard } from "../components/common/BentoCard";
-import { PageHero } from "../components/common/PageHero";
-import { SectionHeading } from "../components/common/SectionHeading";
-import { contactOffices } from "../data/siteContent";
+import { Card } from "../components/common/Card";
+import { PageHeader } from "../components/common/PageHeader";
+import { Section } from "../components/common/Section";
+import { contactDirectory, contactTopics, organization } from "../data/organization";
+import { usePageTitle } from "../hooks/usePageTitle";
 
-const topicLabels: Record<string, string> = {
-  partnership: "Partnership",
-  media: "Media",
-  grants: "Grants",
-  programs: "Programs and applications",
-  other: "Other",
-};
-
-// No form backend yet: open the visitor's email client addressed to info@.
+// Until the contact form is backed by the database, submitting opens the
+// visitor's email client addressed to the inbox for the chosen topic.
 function handleSubmit(event: FormEvent<HTMLFormElement>) {
   event.preventDefault();
   const data = new FormData(event.currentTarget);
   const field = (key: string) => String(data.get(key) ?? "").trim();
-  const topic = topicLabels[field("topic")] ?? "General";
+  const topic = contactTopics.find((item) => item.value === field("topic")) ?? contactTopics[0];
   const body = [
     field("message"),
     "",
@@ -27,96 +21,97 @@ function handleSubmit(event: FormEvent<HTMLFormElement>) {
   ]
     .filter((line, index) => index < 2 || line)
     .join("\n");
-  window.location.href = `mailto:${contactOffices[0].email}?subject=${encodeURIComponent(
-    `[${topic}] Website inquiry`
+
+  window.location.href = `mailto:${organization.inboxes[topic.inbox]}?subject=${encodeURIComponent(
+    `[${topic.label}] Website inquiry`
   )}&body=${encodeURIComponent(body)}`;
 }
 
 export function ContactPage() {
+  usePageTitle("Contact");
+
   return (
-    <main className="page-container">
-      <PageHero
+    <main>
+      <PageHeader
         eyebrow="Contact"
-        title="Connect with the right team quickly."
-        description="For partnerships, media, grants, operations, and program collaboration requests."
-        imageSrc="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1800&q=88"
-        imageAlt="Professional team collaboration"
-        primaryCta={{ label: "Donate", to: "/donate" }}
-        secondaryCta={{ label: "View What We Do", to: "/programs" }}
-        rightContent={
-          <>
-            <p className="eyebrow">Get In Touch</p>
-            <h3>We read every message</h3>
-            <p>
-              Questions about programs, partnerships, or giving are routed to
-              the director who handles them.
-            </p>
-          </>
-        }
+        title="Contact ARISE Foundation"
+        lead="Select a topic below and your message will be directed to the appropriate inbox."
       />
 
-      <section className="section-block">
-        <SectionHeading
-          eyebrow="Inquiry Form"
-          title="Send A Direct Request"
-          description="Send us a message and we will get back to you by email."
-        />
-        <div className="bento-grid contact-page-grid">
-          <BentoCard className="contact-form-card reveal">
-            <form
-              className="contact-form"
-              onSubmit={handleSubmit}
-            >
-              <label className="input-block">
-                Full name
-                <input type="text" name="name" autoComplete="name" required />
-              </label>
-              <label className="input-block">
-                Email
-                <input type="email" name="email" autoComplete="email" required />
-              </label>
-              <label className="input-block">
-                Organization
-                <input type="text" name="organization" autoComplete="organization" />
-              </label>
-              <label className="input-block">
-                Topic
-                <select name="topic" defaultValue="partnership">
-                  <option value="partnership">Partnership</option>
-                  <option value="media">Media</option>
-                  <option value="grants">Grants</option>
-                  <option value="programs">Programs and applications</option>
-                  <option value="other">Other</option>
-                </select>
-              </label>
-              <label className="input-block">
+      <Section tone="tint">
+        <div className="contact-layout">
+          <Card>
+            <h2 className="h3">Send a Message</h2>
+            <form className="form" onSubmit={handleSubmit}>
+              <div className="form-row">
+                <label className="field">
+                  Full name
+                  <input type="text" name="name" autoComplete="name" required />
+                </label>
+                <label className="field">
+                  Email
+                  <input type="email" name="email" autoComplete="email" required />
+                </label>
+              </div>
+              <div className="form-row">
+                <label className="field">
+                  Organization (optional)
+                  <input type="text" name="organization" autoComplete="organization" />
+                </label>
+                <label className="field">
+                  Topic
+                  <select name="topic" defaultValue={contactTopics[0].value}>
+                    {contactTopics.map((topic) => (
+                      <option key={topic.value} value={topic.value}>
+                        {topic.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              </div>
+              <label className="field">
                 Message
-                <textarea name="message" rows={5} required />
+                <textarea name="message" rows={6} required />
               </label>
-              <button type="submit" className="btn btn-primary">
-                Send Request
-              </button>
+              <div className="button-row">
+                <button type="submit" className="btn btn-primary">
+                  Send Message
+                </button>
+              </div>
             </form>
-          </BentoCard>
-          <BentoCard className="office-list-card reveal">
-            <h3>Contact Information</h3>
-            <div className="office-list">
-              {contactOffices.map((office) => (
-                <article key={office.city}>
-                  <h4>{office.city}</h4>
-                  <p>{office.address}</p>
-                  <p>
-                    <a href={`tel:${office.phone.replace(/[^\d+]/g, "")}`}>{office.phone}</a>
-                  </p>
-                  <p>
-                    <a href={`mailto:${office.email}`}>{office.email}</a>
-                  </p>
-                </article>
+          </Card>
+
+          <Card>
+            <h2 className="h3">Contact Directory</h2>
+            <dl className="directory">
+              {contactDirectory.map((entry) => (
+                <div key={entry.inbox}>
+                  <dt>
+                    <a href={`mailto:${organization.inboxes[entry.inbox]}`}>
+                      {organization.inboxes[entry.inbox]}
+                    </a>
+                  </dt>
+                  <dd>{entry.use}</dd>
+                </div>
               ))}
-            </div>
-          </BentoCard>
+              <div>
+                <dt>Phone</dt>
+                <dd>
+                  <a href={`tel:${organization.phone.tel}`}>{organization.phone.display}</a>
+                </dd>
+              </div>
+              <div>
+                <dt>Fax</dt>
+                <dd>{organization.fax.display}</dd>
+              </div>
+              <div>
+                <dt>Mail</dt>
+                <dd>{organization.address}</dd>
+              </div>
+            </dl>
+          </Card>
         </div>
-      </section>
+      </Section>
     </main>
   );
 }

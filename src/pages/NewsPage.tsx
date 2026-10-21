@@ -1,30 +1,30 @@
-import { Link } from "react-router-dom";
-import { BentoCard } from "../components/common/BentoCard";
-import { SectionHeading } from "../components/common/SectionHeading";
+import { Card } from "../components/common/Card";
+import { PageHeader } from "../components/common/PageHeader";
+import { Section } from "../components/common/Section";
+import { StoryImage } from "../components/common/StoryImage";
 import { stories } from "../data/news";
+import { usePageTitle } from "../hooks/usePageTitle";
 
 export function NewsPage() {
+  usePageTitle("News & Stories");
+
   return (
-    <main className="page-container">
-      <section className="section-block">
-        <SectionHeading eyebrow="News" title="News & Stories" level={1} />
-        <div className="bento-grid news-list-grid">
+    <main>
+      <PageHeader eyebrow="News" title="News & Stories" />
+      <Section>
+        <div className="story-list">
           {stories.map((story) => (
-            <BentoCard key={story.slug} className="news-card reveal">
-              <Link to={`/news/${story.slug}`} className="news-card-media">
-                <img src={story.image.src} alt={story.image.alt} loading="lazy" />
-              </Link>
-              <div className="news-card-body">
-                <p className="eyebrow">{story.dateLabel}</p>
-                <h2>{story.title}</h2>
-                <Link className="btn btn-primary" to={`/news/${story.slug}`}>
-                  Read the story
-                </Link>
+            <Card key={story.slug} to={`/news/${story.slug}`} className="story-row">
+              <StoryImage story={story} sizes="160px" decorative />
+              <div className="story-body">
+                <p className="muted">{story.dateLabel}</p>
+                <h2 className="h3">{story.title}</h2>
+                <span className="card-more">Read the story</span>
               </div>
-            </BentoCard>
+            </Card>
           ))}
         </div>
-      </section>
+      </Section>
     </main>
   );
 }
