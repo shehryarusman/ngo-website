@@ -1,8 +1,9 @@
 // End-to-end site check: renders every route at desktop and mobile widths and
 // fails on broken internal links, console errors, horizontal overflow, clipped
 // text, missing/duplicate <h1>, broken images, forbidden text, card calls to
-// action that don't line up across a row, or a card hover effect that stopped
-// following the mouse.
+// action that don't line up across a row, nested cards, cards missing the
+// cursor highlight, any raised box (card, band, photo, note) that stopped
+// following the mouse, or scroll-reveal content left hidden.
 //
 // Usage: npm run build && npm run preview & npm run check:site [baseUrl]
 // Optional: SHOTS_DIR=./shots to save full-page screenshots.
@@ -127,6 +128,22 @@ for (const [vpName, viewport] of Object.entries(viewports)) {
   const left = await shiftX(box.x + 6);
   const right = await shiftX(box.x + box.width - 6);
   if (!(left < -2 && right > 2)) problems.push(`card hover motion not working (left ${left}px, right ${right}px)`);
+  await page.close();
+}
+
+// Every other kind of raised box must move too.
+for (const [route, selector] of [["/", ".cta-band"], ["/", ".home-hero-media img"],
+  ["/programs", ".page-header-media img"], ["/about", ".page-header-aside"],
+  ["/news/thailand-pilot-2026", ".story-poster"]]) {
+  const page = await browser.newPage({ viewport: viewports.desktop });
+  await page.goto(base + route, { waitUntil: "networkidle" });
+  const target = page.locator(selector).first();
+  await target.scrollIntoViewIfNeeded();
+  const box = await target.boundingBox();
+  await page.mouse.move(box.x + box.width - 6, box.y + box.height / 2, { steps: 4 });
+  await page.waitForTimeout(600);
+  const shift = await target.evaluate((el) => parseFloat(getComputedStyle(el).translate) || 0);
+  if (!(shift > 0.5)) problems.push(`${route} ${selector} does not move on hover (${shift}px)`);
   await page.close();
 }
 

@@ -1,5 +1,9 @@
 import { useEffect } from "react";
 
+// Every raised box moves; styles.css gives the same list the moving shadow.
+const MOVABLE =
+  ".card, .cta-band, .page-header-aside, .home-hero-media img, .page-header-media img, .story-poster";
+
 // How far (px) a card drifts toward the pointer at its edges, and how far it tilts.
 const MAX_SHIFT_X = 8;
 const MAX_SHIFT_Y = 6;
@@ -23,7 +27,8 @@ type CardState = {
 const PROPS = ["--card-x", "--card-y", "--card-rx", "--card-ry", "--card-lift", "--shadow-x", "--shadow-y", "--gloss-x", "--gloss-y"];
 
 /**
- * Every card leans toward the mouse: it drifts and tilts toward the pointer,
+ * Every raised box (card, band, photo, note) leans toward the mouse: it
+ * drifts and tilts toward the pointer,
  * its shadow moves the opposite way and a soft highlight follows the cursor.
  * One set of delegated listeners covers every card on every route; each card
  * eases with its own requestAnimationFrame loop while it moves. Mouse only,
@@ -101,7 +106,7 @@ export function useCardMotion() {
 
     const onMove = (event: PointerEvent) => {
       if (event.pointerType !== "mouse") return;
-      const card = (event.target as Element | null)?.closest<HTMLElement>(".card") ?? null;
+      const card = (event.target as Element | null)?.closest<HTMLElement>(MOVABLE) ?? null;
       if (card !== active) {
         if (active) release(active);
         active = card;
@@ -125,7 +130,7 @@ export function useCardMotion() {
 
     // Typing into a field must not happen on a tilted card.
     const onFocusIn = (event: FocusEvent) => {
-      const card = (event.target as Element | null)?.closest<HTMLElement>(".card");
+      const card = (event.target as Element | null)?.closest<HTMLElement>(MOVABLE);
       const s = card && states.get(card);
       if (!card || !s) return;
       s.targetX = 0;

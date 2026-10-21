@@ -77,9 +77,6 @@
   --radius-card: 20px;
   --card-border: rgba(42, 37, 34, 0.14);
   --card-border-hover: rgba(42, 37, 34, 0.22);
-  /* Resting depth of a card, for raised blocks that don't follow the cursor. */
-  --depth-shadow: 0 14px 26px rgba(42, 37, 34, 0.16), 0 34px 72px rgba(42, 37, 34, 0.2),
-    0 2px 6px rgba(42, 37, 34, 0.08);
 
   --container: 1160px;
   --gutter: clamp(16px, 4vw, 32px);
@@ -684,7 +681,6 @@ ul {
   aspect-ratio: 4 / 3;
   object-fit: cover;
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
 }
 
 .page-header-aside {
@@ -762,7 +758,27 @@ ul {
     var(--white);
   border: 1px solid var(--card-border);
   border-radius: var(--radius-card);
-  /* Two soft layers whose offsets move against the cursor, lengthening as the card lifts. */
+  color: inherit;
+  transition: border-color 0.3s ease;
+}
+
+/* Every raised box moves with the mouse (useCardMotion's MOVABLE selector):
+   two soft shadow layers whose offsets move against the cursor and lengthen
+   as the box lifts. Cards add an inner top highlight. */
+.cta-band,
+.page-header-aside,
+.home-hero-media img,
+.page-header-media img,
+.story-poster {
+  box-shadow:
+    var(--shadow-x, 0px) calc(14px + var(--shadow-y, 0px) + 2px * var(--card-lift, 0))
+      calc(26px + 4px * var(--card-lift, 0)) rgba(42, 37, 34, calc(0.16 + 0.04 * var(--card-lift, 0))),
+    calc(var(--shadow-x, 0px) * 1.9) calc(34px + var(--shadow-y, 0px) * 1.6 + 4px * var(--card-lift, 0))
+      calc(72px + 12px * var(--card-lift, 0)) rgba(42, 37, 34, calc(0.2 + 0.06 * var(--card-lift, 0))),
+    0 2px 6px rgba(42, 37, 34, 0.08);
+}
+
+.card {
   box-shadow:
     var(--shadow-x, 0px) calc(14px + var(--shadow-y, 0px) + 2px * var(--card-lift, 0))
       calc(26px + 4px * var(--card-lift, 0)) rgba(42, 37, 34, calc(0.16 + 0.04 * var(--card-lift, 0))),
@@ -770,12 +786,10 @@ ul {
       calc(72px + 12px * var(--card-lift, 0)) rgba(42, 37, 34, calc(0.2 + 0.06 * var(--card-lift, 0))),
     0 2px 6px rgba(42, 37, 34, 0.08),
     inset 0 1px 0 rgba(255, 255, 255, 0.78);
-  color: inherit;
-  transition: border-color 0.3s ease;
 }
 
-/* Only while useCardMotion is easing a card; at rest cards carry no 3D layer. */
-.card.is-moving {
+/* Only while useCardMotion is easing a box; at rest boxes carry no 3D layer. */
+.is-moving {
   translate: var(--card-x, 0px) var(--card-y, 0px);
   transform: perspective(1200px) rotateX(var(--card-rx, 0deg)) rotateY(var(--card-ry, 0deg));
   will-change: transform, translate;
@@ -919,7 +933,6 @@ ul {
   aspect-ratio: 4 / 5;
   object-fit: cover;
   border-radius: var(--radius-lg);
-  box-shadow: var(--depth-shadow);
 }
 
 .feature-story {
@@ -952,7 +965,6 @@ ul {
   background:
     radial-gradient(120% 140% at 100% 0%, rgba(224, 161, 0, 0.16) 0%, rgba(224, 161, 0, 0) 45%),
     linear-gradient(135deg, var(--maroon) 0%, var(--maroon-dark) 100%);
-  box-shadow: var(--depth-shadow);
   color: var(--cream);
   border-radius: var(--radius-lg);
   padding: clamp(28px, 5vw, 56px);
@@ -1027,7 +1039,6 @@ ul {
 .story-poster {
   border-radius: var(--radius-md);
   overflow: hidden;
-  box-shadow: var(--shadow-md);
 }
 
 /* ---------- Programs ---------- */
