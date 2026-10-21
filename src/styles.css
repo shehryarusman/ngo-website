@@ -658,7 +658,7 @@ ul {
 /* ---------- Page header (inner pages) ---------- */
 
 .page-header {
-  padding: clamp(36px, 6vw, 72px) 0 clamp(28px, 4vw, 48px);
+  padding: clamp(36px, 6vw, 72px) 0 calc(var(--section-space) * 0.75);
 }
 
 .page-header-grid {
@@ -697,18 +697,10 @@ ul {
 
 /* ---------- Sections ---------- */
 
+/* Sections share one page background, so adjacent paddings add up; each
+   side is three quarters of the section spacing. */
 .section {
-  padding: var(--section-space) 0;
-}
-
-.section--tint {
-  background: var(--cream-deep);
-  border-block: 1px solid var(--line);
-}
-
-/* Two plain sections in a row share one gap instead of two. */
-.section:not(.section--tint) + .section:not(.section--tint) {
-  padding-top: 0;
+  padding: calc(var(--section-space) * 0.75) 0;
 }
 
 .section-header {
@@ -900,7 +892,7 @@ ul {
 /* ---------- Home ---------- */
 
 .home-hero {
-  padding: clamp(28px, 5vw, 56px) 0 var(--section-space);
+  padding: clamp(28px, 5vw, 56px) 0 calc(var(--section-space) * 0.75);
 }
 
 .home-hero-grid {
