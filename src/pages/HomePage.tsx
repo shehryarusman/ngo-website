@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 import { BentoCard } from "../components/common/BentoCard";
 import { ParallaxImage } from "../components/common/ParallaxImage";
+import { stories } from "../data/news";
+
+const latestStory = stories[0];
 
 export function HomePage() {
   return (
@@ -38,29 +41,54 @@ export function HomePage() {
         </BentoCard>
 
         <BentoCard className="landing-side-card reveal">
-          <p className="eyebrow">Current Cycle</p>
-          <h3>2026 Opening</h3>
-          <p>
-            Our first programs are in action in 2026, including the ARISE High
-            School Scholars pilot in Thailand this November.
-          </p>
+          <Link
+            to={`/news/${latestStory.slug}`}
+            className="landing-story-media"
+            tabIndex={-1}
+            aria-hidden="true"
+          >
+            <img src={latestStory.image.src} alt="" />
+          </Link>
+          <p className="eyebrow">Latest Story</p>
+          <h2 className="landing-story-title">{latestStory.title}</h2>
+          <p>{latestStory.dateLabel}</p>
+          <Link className="btn btn-primary" to={`/news/${latestStory.slug}`}>
+            Read the story
+          </Link>
         </BentoCard>
       </section>
 
       <section className="section-block home-information-intro">
-        <BentoCard className="home-briefing-card reveal">
-          <p className="eyebrow">Active Programs</p>
-          <h2>Internship program</h2>
-          <p>
-            Scroll to explore the ins-and-outs of our organization, available
-            programs, and partnership opportunities.
-          </p>
-          <div className="button-row">
-            <Link className="btn btn-primary" to="/programs#internship">
-              Internship Program Page
+        <div className="bento-grid home-explore-grid">
+          <BentoCard className="home-briefing-card reveal">
+            <p>
+              Explore the ins-and-outs of our organization, available programs,
+              and partnership opportunities.
+            </p>
+          </BentoCard>
+          {[
+            {
+              title: "About The Organization",
+              text: "Our inspiration, mission, and leadership.",
+              to: "/about",
+            },
+            {
+              title: "Programs",
+              text: "Learn about our programs furthering our mission.",
+              to: "/programs",
+            },
+            {
+              title: "Contact & Partnerships",
+              text: "Click here for institutional and community-based collaboration, to support our mission, or to contact us with any questions!",
+              to: "/contact",
+            },
+          ].map((item) => (
+            <Link key={item.to} to={item.to} className="bento-card home-explore-card reveal">
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
             </Link>
-          </div>
-        </BentoCard>
+          ))}
+        </div>
       </section>
     </main>
   );

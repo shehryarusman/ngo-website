@@ -9,9 +9,20 @@ export const leadership = [
     role: "Secretary and Director, Arts & Research",
     bio: "Jess leads the evaluation and preparation of arts-related grant submissions, and welcomes collaborations and discussions regarding ARISE's arts and science initiatives.",
   },
+  {
+    name: "Ilya Vasserman",
+    role: "Treasurer, CFO and Director",
+    bio: null,
+  },
 ];
 
-export const boardMembers = [
+export const boardMembers: Array<{
+  name: string;
+  role: string;
+  pronouns?: string;
+  intro?: string;
+  sections: Array<{ title: string; body: string }>;
+}> = [
   {
     name: "Dr. Elena Atochina-Vasserman, M.D., Ph.D.",
     role: "President and Director",
@@ -69,6 +80,11 @@ export const boardMembers = [
           "Jess leads the evaluation and preparation of arts-related grant submissions, and welcomes collaborations and discussions regarding ARISE's arts and science initiatives.",
       },
     ],
+  },
+  {
+    name: "Ilya Vasserman",
+    role: "Treasurer, CFO and Director",
+    sections: [],
   },
 ];
 
