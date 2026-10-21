@@ -3,6 +3,7 @@ import { BentoCard } from "../components/common/BentoCard";
 import { PageHero } from "../components/common/PageHero";
 import { Placeholder } from "../components/common/Placeholder";
 import { SectionHeading } from "../components/common/SectionHeading";
+import { programs } from "../data/programs";
 import { leadership } from "../data/siteContent";
 
 export function AboutPage() {
@@ -79,30 +80,18 @@ export function AboutPage() {
           description="ARISE runs three science programs, from high school through postdoctoral research, plus arts education."
         />
         <div className="bento-grid value-grid">
-          {[
-            [
-              "Biomedical Research Laboratory Internship",
-              "High school students ages 16–18 and early undergraduates",
-            ],
-            [
-              "Graduate and Postdoctoral Fellowship Support",
-              "Graduate students and postdoctoral researchers in biomedical research",
-            ],
-            [
-              "Travel Grant Program",
-              "High school, college and graduate students, young researchers, and underfunded academic labs",
-            ],
-            [
-              "Arts Education and Exhibitions",
-              "Emerging local and regional artists, and the public",
-            ],
-          ].map(([title, serves]) => (
-            <BentoCard key={title} className="value-card reveal">
-              <h3>{title}</h3>
+          {programs.map((program) => (
+            <Link
+              key={program.slug}
+              to={`/programs/${program.slug}`}
+              className="bento-card value-card value-card-link reveal"
+            >
+              <h3>{program.name}</h3>
               <p>
-                <span className="value-label">Who it serves:</span> {serves}
+                <span className="value-label">Who it serves:</span>{" "}
+                {program.serves}
               </p>
-            </BentoCard>
+            </Link>
           ))}
         </div>
       </section>
