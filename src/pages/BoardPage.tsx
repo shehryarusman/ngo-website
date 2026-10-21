@@ -22,7 +22,7 @@ export function BoardPage() {
               <Placeholder
                 kind="image"
                 className="board-photo-placeholder"
-                what={`Photo of ${member.name}`}
+                what={`Formal portrait photograph of ${member.name}`}
               />
               <div>
                 <h2>{member.name}</h2>
@@ -37,7 +37,7 @@ export function BoardPage() {
               <p className="board-profile-intro">{member.intro}</p>
             ) : (
               <Placeholder
-                what={`${member.name} intro, 2–3 sentences: background and what they bring to ARISE.`}
+                what={`Introductory paragraph for ${member.name} (two to three sentences): professional background and contribution to ARISE Foundation.`}
               />
             )}
 
@@ -52,7 +52,7 @@ export function BoardPage() {
               </div>
             ) : (
               <Placeholder
-                what={`${member.name} full bio in the same four parts as the other directors: Professional Background, Why He Serves, Personal Touch, Role at ARISE.`}
+                what={`Full biography of ${member.name}, in the same four sections used for the other directors: Professional Background, Reasons for Serving, Personal Background, and Role at ARISE.`}
               />
             )}
           </BentoCard>

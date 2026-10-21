@@ -1,6 +1,8 @@
 export interface NewsFact {
   label: string;
   text: string;
+  /** Detail still to be confirmed by ARISE; rendered as a placeholder. */
+  todo?: string;
 }
 
 export interface NewsStory {
@@ -11,7 +13,7 @@ export interface NewsStory {
   facts: NewsFact[];
 }
 
-// Facts are taken verbatim from the client's program summary (Oct 20, 2026).
+// Facts come from the client's program summary (Oct 20, 2026), in formal wording.
 // Newest story first; the home page features stories[0].
 export const stories: NewsStory[] = [
   {
@@ -25,7 +27,8 @@ export const stories: NewsStory[] = [
     facts: [
       {
         label: "Who",
-        text: "ARISE's first High School Scholars cohort, about 5–10 Grade 10–11 (Mathayom 4–5) students and their Guardian STEM Teachers from 2–3 Thai schools.",
+        text: "The inaugural ARISE High School Scholars cohort: students in Grades 10–11 (Mathayom 4–5), accompanied by their Guardian STEM Teachers.",
+        todo: "Confirmed number of participating students and secondary schools in Thailand",
       },
       {
         label: "When and where",
@@ -33,11 +36,11 @@ export const stories: NewsStory[] = [
       },
       {
         label: "Funding",
-        text: "Sponsored through ARISE travel grants to each participating school under the Travel Grant Program.",
+        text: "Sponsored through ARISE travel grants awarded to each participating school under the ARISE Travel Grant Program.",
       },
       {
         label: "Program",
-        text: "Three parts: nine online RNA Building Blocks modules, the forum itself, and a closing session and lunch with ARISE leaders, with a planned visit to the Chula Vaccine Research Center lab.",
+        text: "The program comprises three components: nine online RNA Building Blocks preparatory modules; participation in the forum; and a closing session and luncheon with ARISE leadership, including a planned visit to the Chula Vaccine Research Center laboratory.",
       },
       {
         label: "Partners",
