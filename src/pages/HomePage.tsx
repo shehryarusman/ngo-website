@@ -35,7 +35,7 @@ export function HomePage() {
     <main>
       <section className="home-hero">
         <div className="container home-hero-grid">
-          <div className="home-hero-copy">
+          <div className="card card--maroon home-hero-copy">
             <h1>
               Charitable educational initiatives opening doors to accessible
               arts, science, and research-based opportunities.
@@ -46,10 +46,10 @@ export function HomePage() {
               governance.
             </p>
             <div className="button-row">
-              <Link className="btn btn-primary" to="/programs">
+              <Link className="btn btn-on-dark" to="/programs">
                 What We Do
               </Link>
-              <Link className="btn btn-secondary" to="/impact">
+              <Link className="btn btn-ghost-dark" to="/impact">
                 How We Work
               </Link>
             </div>

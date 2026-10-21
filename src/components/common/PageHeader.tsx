@@ -27,10 +27,12 @@ export function PageHeader({
   image,
   aside,
 }: PageHeaderProps) {
+  // Bento header: a maroon title tile, the photo tile beside it, and the
+  // supporting note (mission, status) as its own tile under the title.
   return (
     <header className={image ? "page-header page-header--image" : "page-header"}>
       <div className="container page-header-grid">
-        <div className="page-header-copy">
+        <div className="card card--maroon page-header-copy">
           {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
           <h1>{title}</h1>
           {lead ? <div className="lead">{lead}</div> : null}
@@ -41,8 +43,8 @@ export function PageHeader({
                   key={action.to + action.label}
                   className={
                     action.variant === "secondary"
-                      ? "btn btn-secondary"
-                      : "btn btn-primary"
+                      ? "btn btn-ghost-dark"
+                      : "btn btn-on-dark"
                   }
                   to={action.to}
                 >
@@ -51,13 +53,13 @@ export function PageHeader({
               ))}
             </div>
           ) : null}
-          {aside ? <aside className="page-header-aside">{aside}</aside> : null}
         </div>
         {image ? (
           <div className="page-header-media">
-            <Picture name={image} priority sizes="(min-width: 960px) 45vw, 100vw" />
+            <Picture name={image} priority sizes="(min-width: 960px) 40vw, 100vw" />
           </div>
         ) : null}
+        {aside ? <aside className="card page-header-aside">{aside}</aside> : null}
       </div>
     </header>
   );

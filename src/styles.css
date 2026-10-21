@@ -681,36 +681,50 @@ ul {
   padding: clamp(36px, 6vw, 72px) 0 calc(var(--section-space) * 0.75);
 }
 
+/* Bento header: maroon title tile (7 of 12 columns), photo tile (5), and the
+   supporting note as its own tile under the title. Plain headers are one
+   full-width title tile. */
 .page-header-grid {
   display: grid;
-  gap: clamp(24px, 4vw, 48px);
-  align-items: center;
-}
-
-.page-header--image .page-header-grid {
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: stretch;
 }
 
 .page-header-copy {
-  display: grid;
+  grid-column: 1 / -1;
   gap: 1.1rem;
-  align-content: center;
+  justify-content: center;
+  padding: clamp(28px, 4vw, 48px);
+}
+
+/* Explicit columns: the photo spans two rows when there is a note, and
+   auto-placement would otherwise put it first. */
+.page-header--image .page-header-copy,
+.page-header-aside {
+  grid-column: 1 / 8;
+}
+
+.page-header-media {
+  grid-column: 8 / -1;
+  display: flex;
+}
+
+.page-header-grid:has(.page-header-aside) .page-header-media {
+  grid-row: 1 / span 2;
 }
 
 .page-header-media img {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  height: 100%;
+  min-height: 300px;
   object-fit: cover;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-card);
 }
 
-.page-header-aside {
-  max-width: 62ch;
-  padding: 1rem 1.2rem;
+/* Doubled class so the gold edge wins over the card's own border. */
+.card.page-header-aside {
   border-left: 3px solid var(--gold);
-  background: var(--white);
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-  display: grid;
   gap: 0.4rem;
 }
 
@@ -806,7 +820,49 @@ ul {
     calc(var(--shadow-x, 0px) * 1.9) calc(34px + var(--shadow-y, 0px) * 1.6 + 4px * var(--card-lift, 0))
       calc(72px + 12px * var(--card-lift, 0)) rgba(42, 37, 34, calc(0.2 + 0.06 * var(--card-lift, 0))),
     0 2px 6px rgba(42, 37, 34, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.78);
+    inset 0 1px 0 var(--card-inset, rgba(255, 255, 255, 0.78));
+}
+
+/* Maroon tile: page and hero titles. The gold glow follows the cursor like
+   the white cards' highlight. */
+.card--maroon {
+  background:
+    radial-gradient(
+      120% 140% at var(--gloss-x, 100%) var(--gloss-y, 0%),
+      rgba(224, 161, 0, 0.16) 0%,
+      rgba(224, 161, 0, 0) 45%
+    ),
+    linear-gradient(135deg, var(--maroon) 0%, var(--maroon-dark) 100%);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: var(--cream);
+  --card-inset: rgba(255, 255, 255, 0.18);
+}
+
+.card--maroon:hover {
+  border-color: rgba(255, 255, 255, 0.24);
+}
+
+.card--maroon h1,
+.card--maroon h2 {
+  color: var(--cream);
+}
+
+.card--maroon .lead {
+  color: rgba(251, 247, 239, 0.85);
+}
+
+.card--maroon .eyebrow {
+  color: var(--gold);
+}
+
+.card--maroon a:not(.btn) {
+  color: var(--cream);
+}
+
+/* Keyboard focus ring must contrast with maroon. */
+.card--maroon :focus-visible,
+.cta-band :focus-visible {
+  outline-color: var(--cream);
 }
 
 /* Only while useCardMotion is easing a box; at rest boxes carry no 3D layer. */
@@ -934,14 +990,16 @@ ul {
 
 .home-hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-  gap: clamp(24px, 4vw, 56px);
-  align-items: center;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: stretch;
 }
 
 .home-hero-copy {
-  display: grid;
+  grid-column: 1 / 8;
   gap: 1.2rem;
+  justify-content: center;
+  padding: clamp(28px, 4vw, 48px);
 }
 
 .home-hero-copy h1 {
@@ -949,11 +1007,17 @@ ul {
   line-height: 1.1;
 }
 
+.home-hero-media {
+  grid-column: 8 / -1;
+  display: flex;
+}
+
 .home-hero-media img {
   width: 100%;
-  aspect-ratio: 4 / 5;
+  height: 100%;
+  min-height: 340px;
   object-fit: cover;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-card);
 }
 
 .feature-story {
@@ -1403,11 +1467,25 @@ ul {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .home-hero-media img {
-    aspect-ratio: 16 / 10;
+  /* One column: title tile, then photo, then the note. */
+  .page-header-grid {
+    grid-template-columns: minmax(0, 1fr);
   }
 
+  .home-hero-copy,
+  .home-hero-media,
+  .page-header--image .page-header-copy,
+  .page-header-aside,
+  .page-header-media,
+  .page-header-grid:has(.page-header-aside) .page-header-media {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+
+  .home-hero-media img,
   .page-header-media img {
+    height: auto;
+    min-height: 0;
     aspect-ratio: 16 / 9;
   }
 
