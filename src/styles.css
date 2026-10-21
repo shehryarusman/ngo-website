@@ -97,7 +97,6 @@ p {
 
 .app-shell {
   position: relative;
-  /* clip (not hidden) so the sticky header keeps working */
   overflow-x: clip;
 }
 
@@ -123,7 +122,7 @@ p {
 }
 
 [id] {
-  scroll-margin-top: 120px;
+  scroll-margin-top: 24px;
 }
 
 :focus-visible {
@@ -195,8 +194,7 @@ p {
   grid-template-columns: minmax(110px, 1fr) auto minmax(180px, 1fr);
   align-items: center;
   gap: 1rem;
-  position: sticky;
-  top: 0.75rem;
+  position: relative;
   z-index: 60;
 }
 
@@ -399,7 +397,7 @@ p {
 .section-block {
   display: grid;
   gap: 0.95rem;
-  scroll-margin-top: 120px;
+  scroll-margin-top: 24px;
 }
 
 .section-heading {
