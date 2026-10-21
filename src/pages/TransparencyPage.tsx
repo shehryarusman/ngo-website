@@ -39,12 +39,11 @@ export function TransparencyPage() {
   return (
     <main>
       <PageHeader
-        eyebrow="How We Work"
         title="Transparency"
         lead={statements.transparency}
       />
 
-      <Section tone="tint" eyebrow="Public Documents" title="IRS Documents and Financial Reports">
+      <Section tone="tint" title="IRS Documents and Financial Reports">
         <div className="table-wrap">
           <table className="table">
             <thead>
@@ -71,7 +70,7 @@ export function TransparencyPage() {
         </div>
       </Section>
 
-      <Section eyebrow="Policies" title="Governance and Nondiscrimination">
+      <Section title="Governance and Nondiscrimination">
         <div className="prose">
           <p>{statements.nondiscrimination}</p>
           <Placeholder
@@ -81,7 +80,7 @@ export function TransparencyPage() {
         </div>
       </Section>
 
-      <Section tone="tint" eyebrow="Requests" title="Inspection and Copies">
+      <Section tone="tint" title="Inspection and Copies">
         <div className="prose">
           <p>
             Documents may be inspected at {organization.address}, or requested

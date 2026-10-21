@@ -36,8 +36,8 @@ export function SiteHeader() {
   }, []);
 
   return (
-    <div className="container">
-      <header ref={headerRef} className="site-header">
+    <header ref={headerRef} className="site-header">
+      <div className="container site-header-inner">
         <Link to="/" className="brand" aria-label="ARISE Foundation home">
           <img
             src="/brand/arise-horizontal-480.webp"
@@ -108,15 +108,15 @@ export function SiteHeader() {
             })}
           </ul>
           <div className="nav-actions">
-            <Link className="btn btn-secondary" to="/contact">
+            <Link className="btn btn-ghost-dark" to="/contact">
               Contact
             </Link>
-            <Link className="btn btn-primary" to="/donate">
+            <Link className="btn btn-on-dark" to="/donate">
               Donate
             </Link>
           </div>
         </nav>
-      </header>
-    </div>
+      </div>
+    </header>
   );
 }

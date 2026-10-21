@@ -13,7 +13,6 @@ export function ImpactPage() {
   return (
     <main>
       <PageHeader
-        eyebrow="How We Work"
         title="Clear governance for student opportunity."
         lead={statements.howWeWork}
         image="documents-review"
@@ -23,7 +22,7 @@ export function ImpactPage() {
         ]}
       />
 
-      <Section id="operations" tone="tint" eyebrow="Operations" title="ARISE at a Glance">
+      <Section id="operations" tone="tint" title="ARISE at a Glance">
         <div className="grid grid-4">
           {organizationFacts.map((fact) => (
             <Card key={fact.figure}>
@@ -34,7 +33,7 @@ export function ImpactPage() {
         </div>
       </Section>
 
-      <Section id="governance" eyebrow="Governance" title="Oversight and Reporting">
+      <Section id="governance" title="Oversight and Reporting">
         <div className="grid grid-2">
           <Card>
             <h3>Board Oversight</h3>

@@ -72,6 +72,10 @@
   --radius-lg: 22px;
   --shadow-sm: 0 1px 2px rgba(42, 37, 34, 0.06);
   --shadow-md: 0 1px 2px rgba(42, 37, 34, 0.05), 0 10px 28px rgba(42, 37, 34, 0.07);
+  --card-border: rgba(42, 37, 34, 0.16);
+  --card-border-hover: rgba(139, 42, 46, 0.35);
+  --card-shadow: 0 1px 2px rgba(42, 37, 34, 0.06), 0 6px 18px rgba(42, 37, 34, 0.07);
+  --card-shadow-hover: 0 2px 4px rgba(42, 37, 34, 0.06), 0 18px 40px rgba(42, 37, 34, 0.14);
 
   --container: 1160px;
   --gutter: clamp(16px, 4vw, 32px);
@@ -282,6 +286,18 @@ ul {
   color: var(--maroon-dark);
 }
 
+.btn-ghost-dark {
+  background: transparent;
+  color: var(--cream);
+  border-color: rgba(251, 247, 239, 0.45);
+}
+
+.btn-ghost-dark:hover {
+  border-color: var(--cream);
+  background: rgba(251, 247, 239, 0.08);
+  color: var(--white);
+}
+
 .btn-on-dark:hover {
   background: var(--white);
   color: var(--maroon-dark);
@@ -290,22 +306,42 @@ ul {
 /* ---------- Header and navigation ---------- */
 
 .site-header {
-  margin-top: 16px;
-  padding: 10px 14px 10px 12px;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
+  background: var(--maroon-dark);
+  color: var(--cream);
   position: relative;
   z-index: 20;
 }
 
+.site-header :focus-visible {
+  outline-color: var(--cream);
+}
+
+/* The desktop dropdown panel is white, so its links keep the maroon ring. */
+.site-header .nav-dropdown :focus-visible {
+  outline-color: var(--maroon);
+}
+
+.site-header-inner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-block: 12px;
+}
+
+/* The full-colour logo has a maroon wordmark, so on the maroon header it sits
+   on a cream plate whose corners match the logo's rounded icon. */
 .brand {
   flex: 0 0 auto;
-  border-radius: var(--radius-sm);
+  display: block;
+  padding: 6px 12px 6px 8px;
+  background: var(--cream);
+  border-radius: 14px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset, 0 4px 14px rgba(0, 0, 0, 0.18);
+  transition: transform 0.25s ease;
+}
+
+.brand:hover {
+  transform: translateY(-1px);
 }
 
 .brand img {
@@ -339,18 +375,39 @@ ul {
 }
 
 .nav-link {
+  position: relative;
   display: block;
   padding: 0.5rem 0.2rem 0.5rem 0.6rem;
-  color: var(--ink);
+  color: var(--cream);
   font-weight: 600;
   font-size: 0.95rem;
   text-decoration: none;
   border-radius: var(--radius-sm);
 }
 
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0.6rem;
+  right: 0.2rem;
+  bottom: 0.25rem;
+  height: 2px;
+  background: var(--gold);
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+
 .nav-link:hover,
 .nav-link.active {
-  color: var(--maroon);
+  color: var(--white);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after,
+.nav-item.is-open .nav-link::after {
+  transform: scaleX(1);
 }
 
 .nav-expand {
@@ -362,7 +419,7 @@ ul {
   border: 0;
   background: none;
   cursor: pointer;
-  color: var(--ink-muted);
+  color: rgba(251, 247, 239, 0.75);
   border-radius: 8px;
 }
 
@@ -425,9 +482,10 @@ ul {
   gap: 0.6rem;
   min-height: 44px;
   padding: 0.4rem 0.9rem;
-  border: 1.5px solid var(--line-strong);
+  border: 1.5px solid rgba(251, 247, 239, 0.45);
   border-radius: 999px;
-  background: var(--white);
+  background: transparent;
+  color: var(--cream);
   font-weight: 600;
   cursor: pointer;
 }
@@ -438,7 +496,7 @@ ul {
   display: block;
   width: 16px;
   height: 2px;
-  background: var(--ink);
+  background: currentColor;
   border-radius: 2px;
 }
 
@@ -462,12 +520,12 @@ ul {
 }
 
 @media (max-width: 1020px) {
-  .site-header {
+  .site-header-inner {
     flex-wrap: wrap;
   }
 
   .brand img {
-    width: 180px;
+    width: 170px;
   }
 
   .menu-toggle {
@@ -480,7 +538,7 @@ ul {
     flex-direction: column;
     align-items: stretch;
     padding: 0.5rem 0 0.4rem;
-    border-top: 1px solid var(--line);
+    border-top: 1px solid rgba(251, 247, 239, 0.18);
   }
 
   .site-nav.is-open {
@@ -511,11 +569,30 @@ ul {
     position: static;
     box-shadow: none;
     border: 0;
-    border-left: 2px solid var(--maroon-tint);
+    border-left: 2px solid rgba(224, 161, 0, 0.6);
     border-radius: 0;
     margin: 0 0 0.4rem 0.5rem;
     padding: 0 0 0 0.4rem;
     min-width: 0;
+    background: transparent;
+  }
+
+  .nav-dropdown a {
+    color: rgba(251, 247, 239, 0.88);
+  }
+
+  .nav-dropdown a:hover {
+    background: rgba(251, 247, 239, 0.08);
+    color: var(--white);
+  }
+
+  .nav-link::after {
+    display: none;
+  }
+
+  /* On the phone menu the dropdown sits on maroon again. */
+  .site-header .nav-dropdown :focus-visible {
+    outline-color: var(--cream);
   }
 
   .nav-actions {
@@ -625,47 +702,77 @@ ul {
 }
 
 .card {
-  display: grid;
-  align-content: start;
+  position: relative;
+  display: flex;
+  flex-direction: column;
   gap: 0.65rem;
   padding: clamp(18px, 2.4vw, 26px);
-  background: var(--white);
-  border: 1px solid var(--line);
+  background: linear-gradient(170deg, var(--white) 0%, #fdfaf4 100%);
+  border: 1px solid var(--card-border);
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--card-shadow);
   color: inherit;
+  /* --card-x/--card-y are set by useCardMotion while a mouse is over the card. */
+  translate: var(--card-x, 0px) var(--card-y, 0px);
+  transition:
+    translate 0.35s cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
 }
 
 .section--tint .card {
-  background: var(--cream);
+  background: linear-gradient(170deg, #fdfaf4 0%, var(--cream) 100%);
+}
+
+/* Tiles (cards in a grid row, or linked cards) respond to hover; large
+   content panels stay still. useCardMotion uses the same selector. */
+.grid > .card:not(.span-all):hover,
+.card--link:hover {
+  border-color: var(--card-border-hover);
+  box-shadow: var(--card-shadow-hover);
 }
 
 .card--link {
   text-decoration: none;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
 }
 
 .card--link:hover {
   color: inherit;
-  border-color: rgba(139, 42, 46, 0.4);
-  box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
 }
 
-.card--link:hover h3 {
+.card--link:hover h3,
+.card--link:hover h2 {
   color: var(--maroon);
 }
 
+/* Push the card's call to action to the bottom so CTAs line up across a row. */
 .card-more {
   margin-top: auto;
+  padding-top: 0.35rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  align-self: flex-start;
   font-weight: 600;
   color: var(--maroon);
+  text-decoration: none;
+}
+
+.card-more::after {
+  content: "\2192";
+  transition: transform 0.25s ease;
+}
+
+.grid > .card:hover .card-more::after,
+.card--link:hover .card-more::after,
+.card-more:hover::after {
+  transform: translateX(4px);
 }
 
 .card-media {
   margin: calc(-1 * clamp(18px, 2.4vw, 26px));
   margin-bottom: 0.35rem;
-  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  border-radius: calc(var(--radius-md) - 1px) calc(var(--radius-md) - 1px) 0 0;
   overflow: hidden;
 }
 
@@ -673,6 +780,12 @@ ul {
   width: 100%;
   aspect-ratio: 16 / 10;
   object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.grid > .card:hover .card-media img,
+.card--link:hover .card-media img {
+  transform: scale(1.05);
 }
 
 .fact-figure {
@@ -681,6 +794,19 @@ ul {
   font-weight: 600;
   color: var(--maroon);
   line-height: 1.1;
+}
+
+.grid-2 > .card .card-media img {
+  aspect-ratio: 2 / 1;
+}
+
+/* Bottom-pinned action row, so buttons line up across a row of cards. */
+.card-actions {
+  margin-top: auto;
+  padding-top: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
 }
 
 .check-list {
@@ -731,7 +857,8 @@ ul {
 }
 
 .home-hero-copy h1 {
-  font-size: clamp(2.3rem, 5.2vw, 3.9rem);
+  font-size: clamp(2.1rem, 4.4vw, 3.3rem);
+  line-height: 1.1;
 }
 
 .home-hero-media img {
@@ -769,7 +896,10 @@ ul {
 }
 
 .cta-band {
-  background: var(--maroon-dark);
+  background:
+    radial-gradient(120% 140% at 100% 0%, rgba(224, 161, 0, 0.16) 0%, rgba(224, 161, 0, 0) 45%),
+    linear-gradient(135deg, var(--maroon) 0%, var(--maroon-dark) 100%);
+  box-shadow: var(--card-shadow);
   color: var(--cream);
   border-radius: var(--radius-lg);
   padding: clamp(28px, 5vw, 56px);
@@ -1247,6 +1377,35 @@ ul {
 
   .button-row .btn {
     flex: 1 1 auto;
+  }
+}
+
+/* Scroll reveal (see useReveal). An animation, not a transition, so it never
+   overrides a card's own hover transitions. */
+.reveal-pending {
+  opacity: 0;
+}
+
+.reveal-in {
+  animation: reveal-up 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) var(--reveal-delay, 0ms) both;
+}
+
+@media print {
+  .reveal-pending,
+  .reveal-in {
+    opacity: 1;
+    animation: none;
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
   }
 }
 

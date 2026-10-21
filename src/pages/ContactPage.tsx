@@ -33,7 +33,6 @@ export function ContactPage() {
   return (
     <main>
       <PageHeader
-        eyebrow="Contact"
         title="Contact ARISE Foundation"
         lead="Select a topic below and your message will be directed to the appropriate inbox."
       />

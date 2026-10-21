@@ -1,6 +1,8 @@
 // End-to-end site check: renders every route at desktop and mobile widths and
 // fails on broken internal links, console errors, horizontal overflow, clipped
-// text, missing/duplicate <h1>, broken images, or forbidden text.
+// text, missing/duplicate <h1>, broken images, forbidden text, card calls to
+// action that don't line up across a row, or a card hover effect that stopped
+// following the mouse.
 //
 // Usage: npm run build && npm run preview & npm run check:site [baseUrl]
 // Optional: SHOTS_DIR=./shots to save full-page screenshots.
@@ -68,6 +70,18 @@ for (const [vpName, viewport] of Object.entries(viewports)) {
         placeholders: document.querySelectorAll("[data-placeholder]").length,
         overflow: document.documentElement.scrollWidth - window.innerWidth,
         h1: document.querySelectorAll("h1").length,
+        // Cards sharing a grid row must have their CTA on the same baseline.
+        misaligned: [...document.querySelectorAll(".grid")].flatMap((grid) => {
+          const rows = new Map();
+          for (const card of grid.querySelectorAll(":scope > .card")) {
+            const cta = card.querySelector(":scope > .card-more, :scope > .card-actions");
+            if (!cta) continue;
+            const top = Math.round(card.getBoundingClientRect().top);
+            rows.set(top, [...(rows.get(top) ?? []), cta.getBoundingClientRect().bottom]);
+          }
+          return [...rows.values()].filter((b) => b.length > 1 && Math.max(...b) - Math.min(...b) > 2)
+            .map((b) => b.map(Math.round).join("/"));
+        }),
       };
     });
 
@@ -81,10 +95,53 @@ for (const [vpName, viewport] of Object.entries(viewports)) {
     if (info.overflow > 0) problems.push(`${vpName} ${route}: horizontal overflow ${info.overflow}px`);
     if (info.brokenImages.length) problems.push(`${route}: broken images ${info.brokenImages.join(", ")}`);
     if (info.h1 !== 1) problems.push(`${vpName} ${route}: ${info.h1} <h1> elements`);
+    if (info.misaligned.length) problems.push(`${vpName} ${route}: card CTAs not aligned (${info.misaligned.join(", ")})`);
     if (vpName === "desktop") placeholders[route] = info.placeholders;
     if (shotsDir) {
       const name = (route === "/" ? "home" : route.slice(1).replaceAll("/", "_")) + `-${vpName}.png`;
       await page.screenshot({ path: `${shotsDir}/${name}`, fullPage: true });
+    }
+  }
+  await page.close();
+}
+
+// Card hover: a tile should drift toward the side the mouse is on.
+{
+  const page = await browser.newPage({ viewport: viewports.desktop });
+  await page.goto(base + "/", { waitUntil: "networkidle" });
+  const card = page.locator(".grid > .card--link").first();
+  await card.scrollIntoViewIfNeeded();
+  const box = await card.boundingBox();
+  const shiftX = async (x) => {
+    await page.mouse.move(x, box.y + box.height / 2, { steps: 4 });
+    await page.waitForTimeout(500);
+    return card.evaluate((el) => parseFloat(getComputedStyle(el).translate) || 0);
+  };
+  const left = await shiftX(box.x + 6);
+  const right = await shiftX(box.x + box.width - 6);
+  if (!(left < -2 && right > 2)) problems.push(`card hover motion not working (left ${left}px, right ${right}px)`);
+  await page.close();
+}
+
+// Scroll reveal: with motion allowed, the first screen must be fully visible on
+// load, and nothing may stay hidden once the page has been scrolled through.
+for (const viewport of Object.values(viewports)) {
+  const page = await browser.newPage({ viewport, reducedMotion: "no-preference" });
+  for (const route of routes) {
+    await page.goto(base + route, { waitUntil: "networkidle" });
+    const hiddenOnLoad = await page.evaluate(() => [...document.querySelectorAll(".reveal-pending")]
+      .filter((el) => el.getBoundingClientRect().top < innerHeight).length);
+    await page.evaluate(async () => {
+      for (let y = 0; y <= document.body.scrollHeight; y += innerHeight / 2) {
+        scrollTo(0, y);
+        await new Promise((done) => setTimeout(done, 80));
+      }
+    });
+    await page.waitForTimeout(1200);
+    const stillHidden = await page.evaluate(() => [...document.querySelectorAll(".reveal-pending, .reveal-in")]
+      .filter((el) => el.classList.contains("reveal-pending") || getComputedStyle(el).opacity !== "1").length);
+    if (hiddenOnLoad || stillHidden) {
+      problems.push(`${viewport.width}px ${route}: reveal left content hidden (first screen ${hiddenOnLoad}, after scroll ${stillHidden})`);
     }
   }
   await page.close();

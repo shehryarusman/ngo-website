@@ -23,7 +23,7 @@ const explore = [
   },
   {
     title: "Contact & Partnerships",
-    text: "Click here for institutional and community-based collaboration, to support our mission, or to contact us with any questions!",
+    text: "Institutional partnerships, support, and inquiries.",
     to: "/contact",
   },
 ];
@@ -36,7 +36,6 @@ export function HomePage() {
       <section className="home-hero">
         <div className="container home-hero-grid">
           <div className="home-hero-copy">
-            <p className="eyebrow">ARISE Foundation</p>
             <h1>
               Charitable educational initiatives opening doors to accessible
               arts, science, and research-based opportunities.
@@ -62,8 +61,8 @@ export function HomePage() {
       </section>
 
       {latestStory ? (
-        <Section tone="tint" eyebrow="Latest Story">
-          <div className="feature-story">
+        <Section tone="tint">
+          <div className="card feature-story">
             <Link
               to={`/news/${latestStory.slug}`}
               className="feature-story-media"
@@ -73,7 +72,7 @@ export function HomePage() {
               <StoryImage story={latestStory} sizes="(min-width: 960px) 40vw, 100vw" decorative />
             </Link>
             <div className="feature-story-copy">
-              <p className="muted">{latestStory.dateLabel}</p>
+              <p className="eyebrow">Latest Story · {latestStory.dateLabel}</p>
               <h2>{latestStory.title}</h2>
               <div className="button-row">
                 <Link className="btn btn-primary" to={`/news/${latestStory.slug}`}>
@@ -88,14 +87,13 @@ export function HomePage() {
         </Section>
       ) : null}
 
-      <Section
-        intro="Explore the ins-and-outs of our organization, available programs, and partnership opportunities."
-      >
+      <Section>
         <div className="grid grid-3">
           {explore.map((item) => (
             <Card key={item.to} to={item.to}>
               <h3>{item.title}</h3>
               <p className="muted">{item.text}</p>
+              <span className="card-more">Learn more</span>
             </Card>
           ))}
         </div>
@@ -103,13 +101,14 @@ export function HomePage() {
 
       <Section
         tone="tint"
-        eyebrow="Programs"
         title="Our Programs"
-        intro="ARISE runs three science programs, from high school through postdoctoral research, plus arts education."
       >
         <div className="grid grid-4">
           {programs.map((program) => (
             <Card key={program.slug} to={`/programs/${program.slug}`}>
+              <div className="card-media">
+                <Picture name={program.image} alt="" sizes="(min-width: 960px) 22vw, (min-width: 640px) 45vw, 100vw" />
+              </div>
               <h3>{program.name}</h3>
               <p className="muted small">{program.serves}</p>
               <span className="card-more">View program</span>

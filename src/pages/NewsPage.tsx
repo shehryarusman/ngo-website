@@ -10,7 +10,7 @@ export function NewsPage() {
 
   return (
     <main>
-      <PageHeader eyebrow="News" title="News & Stories" />
+      <PageHeader title="News & Stories" />
       <Section>
         <div className="story-list">
           {stories.map((story) => (
