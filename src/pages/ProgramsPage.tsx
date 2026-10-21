@@ -1,128 +1,117 @@
-import { Link } from "react-router-dom";
-import { BentoCard } from "../components/common/BentoCard";
-import { PageHero } from "../components/common/PageHero";
-import { ParallaxImage } from "../components/common/ParallaxImage";
+import { Card } from "../components/common/Card";
+import { PageHeader } from "../components/common/PageHeader";
+import { Picture } from "../components/common/Picture";
 import { Placeholder } from "../components/common/Placeholder";
-import { SectionHeading } from "../components/common/SectionHeading";
+import { Section } from "../components/common/Section";
+import { statements } from "../data/organization";
 import { programs } from "../data/programs";
 import { programAreas } from "../data/siteContent";
+import { usePageTitle } from "../hooks/usePageTitle";
 
 export function ProgramsPage() {
+  usePageTitle("Programs");
+
   return (
-    <main className="page-container">
-      <PageHero
+    <main>
+      <PageHeader
         eyebrow="What We Do"
         title="Programs that connect students to real opportunity."
-        description="ARISE runs three science programs, from high school through postdoctoral research, plus arts education."
-        imageSrc="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=1800&q=84"
-        imageAlt="Students working in a science laboratory"
-        primaryCta={{ label: "View Programs", to: "#programs" }}
-        secondaryCta={{ label: "Support Programs", to: "/donate" }}
-        rightContent={
+        lead="ARISE runs three science programs, from high school through postdoctoral research, plus arts education."
+        image="lab-pipette"
+        actions={[
+          { label: "View Programs", to: "#programs" },
+          { label: "Support Programs", to: "/donate", variant: "secondary" },
+        ]}
+        aside={
           <>
-            <p className="eyebrow">Model</p>
-            <p className="hero-side-title">How ARISE Works</p>
-            <p>
-              ARISE designs and runs its own programs, directly and in
-              collaboration with universities, research laboratories, and
-              schools, and covers participation costs such as travel, lodging,
-              and meals.
-            </p>
+            <p className="eyebrow">How ARISE Works</p>
+            <p>{statements.howWeWork}</p>
           </>
         }
       />
 
-      <section id="areas" className="section-block">
-        <SectionHeading
-          eyebrow="Why We Do It"
-          title="Areas of Impact"
-          description="Learn about the mission of ARISE Foundation by field of impact, or take a look into our mission as a whole."
-        />
-        <div className="bento-grid program-areas-grid">
-          {programAreas.map((area, index) => {
-            const content = (
-              <>
-                <div className="program-area-media">
-                  <ParallaxImage src={area.image} alt="" intensity={12 + index} />
-                </div>
-                <h3>{area.title}</h3>
-                <p>{area.summary}</p>
-              </>
-            );
-
-            return area.to ? (
-              <Link
-                key={area.title}
-                to={area.to}
-                className="bento-card program-area-card program-area-link reveal"
-              >
-                {content}
-              </Link>
-            ) : (
-              <BentoCard key={area.title} className="program-area-card reveal">
-                {content}
-              </BentoCard>
-            );
-          })}
-        </div>
-      </section>
-
-      <section id="programs" className="section-block">
-        <SectionHeading eyebrow="Programs" title="Our Programs" />
-        <div className="bento-grid program-list-grid">
+      <Section id="programs" tone="tint" eyebrow="Programs" title="Our Programs">
+        <div className="grid grid-2">
           {programs.map((program) => (
-            <Link
-              key={program.slug}
-              to={`/programs/${program.slug}`}
-              className="bento-card program-list-card reveal"
-            >
+            <Card key={program.slug} to={`/programs/${program.slug}`}>
+              <div className="card-media">
+                <Picture name={program.image} alt="" sizes="(min-width: 960px) 45vw, 100vw" />
+              </div>
               <h3>{program.name}</h3>
-              <p>
-                <span className="value-label">Who it serves:</span>{" "}
-                {program.serves}
+              <p className="small">
+                <span className="label">Who it serves:</span> {program.serves}
               </p>
-              <p>
-                <span className="value-label">Status:</span> {program.status}
+              <p className="small">
+                <span className="label">Status:</span> {program.status}
               </p>
-              <span className="program-list-more">View program</span>
-            </Link>
+              <span className="card-more">View program</span>
+            </Card>
           ))}
-          <BentoCard className="program-list-note reveal">
+          <Card className="span-all">
             <p>
               ARISE also sponsors seminars and speaking engagements by
               scientists and educators. An industry laboratory internship with
               a commercial testing laboratory in the Lehigh Valley is in
               development.
             </p>
-          </BentoCard>
+          </Card>
         </div>
-      </section>
+      </Section>
 
-      <section id="locations-history" className="section-block">
-        <SectionHeading
-          eyebrow="Locations & History"
-          title="Where ARISE Works"
-          description="ARISE is based in the Philadelphia area and works with institutions in the United States and Asia, beginning with Thailand in 2026."
-        />
-        <div className="bento-grid timeline-grid">
-          <BentoCard className="timeline-card reveal">
+      <Section
+        id="areas"
+        eyebrow="Why We Do It"
+        title="Areas of Impact"
+        intro="Learn about the mission of ARISE Foundation by field of impact, or take a look into our mission as a whole."
+      >
+        <div className="grid grid-3">
+          {programAreas.map((area) => {
+            const body = (
+              <>
+                <div className="card-media">
+                  <Picture name={area.image} alt="" sizes="(min-width: 960px) 30vw, 100vw" />
+                </div>
+                <h3>{area.title}</h3>
+                <p className="muted">{area.summary}</p>
+              </>
+            );
+            return area.to ? (
+              <Card key={area.title} to={area.to}>
+                {body}
+              </Card>
+            ) : (
+              <Card key={area.title}>{body}</Card>
+            );
+          })}
+        </div>
+      </Section>
+
+      <Section
+        id="locations-history"
+        tone="tint"
+        eyebrow="Locations & History"
+        title="Where ARISE Works"
+        intro={statements.whereWeWork}
+      >
+        <div className="grid grid-4">
+          <Card>
             <h3>Philadelphia Area</h3>
-            <p>Headquarters of ARISE Foundation.</p>
-          </BentoCard>
-          <BentoCard className="timeline-card reveal">
+            <p className="muted">Headquarters of ARISE Foundation.</p>
+          </Card>
+          <Card>
             <h3>United States</h3>
-            <p>Programs with universities, research laboratories, and schools.</p>
-          </BentoCard>
-          <BentoCard className="timeline-card reveal">
+            <p className="muted">Programs with universities, research laboratories, and schools.</p>
+          </Card>
+          <Card>
             <h3>Asia</h3>
-            <p>Beginning with Thailand in 2026.</p>
-          </BentoCard>
-          <BentoCard className="timeline-card reveal">
+            <p className="muted">Beginning with Thailand in 2026.</p>
+          </Card>
+          <Card>
             <h3>History</h3>
             <Placeholder what="Timeline of key milestones since the establishment of ARISE Foundation in 2025" />
-          </BentoCard>
+          </Card>
         </div>
-      </section>
+      </Section>
     </main>
   );
 }

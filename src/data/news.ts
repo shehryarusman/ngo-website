@@ -9,7 +9,8 @@ export interface NewsStory {
   slug: string;
   title: string;
   dateLabel: string;
-  image: { src: string; alt: string };
+  /** Portrait poster image, exported at 420w and 712w (WebP). */
+  image: { base: string; width: number; height: number; alt: string };
   facts: NewsFact[];
 }
 
@@ -21,7 +22,9 @@ export const stories: NewsStory[] = [
     title: "ARISE High School Scholars – Thailand Pilot 2026",
     dateLabel: "November 9–10, 2026",
     image: {
-      src: "/news/thailand-pilot-2026-banner.jpg",
+      base: "/images/news/thailand-pilot-2026",
+      width: 712,
+      height: 1601,
       alt: "ARISE High School Scholars Program Thailand Pilot 2026 banner: Inspiring the Next Generation of Young Scientists, with partner logos",
     },
     facts: [

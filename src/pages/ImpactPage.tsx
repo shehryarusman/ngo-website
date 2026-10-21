@@ -1,100 +1,72 @@
 import { Link } from "react-router-dom";
-import { BentoCard } from "../components/common/BentoCard";
-import { PageHero } from "../components/common/PageHero";
-import { ParallaxImage } from "../components/common/ParallaxImage";
-import { SectionHeading } from "../components/common/SectionHeading";
-import { impactSnapshots, reports } from "../data/siteContent";
+import { Card } from "../components/common/Card";
+import { PageHeader } from "../components/common/PageHeader";
+import { Placeholder } from "../components/common/Placeholder";
+import { Section } from "../components/common/Section";
+import { statements } from "../data/organization";
+import { organizationFacts } from "../data/siteContent";
+import { usePageTitle } from "../hooks/usePageTitle";
 
 export function ImpactPage() {
+  usePageTitle("How We Work");
+
   return (
-    <main className="page-container">
-      <PageHero
+    <main>
+      <PageHeader
         eyebrow="How We Work"
         title="Clear governance for student opportunity."
-        description="We track programs, funding, partner commitments, and student-facing outcomes so ARISE can grow with discipline and transparency."
-        imageSrc="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1800&q=84"
-        imageAlt="Documents and reporting dashboard"
-        primaryCta={{ label: "Read Our Story", to: "/about#story" }}
-        secondaryCta={{ label: "Support This Work", to: "/donate" }}
-        rightContent={
-          <>
-            <p className="eyebrow">Reporting Cycle</p>
-            <h3>Annual Reviews</h3>
-            <p>
-              Program progress, budget variance, and operational risks are
-              reviewed against board-approved expectations.
-            </p>
-          </>
-        }
+        lead={statements.howWeWork}
+        image="documents-review"
+        actions={[
+          { label: "Transparency", to: "/transparency" },
+          { label: "Support This Work", to: "/donate", variant: "secondary" },
+        ]}
       />
 
-      <section id="operations" className="section-block">
-        <SectionHeading
-          eyebrow="Operations"
-          title="Operating Snapshot"
-          description="Current organizational and program indicators for ARISE."
-        />
-        <div className="bento-grid impact-snapshots-grid">
-          {impactSnapshots.map((snapshot) => (
-            <BentoCard key={snapshot.metric + snapshot.context} className="snapshot-card reveal">
-              <h3>{snapshot.metric}</h3>
-              <p>{snapshot.context}</p>
-            </BentoCard>
+      <Section id="operations" tone="tint" eyebrow="Operations" title="ARISE at a Glance">
+        <div className="grid grid-4">
+          {organizationFacts.map((fact) => (
+            <Card key={fact.figure}>
+              <p className="fact-figure">{fact.figure}</p>
+              <p className="muted">{fact.label}</p>
+            </Card>
           ))}
         </div>
-      </section>
+      </Section>
 
-      <section id="financials" className="section-block">
-        <SectionHeading
-          eyebrow="Financials"
-          title="Public Documentation"
-          description="Core reports prepared for donors, partners, and community stakeholders."
-        />
-        <div className="bento-grid reports-grid">
-          {reports.map((report) => (
-            <BentoCard key={report.name} className="report-card reveal">
-              <h3>{report.name}</h3>
-              <p>{report.detail}</p>
-              <a
-                className="btn btn-soft"
-                href={`mailto:info@arisegiving.org?subject=${encodeURIComponent(
-                  `Document request: ${report.name}`
-                )}`}
-              >
-                Request PDF
-              </a>
-            </BentoCard>
-          ))}
-          <BentoCard className="report-media-card reveal">
-            <ParallaxImage
-              src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1800&q=88"
-              alt="Program reporting documents"
-              intensity={13}
-            />
-          </BentoCard>
-        </div>
-      </section>
-
-      <section id="funding" className="section-block">
-        <div className="bento-grid">
-          <BentoCard className="wide-cta-card reveal">
-            <p className="eyebrow">Support The Next Cycle</p>
-            <h2>Funding opens access to serious educational opportunity.</h2>
+      <Section id="governance" eyebrow="Governance" title="Oversight and Reporting">
+        <div className="grid grid-2">
+          <Card>
+            <h3>Board Oversight</h3>
+            <Placeholder what="Description of how the Board of Directors oversees programs and grants (one paragraph), per the board's approved governance policies" />
+          </Card>
+          <Card>
+            <h3>Public Documents</h3>
             <p>
-              Contributions are tied to program budgets and reviewed in public
-              reporting cycles.
+              ARISE posts its public IRS documents on its Transparency page,
+              where anyone may view, download and print them free of charge.
             </p>
-            <div className="button-row">
-              <Link className="btn btn-primary" to="/donate">
-                Donate
-              </Link>
-              <Link className="btn btn-soft" to="/contact">
-                Partner With Us
-              </Link>
-            </div>
-          </BentoCard>
+            <Link className="card-more" to="/transparency">
+              View the Transparency page
+            </Link>
+          </Card>
         </div>
-      </section>
+      </Section>
+
+      <Section id="funding">
+        <div className="cta-band">
+          <div>
+            <h2>Funding</h2>
+            <p>
+              ARISE covers participation costs such as travel, lodging, and
+              meals so that finances are not a barrier. {statements.charityStatus}
+            </p>
+          </div>
+          <Link className="btn btn-on-dark" to="/donate">
+            Donate
+          </Link>
+        </div>
+      </Section>
     </main>
   );
 }
