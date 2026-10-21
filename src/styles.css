@@ -72,10 +72,12 @@
   --radius-lg: 22px;
   --shadow-sm: 0 1px 2px rgba(42, 37, 34, 0.06);
   --shadow-md: 0 1px 2px rgba(42, 37, 34, 0.05), 0 10px 28px rgba(42, 37, 34, 0.07);
-  --card-border: rgba(42, 37, 34, 0.16);
-  --card-border-hover: rgba(139, 42, 46, 0.35);
-  --card-shadow: 0 1px 2px rgba(42, 37, 34, 0.06), 0 6px 18px rgba(42, 37, 34, 0.07);
-  --card-shadow-hover: 0 2px 4px rgba(42, 37, 34, 0.06), 0 18px 40px rgba(42, 37, 34, 0.14);
+  --radius-card: 20px;
+  --card-border: rgba(42, 37, 34, 0.14);
+  --card-border-hover: rgba(42, 37, 34, 0.22);
+  /* Resting depth of a card, for raised blocks that don't follow the cursor. */
+  --depth-shadow: 0 14px 26px rgba(42, 37, 34, 0.16), 0 34px 72px rgba(42, 37, 34, 0.2),
+    0 2px 6px rgba(42, 37, 34, 0.08);
 
   --container: 1160px;
   --gutter: clamp(16px, 4vw, 32px);
@@ -436,37 +438,71 @@ ul {
   transform: translateY(1px) rotate(225deg);
 }
 
+/* Desktop dropdown: each link is its own floating pill. */
 .nav-dropdown {
   list-style: none;
   margin: 0;
-  padding: 0.4rem;
+  padding: 0.6rem 0.5rem 0.6rem;
   position: absolute;
   top: 100%;
-  left: 0;
-  min-width: 260px;
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-md);
+  left: 50%;
+  translate: -50% 0;
+  width: max-content;
+  min-width: 230px;
   display: none;
+  flex-direction: column;
+  gap: 0.42rem;
 }
 
 .nav-item.is-open .nav-dropdown {
-  display: block;
+  display: flex;
+}
+
+.nav-dropdown li {
+  animation: pill-in 0.28s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+}
+
+.nav-dropdown li:nth-child(2) { animation-delay: 40ms; }
+.nav-dropdown li:nth-child(3) { animation-delay: 80ms; }
+.nav-dropdown li:nth-child(4) { animation-delay: 120ms; }
+.nav-dropdown li:nth-child(5) { animation-delay: 160ms; }
+.nav-dropdown li:nth-child(6) { animation-delay: 200ms; }
+.nav-dropdown li:nth-child(7) { animation-delay: 240ms; }
+
+@keyframes pill-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
 }
 
 .nav-dropdown a {
   display: block;
-  padding: 0.5rem 0.75rem;
-  border-radius: var(--radius-sm);
+  padding: 0.68rem 0.86rem;
+  border: 1px solid rgba(255, 255, 255, 0.62);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.94);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 12px 28px rgba(42, 37, 34, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.9);
   color: var(--ink);
+  text-align: center;
   text-decoration: none;
   font-size: 0.95rem;
+  white-space: nowrap;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
 }
 
 .nav-dropdown a:hover {
-  background: var(--maroon-tint);
+  background: var(--white);
+  border-color: rgba(139, 42, 46, 0.22);
+  box-shadow: 0 16px 34px rgba(42, 37, 34, 0.16);
   color: var(--maroon-dark);
+  transform: translateY(-1px);
 }
 
 .nav-actions {
@@ -567,23 +603,38 @@ ul {
 
   .nav-dropdown {
     position: static;
-    box-shadow: none;
-    border: 0;
+    translate: none;
+    width: auto;
+    gap: 0;
     border-left: 2px solid rgba(224, 161, 0, 0.6);
-    border-radius: 0;
     margin: 0 0 0.4rem 0.5rem;
     padding: 0 0 0 0.4rem;
     min-width: 0;
-    background: transparent;
+  }
+
+  .nav-dropdown li {
+    animation: none;
   }
 
   .nav-dropdown a {
+    padding: 0.5rem 0.75rem;
+    border: 0;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    box-shadow: none;
     color: rgba(251, 247, 239, 0.88);
+    text-align: left;
+    white-space: normal;
   }
 
   .nav-dropdown a:hover {
     background: rgba(251, 247, 239, 0.08);
+    border-color: transparent;
+    box-shadow: none;
     color: var(--white);
+    transform: none;
   }
 
   .nav-link::after {
@@ -707,29 +758,37 @@ ul {
   flex-direction: column;
   gap: 0.65rem;
   padding: clamp(18px, 2.4vw, 26px);
-  background: linear-gradient(170deg, var(--white) 0%, #fdfaf4 100%);
+  /* The highlight follows the cursor via --gloss-x/--gloss-y (useCardMotion). */
+  background:
+    radial-gradient(
+      circle at var(--gloss-x, 40%) var(--gloss-y, 16%),
+      rgba(255, 255, 255, calc(0.3 + 0.3 * var(--card-lift, 0))) 0%,
+      rgba(255, 255, 255, 0) 48%
+    ),
+    linear-gradient(165deg, var(--white) 0%, #f8f3e9 100%);
   border: 1px solid var(--card-border);
-  border-radius: var(--radius-md);
-  box-shadow: var(--card-shadow);
+  border-radius: var(--radius-card);
+  /* Two soft layers whose offsets move against the cursor, lengthening as the card lifts. */
+  box-shadow:
+    var(--shadow-x, 0px) calc(14px + var(--shadow-y, 0px) + 2px * var(--card-lift, 0))
+      calc(26px + 4px * var(--card-lift, 0)) rgba(42, 37, 34, calc(0.16 + 0.04 * var(--card-lift, 0))),
+    calc(var(--shadow-x, 0px) * 1.9) calc(34px + var(--shadow-y, 0px) * 1.6 + 4px * var(--card-lift, 0))
+      calc(72px + 12px * var(--card-lift, 0)) rgba(42, 37, 34, calc(0.2 + 0.06 * var(--card-lift, 0))),
+    0 2px 6px rgba(42, 37, 34, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.78);
   color: inherit;
-  /* --card-x/--card-y are set by useCardMotion while a mouse is over the card. */
+  transition: border-color 0.3s ease;
+}
+
+/* Only while useCardMotion is easing a card; at rest cards carry no 3D layer. */
+.card.is-moving {
   translate: var(--card-x, 0px) var(--card-y, 0px);
-  transition:
-    translate 0.35s cubic-bezier(0.2, 0.7, 0.2, 1),
-    box-shadow 0.3s ease,
-    border-color 0.3s ease;
+  transform: perspective(1200px) rotateX(var(--card-rx, 0deg)) rotateY(var(--card-ry, 0deg));
+  will-change: transform, translate;
 }
 
-.section--tint .card {
-  background: linear-gradient(170deg, #fdfaf4 0%, var(--cream) 100%);
-}
-
-/* Tiles (cards in a grid row, or linked cards) respond to hover; large
-   content panels stay still. useCardMotion uses the same selector. */
-.grid > .card:not(.span-all):hover,
-.card--link:hover {
+.card:hover {
   border-color: var(--card-border-hover);
-  box-shadow: var(--card-shadow-hover);
 }
 
 .card--link {
@@ -772,7 +831,7 @@ ul {
 .card-media {
   margin: calc(-1 * clamp(18px, 2.4vw, 26px));
   margin-bottom: 0.35rem;
-  border-radius: calc(var(--radius-md) - 1px) calc(var(--radius-md) - 1px) 0 0;
+  border-radius: calc(var(--radius-card) - 1px) calc(var(--radius-card) - 1px) 0 0;
   overflow: hidden;
 }
 
@@ -866,7 +925,7 @@ ul {
   aspect-ratio: 4 / 5;
   object-fit: cover;
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--depth-shadow);
 }
 
 .feature-story {
@@ -899,7 +958,7 @@ ul {
   background:
     radial-gradient(120% 140% at 100% 0%, rgba(224, 161, 0, 0.16) 0%, rgba(224, 161, 0, 0) 45%),
     linear-gradient(135deg, var(--maroon) 0%, var(--maroon-dark) 100%);
-  box-shadow: var(--card-shadow);
+  box-shadow: var(--depth-shadow);
   color: var(--cream);
   border-radius: var(--radius-lg);
   padding: clamp(28px, 5vw, 56px);
@@ -1381,13 +1440,15 @@ ul {
 }
 
 /* Scroll reveal (see useReveal). An animation, not a transition, so it never
-   overrides a card's own hover transitions. */
+   overrides a card's own motion. */
 .reveal-pending {
   opacity: 0;
 }
 
 .reveal-in {
-  animation: reveal-up 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) var(--reveal-delay, 0ms) both;
+  /* "backwards" so the animation lets go of transform once it ends; cards
+     tilt with transform (useCardMotion). */
+  animation: reveal-up 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) var(--reveal-delay, 0ms) backwards;
 }
 
 @media print {
