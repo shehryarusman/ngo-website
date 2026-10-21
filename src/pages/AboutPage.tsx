@@ -37,7 +37,7 @@ export function AboutPage() {
         <div className="bento-grid about-story-grid">
           <BentoCard className="about-story-card about-story-wide reveal">
             <h3>Our Story</h3>
-            <Placeholder what="ARISE's founding story, 1–2 paragraphs: why the foundation was started, by whom, and what has happened since 2025." />
+            <Placeholder what="History of ARISE Foundation (one to two paragraphs): the purpose of its founding, its founders, and its activities since establishment in 2025." />
           </BentoCard>
           <BentoCard className="about-story-card reveal">
             <h3>How ARISE Works</h3>
@@ -121,7 +121,7 @@ export function AboutPage() {
               {member.bio ? (
                 <p>{member.bio}</p>
               ) : (
-                <Placeholder what={`Short summary of ${member.name}'s role at ARISE, 1–2 sentences (same style as the other directors).`} />
+                <Placeholder what={`Summary of ${member.name}'s role at ARISE Foundation (one to two sentences), consistent in style with the other directors' summaries.`} />
               )}
               <Link className="btn btn-soft" to="/board">
                 Read Full Bio
