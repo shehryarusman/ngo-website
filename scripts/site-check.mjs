@@ -70,6 +70,11 @@ for (const [vpName, viewport] of Object.entries(viewports)) {
         placeholders: document.querySelectorAll("[data-placeholder]").length,
         overflow: document.documentElement.scrollWidth - window.innerWidth,
         h1: document.querySelectorAll("h1").length,
+        // Card motion is delegated to the nearest .card, so cards must not nest,
+        // and every card must keep the cursor highlight layer.
+        nestedCards: document.querySelectorAll(".card .card").length,
+        flatCards: [...document.querySelectorAll(".card")]
+          .filter((card) => !getComputedStyle(card).backgroundImage.includes("radial-gradient")).length,
         // Cards sharing a grid row must have their CTA on the same baseline.
         misaligned: [...document.querySelectorAll(".grid")].flatMap((grid) => {
           const rows = new Map();
@@ -95,6 +100,8 @@ for (const [vpName, viewport] of Object.entries(viewports)) {
     if (info.overflow > 0) problems.push(`${vpName} ${route}: horizontal overflow ${info.overflow}px`);
     if (info.brokenImages.length) problems.push(`${route}: broken images ${info.brokenImages.join(", ")}`);
     if (info.h1 !== 1) problems.push(`${vpName} ${route}: ${info.h1} <h1> elements`);
+    if (info.nestedCards) problems.push(`${vpName} ${route}: ${info.nestedCards} card(s) nested inside another card`);
+    if (info.flatCards) problems.push(`${vpName} ${route}: ${info.flatCards} card(s) lost the cursor highlight background`);
     if (info.misaligned.length) problems.push(`${vpName} ${route}: card CTAs not aligned (${info.misaligned.join(", ")})`);
     if (vpName === "desktop") placeholders[route] = info.placeholders;
     if (shotsDir) {
