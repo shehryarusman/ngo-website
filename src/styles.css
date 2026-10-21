@@ -702,7 +702,7 @@ ul {
 }
 
 .section--tint {
-  background: var(--white);
+  background: var(--cream-deep);
   border-block: 1px solid var(--line);
 }
 
@@ -758,14 +758,14 @@ ul {
   flex-direction: column;
   gap: 0.65rem;
   padding: clamp(18px, 2.4vw, 26px);
-  /* The highlight follows the cursor via --gloss-x/--gloss-y (useCardMotion). */
+  /* A faint gold glow follows the cursor via --gloss-x/--gloss-y (useCardMotion). */
   background:
     radial-gradient(
       circle at var(--gloss-x, 40%) var(--gloss-y, 16%),
-      rgba(255, 255, 255, calc(0.3 + 0.3 * var(--card-lift, 0))) 0%,
-      rgba(255, 255, 255, 0) 48%
+      rgba(224, 161, 0, calc(0.04 + 0.05 * var(--card-lift, 0))) 0%,
+      rgba(224, 161, 0, 0) 48%
     ),
-    linear-gradient(165deg, var(--white) 0%, #f8f3e9 100%);
+    var(--white);
   border: 1px solid var(--card-border);
   border-radius: var(--radius-card);
   /* Two soft layers whose offsets move against the cursor, lengthening as the card lifts. */
