@@ -54,6 +54,9 @@ export function NewsStoryPage() {
             <Link className="btn btn-soft" to="/news">
               All stories
             </Link>
+            <Link className="btn btn-soft" to="/programs/travel-grants#high-school-scholars">
+              ARISE High School Scholars Program
+            </Link>
           </div>
         </BentoCard>
         <BentoCard className="story-poster reveal">

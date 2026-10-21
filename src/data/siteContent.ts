@@ -88,48 +88,53 @@ export const boardMembers: Array<{
   },
 ];
 
-export const programAreas = [
+// "Areas of Impact" text is from the client's website notes.
+export const programAreas: Array<{
+  title: string;
+  summary: string;
+  image: string;
+  to?: string;
+}> = [
   {
-    title: "Research Internships",
-    summary:
-      "Hands-on exposure to laboratory environments, scientific practice, and mentorship.",
-    image:
-      "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=1600&q=84",
-  },
-  {
-    title: "Arts Preparation",
-    summary:
-      "Support for students developing portfolios, creative confidence, and artistic direction.",
+    title: "Art",
+    summary: "Furthering culture and expression by fostering creativity and community.",
     image:
       "https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=1600&q=84",
   },
   {
-    title: "Scientific Mentorship",
+    title: "Research",
     summary:
-      "Guided conversations with educators and researchers about academic pathways.",
+      "Opening doors and destabilizing barriers to research by funding travel to conferences, as well as fellowship opportunities.",
+    image:
+      "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=1600&q=84",
+  },
+  {
+    title: "Innovation",
+    summary: "Pushing boundaries of what is known by promoting discovery of the unknown.",
     image:
       "https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&w=1600&q=84",
   },
   {
-    title: "Community Partnerships",
+    title: "Science",
     summary:
-      "Collaboration with educational institutions and community spaces.",
+      "Expanding knowledge and advancing science through educational and research-based programs.",
     image:
-      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1600&q=84",
+      "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=1600&q=84",
   },
   {
-    title: "Student Readiness",
+    title: "Education",
     summary:
-      "Practical preparation for professional communication, expectations, and follow-through.",
+      "Extending horizons for young academics by creating opportunities for accessible education.",
     image:
       "https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?auto=format&fit=crop&w=1600&q=84",
   },
   {
-    title: "Grant Support",
+    title: "Mission",
     summary:
-      "Evaluation and preparation of arts and science grant opportunities.",
+      "Read about ARISE Foundation's mission to impassion, inspire, and educate across Arts, Research, Innovation, Science, and Education.",
     image:
-      "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1600&q=84",
+      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1600&q=84",
+    to: "/about",
   },
 ];
 

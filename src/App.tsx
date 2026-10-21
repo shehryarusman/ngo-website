@@ -15,6 +15,7 @@ import { ImpactPage } from "./pages/ImpactPage";
 import { NewsPage } from "./pages/NewsPage";
 import { NewsStoryPage } from "./pages/NewsStoryPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
+import { ProgramPage } from "./pages/ProgramPage";
 import { ProgramsPage } from "./pages/ProgramsPage";
 
 function App() {
@@ -77,6 +78,7 @@ function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/board" element={<BoardPage />} />
         <Route path="/programs" element={<ProgramsPage />} />
+        <Route path="/programs/:slug" element={<ProgramPage />} />
         <Route path="/impact" element={<ImpactPage />} />
         <Route path="/get-involved" element={<GetInvolvedPage />} />
         <Route path="/contact" element={<ContactPage />} />
