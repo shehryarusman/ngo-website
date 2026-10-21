@@ -11,13 +11,12 @@ export function DonationPage() {
   return (
     <main>
       <PageHeader
-        eyebrow="Donate"
         title="Support science and arts education."
         lead={statements.charityStatus}
         image="students-collaborating"
       />
 
-      <Section tone="tint" eyebrow="Ways to Give" title="How to Donate">
+      <Section tone="tint" title="How to Donate">
         <div className="grid grid-3">
           <Card>
             <h3>Online</h3>
@@ -42,7 +41,7 @@ export function DonationPage() {
         </div>
       </Section>
 
-      <Section eyebrow="Questions" title="Receipts and Questions">
+      <Section title="Receipts and Questions">
         <div className="prose">
           <p>
             For donation receipts and questions about giving, please contact{" "}

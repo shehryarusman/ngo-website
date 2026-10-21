@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { SiteFooter } from "./components/layout/SiteFooter";
 import { SiteHeader } from "./components/layout/SiteHeader";
+import { useCardMotion } from "./hooks/useCardMotion";
+import { useReveal } from "./hooks/useReveal";
 import { AboutPage } from "./pages/AboutPage";
 import { BoardPage } from "./pages/BoardPage";
 import { ContactPage } from "./pages/ContactPage";
@@ -32,6 +34,8 @@ function useScrollOnNavigate() {
 
 function App() {
   useScrollOnNavigate();
+  useReveal();
+  useCardMotion();
 
   return (
     <>

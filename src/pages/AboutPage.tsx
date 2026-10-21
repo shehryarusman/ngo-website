@@ -14,7 +14,6 @@ export function AboutPage() {
   return (
     <main>
       <PageHeader
-        eyebrow="Who We Are"
         title="Opening access to arts, science, and research."
         lead="ARISE Foundation is a Pennsylvania nonprofit and a 501(c)(3) public charity that runs hands-on science education and research programs for students and early-career researchers."
         image="students-library"
@@ -33,8 +32,7 @@ export function AboutPage() {
       <Section
         id="story"
         tone="tint"
-        eyebrow="Story"
-        title="About The Bigger Picture"
+        title="About ARISE"
         intro="The name stands for Arts, Research, Innovation, Science and Education."
       >
         <div className="grid grid-2">
@@ -55,9 +53,7 @@ export function AboutPage() {
 
       <Section
         id="role"
-        eyebrow="Role"
-        title="Mission And Current Activities"
-        intro="ARISE runs three science programs, from high school through postdoctoral research, plus arts education."
+        title="Programs"
       >
         <div className="grid grid-4">
           {programs.map((program) => (
@@ -75,9 +71,7 @@ export function AboutPage() {
       <Section
         id="board"
         tone="tint"
-        eyebrow="Board"
         title="Board of Directors"
-        intro="ARISE is led by a three-member Board of Directors."
       >
         <div className="grid grid-3">
           {leadership.map((member) => (

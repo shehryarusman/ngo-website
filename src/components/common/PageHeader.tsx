@@ -10,7 +10,7 @@ interface Action {
 }
 
 interface PageHeaderProps {
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   lead?: ReactNode;
   actions?: Action[];
@@ -31,7 +31,7 @@ export function PageHeader({
     <header className={image ? "page-header page-header--image" : "page-header"}>
       <div className="container page-header-grid">
         <div className="page-header-copy">
-          <p className="eyebrow">{eyebrow}</p>
+          {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
           <h1>{title}</h1>
           {lead ? <div className="lead">{lead}</div> : null}
           {actions && actions.length > 0 ? (

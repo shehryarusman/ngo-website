@@ -14,7 +14,6 @@ export function ProgramsPage() {
   return (
     <main>
       <PageHeader
-        eyebrow="What We Do"
         title="Programs that connect students to real opportunity."
         lead="ARISE runs three science programs, from high school through postdoctoral research, plus arts education."
         image="lab-pipette"
@@ -30,7 +29,7 @@ export function ProgramsPage() {
         }
       />
 
-      <Section id="programs" tone="tint" eyebrow="Programs" title="Our Programs">
+      <Section id="programs" tone="tint" title="Our Programs">
         <div className="grid grid-2">
           {programs.map((program) => (
             <Card key={program.slug} to={`/programs/${program.slug}`}>
@@ -60,9 +59,7 @@ export function ProgramsPage() {
 
       <Section
         id="areas"
-        eyebrow="Why We Do It"
         title="Areas of Impact"
-        intro="Learn about the mission of ARISE Foundation by field of impact, or take a look into our mission as a whole."
       >
         <div className="grid grid-3">
           {programAreas.map((area) => {
@@ -73,6 +70,7 @@ export function ProgramsPage() {
                 </div>
                 <h3>{area.title}</h3>
                 <p className="muted">{area.summary}</p>
+                {area.to ? <span className="card-more">Read more</span> : null}
               </>
             );
             return area.to ? (
@@ -89,9 +87,7 @@ export function ProgramsPage() {
       <Section
         id="locations-history"
         tone="tint"
-        eyebrow="Locations & History"
         title="Where ARISE Works"
-        intro={statements.whereWeWork}
       >
         <div className="grid grid-4">
           <Card>

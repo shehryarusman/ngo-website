@@ -11,9 +11,7 @@ export function BoardPage() {
   return (
     <main>
       <PageHeader
-        eyebrow="Who We Are"
         title="Board of Directors"
-        lead="ARISE is led by a three-member Board of Directors."
       />
 
       <Section>

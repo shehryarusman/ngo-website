@@ -13,9 +13,7 @@ export function GetInvolvedPage() {
   return (
     <main>
       <PageHeader
-        eyebrow="Get Involved"
         title="Apply, partner, or donate."
-        lead="ARISE welcomes applications from students and researchers, partnerships with institutions, and support from donors."
         image="team-planning"
       />
 
@@ -40,6 +38,11 @@ export function GetInvolvedPage() {
               Questions:{" "}
               <a href={`mailto:${organization.inboxes.apply}`}>{organization.inboxes.apply}</a>
             </p>
+            <div className="card-actions">
+              <Link className="btn btn-primary" to="/programs">
+                View Programs
+              </Link>
+            </div>
           </Card>
 
           <Card id="partner">
@@ -52,10 +55,13 @@ export function GetInvolvedPage() {
             </p>
             <p className="small">
               Contact:{" "}
-              <a href={`mailto:${organization.inboxes.partners}`}>
-                {organization.inboxes.partners}
-              </a>
+              <a href={`mailto:${organization.inboxes.partners}`}>{organization.inboxes.partners}</a>
             </p>
+            <div className="card-actions">
+              <a className="btn btn-primary" href={`mailto:${organization.inboxes.partners}`}>
+                Contact Partnerships
+              </a>
+            </div>
           </Card>
 
           <Card id="donate">
@@ -65,7 +71,7 @@ export function GetInvolvedPage() {
               Donors may give online or by check, or through a donor-advised
               fund. {statements.charityStatus}
             </p>
-            <div className="button-row">
+            <div className="card-actions">
               <Link className="btn btn-primary" to="/donate">
                 Donate
               </Link>
@@ -79,7 +85,6 @@ export function GetInvolvedPage() {
 
       <Section
         id="partners"
-        eyebrow="Partners"
         title="Current Partners"
         intro="Partners in the ARISE High School Scholars – Thailand Pilot 2026."
       >

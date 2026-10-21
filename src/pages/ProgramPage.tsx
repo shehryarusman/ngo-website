@@ -50,9 +50,7 @@ export function ProgramPage() {
   return (
     <main>
       <PageHeader
-        eyebrow="Program"
         title={program.name}
-        lead={program.provides}
         image={program.image}
         actions={[
           { label: "How To Apply", to: "#apply" },
@@ -98,7 +96,6 @@ export function ProgramPage() {
       {program.slug === "travel-grants" ? (
         <Section
           id="high-school-scholars"
-          eyebrow="Travel Grant Program"
           title="ARISE High School Scholars Program"
         >
           <Card>
@@ -136,7 +133,6 @@ export function ProgramPage() {
       <Section
         id="apply"
         tone={program.slug === "travel-grants" ? "tint" : "default"}
-        eyebrow="Apply"
         title="How To Apply"
         intro="Applications may be submitted through the ARISE website, through a participating university or school, or directly to ARISE."
       >
