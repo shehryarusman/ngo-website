@@ -258,7 +258,49 @@ ul {
   line-height: 1.2;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.18s ease;
+}
+
+/* Hover effects only for a mouse or trackpad; on phones a tapped button
+   would otherwise stay highlighted. Phones still get the press below. */
+@media (hover: hover) {
+  /* Every button lifts on hover. */
+  .btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(42, 37, 34, 0.18);
+  }
+
+  .btn-primary:hover {
+    background: var(--maroon-dark);
+    color: var(--white);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--maroon);
+    color: var(--maroon-dark);
+  }
+
+  .btn-ghost-dark:hover {
+    border-color: var(--cream);
+    background: var(--cream);
+    color: var(--maroon-dark);
+  }
+
+  /* Gold is a fill here, never text on white (brand rule). */
+  .btn-on-dark:hover {
+    background: var(--gold);
+    color: var(--ink);
+  }
+}
+
+.btn:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 2px 6px rgba(42, 37, 34, 0.16);
 }
 
 .btn-primary {
@@ -266,20 +308,10 @@ ul {
   color: var(--white);
 }
 
-.btn-primary:hover {
-  background: var(--maroon-dark);
-  color: var(--white);
-}
-
 .btn-secondary {
   background: var(--white);
   color: var(--maroon);
   border-color: var(--line-strong);
-}
-
-.btn-secondary:hover {
-  border-color: var(--maroon);
-  color: var(--maroon-dark);
 }
 
 .btn-on-dark {
@@ -291,17 +323,6 @@ ul {
   background: transparent;
   color: var(--cream);
   border-color: rgba(251, 247, 239, 0.45);
-}
-
-.btn-ghost-dark:hover {
-  border-color: var(--cream);
-  background: rgba(251, 247, 239, 0.08);
-  color: var(--white);
-}
-
-.btn-on-dark:hover {
-  background: var(--white);
-  color: var(--maroon-dark);
 }
 
 /* ---------- Header and navigation ---------- */
