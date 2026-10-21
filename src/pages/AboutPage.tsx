@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { BentoCard } from "../components/common/BentoCard";
 import { PageHero } from "../components/common/PageHero";
+import { Placeholder } from "../components/common/Placeholder";
 import { SectionHeading } from "../components/common/SectionHeading";
 import { leadership } from "../data/siteContent";
 
@@ -10,7 +11,7 @@ export function AboutPage() {
       <PageHero
         eyebrow="Who We Are"
         title="Opening access to arts, science, and research."
-        description="ARISE Foundation is built to connect students with high-quality educational opportunities through disciplined programs, trusted partners, and transparent governance."
+        description="ARISE Foundation is a Pennsylvania nonprofit and a 501(c)(3) public charity that runs hands-on science education and research programs for students and early-career researchers."
         imageSrc="https://images.unsplash.com/photo-1581093458791-9f3c3900df7b?auto=format&fit=crop&w=1800&q=84"
         imageAlt="Research workspace with laboratory glassware"
         primaryCta={{ label: "Meet The Board", to: "/board" }}
@@ -18,11 +19,10 @@ export function AboutPage() {
         rightContent={
           <>
             <p className="eyebrow">Mission</p>
-            <h3>Accessible Opportunity</h3>
             <p>
-              We focus on practical access to scientific, artistic, and
-              research-based environments where students can build confidence
-              and capability.
+              ARISE advances science, education, and innovation by operating
+              educational and research-based programs that promote scientific
+              knowledge, training, and public understanding.
             </p>
           </>
         }
@@ -32,26 +32,42 @@ export function AboutPage() {
         <SectionHeading
           eyebrow="Story"
           title="About The Bigger Picture"
-          description="ARISE was created to make serious educational opportunity easier to reach for students with curiosity, discipline, and creative ambition."
+          description="The name stands for Arts, Research, Innovation, Science and Education."
         />
         <div className="bento-grid about-story-grid">
+          <BentoCard className="about-story-card about-story-wide reveal">
+            <h3>Our Story</h3>
+            <Placeholder what="ARISE's founding story, 1–2 paragraphs: why the foundation was started, by whom, and what has happened since 2025." />
+          </BentoCard>
           <BentoCard className="about-story-card reveal">
-            <h3>Inspired By Access</h3>
+            <h3>How ARISE Works</h3>
             <p>
-              The foundation's work is centered on opening doors to places and
-              programs that can change how students see their own futures:
-              research labs, arts spaces, mentorship networks, and educational
-              communities built around real participation.
+              ARISE designs and runs its own programs, directly and in
+              collaboration with universities, research laboratories, and
+              schools. It covers participation costs such as travel, lodging,
+              and meals so that finances are not a barrier. ARISE also supports
+              complementary educational programs in the arts.
             </p>
           </BentoCard>
           <BentoCard className="about-story-card reveal">
-            <h3>Built For Trust</h3>
+            <h3>Where ARISE Works</h3>
             <p>
-              Programs are designed with institutional partners and community
-              spaces so each initiative has a clear purpose, accountable
-              oversight, and a path for students to keep growing after the
-              program ends.
+              ARISE is based in the Philadelphia area and works with
+              institutions in the United States and Asia, beginning with
+              Thailand in 2026.
             </p>
+          </BentoCard>
+          <BentoCard className="about-story-card about-story-wide reveal">
+            <h3>Donations</h3>
+            <p>
+              ARISE is recognized by the IRS as a 501(c)(3) public charity, so
+              contributions are tax-deductible to the extent allowed by law.
+            </p>
+            <div className="button-row">
+              <Link className="btn btn-primary" to="/donate">
+                Donate
+              </Link>
+            </div>
           </BentoCard>
         </div>
       </section>
@@ -60,30 +76,32 @@ export function AboutPage() {
         <SectionHeading
           eyebrow="Role"
           title="Mission And Current Activities"
-          description="ARISE is beginning with focused 2026 programming that connects students to hands-on research, arts, and mentorship opportunities."
+          description="ARISE runs three science programs, from high school through postdoctoral research, plus arts education."
         />
         <div className="bento-grid value-grid">
           {[
             [
-              "Science Access",
-              "Students enter real research environments and learn through guided, hands-on exposure.",
+              "Biomedical Research Laboratory Internship",
+              "High school students ages 16–18 and early undergraduates",
             ],
             [
-              "Arts Opportunity",
-              "Creative students gain pathways to mentorship, preparation, and program support.",
+              "Graduate and Postdoctoral Fellowship Support",
+              "Graduate students and postdoctoral researchers in biomedical research",
             ],
             [
-              "Research Readiness",
-              "Programs emphasize preparation, professionalism, curiosity, and ethical participation.",
+              "Travel Grant Program",
+              "High school, college and graduate students, young researchers, and underfunded academic labs",
             ],
             [
-              "Community Partnerships",
-              "Local institutions and community spaces help keep opportunities practical and accountable.",
+              "Arts Education and Exhibitions",
+              "Emerging local and regional artists, and the public",
             ],
-          ].map(([title, text]) => (
+          ].map(([title, serves]) => (
             <BentoCard key={title} className="value-card reveal">
               <h3>{title}</h3>
-              <p>{text}</p>
+              <p>
+                <span className="value-label">Who it serves:</span> {serves}
+              </p>
             </BentoCard>
           ))}
         </div>
@@ -93,14 +111,18 @@ export function AboutPage() {
         <SectionHeading
           eyebrow="Board"
           title="Board of Directors"
-          description="ARISE is led by directors with scientific, educational, and artistic experience."
+          description="ARISE is led by a three-member Board of Directors."
         />
         <div className="bento-grid board-preview-grid">
           {leadership.map((member) => (
             <BentoCard key={member.name} className="board-preview-card reveal">
               <h3>{member.name}</h3>
               <p className="leader-role">{member.role}</p>
-              <p>{member.bio}</p>
+              {member.bio ? (
+                <p>{member.bio}</p>
+              ) : (
+                <Placeholder what={`Short summary of ${member.name}'s role at ARISE, 1–2 sentences (same style as the other directors).`} />
+              )}
               <Link className="btn btn-soft" to="/board">
                 Read Full Bio
               </Link>

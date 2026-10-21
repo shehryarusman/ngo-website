@@ -1,7 +1,7 @@
 interface SectionHeadingProps {
   eyebrow: string;
   title: string;
-  description: string;
+  description?: string;
   level?: 1 | 2;
 }
 
@@ -17,7 +17,7 @@ export function SectionHeading({
     <header className="section-heading section-heading-card bento-card reveal">
       <p className="eyebrow">{eyebrow}</p>
       <Heading>{title}</Heading>
-      <p>{description}</p>
+      {description ? <p>{description}</p> : null}
     </header>
   );
 }

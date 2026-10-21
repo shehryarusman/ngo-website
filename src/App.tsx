@@ -12,6 +12,8 @@ import { DonationPage } from "./pages/DonationPage";
 import { GetInvolvedPage } from "./pages/GetInvolvedPage";
 import { HomePage } from "./pages/HomePage";
 import { ImpactPage } from "./pages/ImpactPage";
+import { NewsPage } from "./pages/NewsPage";
+import { NewsStoryPage } from "./pages/NewsStoryPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { ProgramsPage } from "./pages/ProgramsPage";
 
@@ -79,6 +81,8 @@ function App() {
         <Route path="/get-involved" element={<GetInvolvedPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/donate" element={<DonationPage />} />
+        <Route path="/news" element={<NewsPage />} />
+        <Route path="/news/:slug" element={<NewsStoryPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       </div>
