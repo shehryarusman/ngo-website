@@ -1,8 +1,8 @@
 // End-to-end site check: renders every route at desktop and mobile widths and
 // fails on broken internal links, console errors, horizontal overflow, clipped
 // text, missing/duplicate <h1>, broken images, forbidden text, card calls to
-// action that don't line up across a row, or a card hover effect that stopped
-// following the mouse.
+// action that don't line up across a row, a card hover effect that stopped
+// following the mouse, or a header that moves content when it shrinks.
 //
 // Usage: npm run build && npm run preview & npm run check:site [baseUrl]
 // Optional: SHOTS_DIR=./shots to save full-page screenshots.
@@ -120,6 +120,32 @@ for (const [vpName, viewport] of Object.entries(viewports)) {
   const left = await shiftX(box.x + 6);
   const right = await shiftX(box.x + box.width - 6);
   if (!(left < -2 && right > 2)) problems.push(`card hover motion not working (left ${left}px, right ${right}px)`);
+  await page.close();
+}
+
+// Header: it shrinks after scrolling, and shrinking must not move the page.
+// The fixed header must also fit its spacer on the narrowest phones.
+{
+  const page = await browser.newPage({ viewport: { width: 320, height: 568 } });
+  await page.goto(base + "/", { waitUntil: "networkidle" });
+  const fit = await page.evaluate(() => [".site-header", ".site-header-spacer"]
+    .map((sel) => Math.round(document.querySelector(sel).getBoundingClientRect().height)));
+  if (fit[0] > fit[1]) problems.push(`320px: header (${fit[0]}px) taller than its spacer (${fit[1]}px)`);
+  await page.close();
+}
+for (const viewport of Object.values(viewports)) {
+  const page = await browser.newPage({ viewport });
+  await page.goto(base + "/", { waitUntil: "networkidle" });
+  const state = () => page.evaluate(() => ({
+    header: Math.round(document.querySelector(".site-header").getBoundingClientRect().height),
+    h1: Math.round(document.querySelector("h1").getBoundingClientRect().top + scrollY),
+  }));
+  const top = await state();
+  await page.evaluate(() => scrollTo({ top: 400, behavior: "instant" }));
+  await page.waitForTimeout(600);
+  const scrolled = await state();
+  if (!(scrolled.header < top.header)) problems.push(`${viewport.width}px: header did not shrink on scroll`);
+  if (scrolled.h1 !== top.h1) problems.push(`${viewport.width}px: header shrink moved page content`);
   await page.close();
 }
 

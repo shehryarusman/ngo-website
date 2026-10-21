@@ -37,8 +37,10 @@ export function HomePage() {
         <div className="container home-hero-grid">
           <div className="home-hero-copy">
             <h1>
-              Charitable educational initiatives opening doors to accessible
-              arts, science, and research-based opportunities.
+              Charitable educational initiatives opening doors to{" "}
+              <span className="accent">
+                accessible arts, science, and research-based opportunities.
+              </span>
             </h1>
             <p className="lead">
               We design operational programs in collaboration with local
