@@ -2,7 +2,7 @@ import { FormEvent } from "react";
 import { Card } from "../components/common/Card";
 import { PageHeader } from "../components/common/PageHeader";
 import { Section } from "../components/common/Section";
-import { contactDirectory, contactTopics, organization } from "../data/organization";
+import { contactTopics, organization } from "../data/organization";
 import { usePageTitle } from "../hooks/usePageTitle";
 
 // Until the contact form is backed by the database, submitting opens the
@@ -32,16 +32,12 @@ export function ContactPage() {
 
   return (
     <main>
-      <PageHeader
-        title="Contact ARISE Foundation"
-        lead="Select a topic below and your message will be directed to the appropriate inbox."
-      />
+      <PageHeader title="Contact" />
 
       <Section tone="tint">
         <div className="contact-layout">
           <Card>
-            <h2 className="h3">Send a Message</h2>
-            <form className="form" onSubmit={handleSubmit}>
+            <form className="form" aria-label="Contact" onSubmit={handleSubmit}>
               <div className="form-row">
                 <label className="field">
                   Full name
@@ -80,34 +76,17 @@ export function ContactPage() {
             </form>
           </Card>
 
-          <Card>
-            <h2 className="h3">Contact Directory</h2>
-            <dl className="directory">
-              {contactDirectory.map((entry) => (
-                <div key={entry.inbox}>
-                  <dt>
-                    <a href={`mailto:${organization.inboxes[entry.inbox]}`}>
-                      {organization.inboxes[entry.inbox]}
-                    </a>
-                  </dt>
-                  <dd>{entry.use}</dd>
-                </div>
-              ))}
-              <div>
-                <dt>Phone</dt>
-                <dd>
-                  <a href={`tel:${organization.phone.tel}`}>{organization.phone.display}</a>
-                </dd>
-              </div>
-              <div>
-                <dt>Fax</dt>
-                <dd>{organization.fax.display}</dd>
-              </div>
-              <div>
-                <dt>Mail</dt>
-                <dd>{organization.address}</dd>
-              </div>
-            </dl>
+          {/* Set like a letterhead: the topic inboxes are reached through the form. */}
+          <Card className="contact-card">
+            <p className="contact-card-name">ARISE Foundation</p>
+            <address>{organization.address}</address>
+            <p>
+              <a href={`tel:${organization.phone.tel}`}>{organization.phone.display}</a>
+              <br />
+              Fax {organization.fax.display}
+              <br />
+              <a href={`mailto:${organization.inboxes.info}`}>{organization.inboxes.info}</a>
+            </p>
           </Card>
         </div>
       </Section>

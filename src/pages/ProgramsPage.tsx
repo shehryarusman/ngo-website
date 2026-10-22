@@ -3,30 +3,22 @@ import { PageHeader } from "../components/common/PageHeader";
 import { Picture } from "../components/common/Picture";
 import { Placeholder } from "../components/common/Placeholder";
 import { Section } from "../components/common/Section";
-import { statements } from "../data/organization";
-import { programs } from "../data/programs";
+import { programSummary, programs, statusLabel } from "../data/programs";
 import { programAreas } from "../data/siteContent";
 import { usePageTitle } from "../hooks/usePageTitle";
 
 export function ProgramsPage() {
-  usePageTitle("Programs");
+  usePageTitle("What We Do");
 
   return (
     <main>
       <PageHeader
-        title="Programs that connect students to real opportunity."
-        lead="ARISE runs three science programs, from high school through postdoctoral research, plus arts education."
+        title="What We Do"
         image="lab-pipette"
         actions={[
           { label: "View Programs", to: "#programs" },
           { label: "Support Programs", to: "/donate", variant: "secondary" },
         ]}
-        aside={
-          <>
-            <p className="eyebrow">How ARISE Works</p>
-            <p>{statements.howWeWork}</p>
-          </>
-        }
       />
 
       <Section id="programs" tone="tint" title="Our Programs">
@@ -36,13 +28,9 @@ export function ProgramsPage() {
               <div className="card-media">
                 <Picture name={program.image} alt="" sizes="(min-width: 960px) 45vw, 100vw" />
               </div>
+              <p className="eyebrow">{statusLabel(program)}</p>
               <h3>{program.name}</h3>
-              <p className="small">
-                <span className="label">Who it serves:</span> {program.serves}
-              </p>
-              <p className="small">
-                <span className="label">Status:</span> {program.status}
-              </p>
+              <p className="muted small">{programSummary(program)}</p>
               <span className="card-more">View program</span>
             </Card>
           ))}

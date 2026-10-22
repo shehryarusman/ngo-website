@@ -11,8 +11,7 @@ export function DonationPage() {
   return (
     <main>
       <PageHeader
-        title="Support science and arts education."
-        lead={statements.charityStatus}
+        title="Donate"
         image="students-collaborating"
       />
 
@@ -38,16 +37,14 @@ export function DonationPage() {
               <a href={`mailto:${organization.inboxes.giving}`}>{organization.inboxes.giving}</a>.
             </p>
           </Card>
-        </div>
-      </Section>
-
-      <Section title="Receipts and Questions">
-        <div className="prose">
-          <p>
-            For donation receipts and questions about giving, please contact{" "}
-            <a href={`mailto:${organization.inboxes.giving}`}>{organization.inboxes.giving}</a>.
-          </p>
-          <p className="statement">{statements.paDisclosure}</p>
+          <Card className="span-all">
+            <p className="statement">{statements.charityStatus}</p>
+            <p className="statement">
+              Receipts and questions:{" "}
+              <a href={`mailto:${organization.inboxes.giving}`}>{organization.inboxes.giving}</a>
+            </p>
+            <p className="statement">{statements.paDisclosure}</p>
+          </Card>
         </div>
       </Section>
     </main>

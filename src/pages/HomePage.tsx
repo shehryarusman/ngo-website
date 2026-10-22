@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 import { Card } from "../components/common/Card";
 import { Picture } from "../components/common/Picture";
 import { Section } from "../components/common/Section";
+import { SupportBand } from "../components/common/SupportBand";
 import { StoryImage } from "../components/common/StoryImage";
 import { stories } from "../data/news";
-import { statements } from "../data/organization";
-import { programs } from "../data/programs";
+import { programSummary, programs } from "../data/programs";
 import { usePageTitle } from "../hooks/usePageTitle";
 
 const latestStory = stories[0];
@@ -110,7 +110,7 @@ export function HomePage() {
                 <Picture name={program.image} alt="" sizes="(min-width: 960px) 22vw, (min-width: 640px) 45vw, 100vw" />
               </div>
               <h3>{program.name}</h3>
-              <p className="muted small">{program.serves}</p>
+              <p className="muted small">{programSummary(program)}</p>
               <span className="card-more">View program</span>
             </Card>
           ))}
@@ -118,15 +118,7 @@ export function HomePage() {
       </Section>
 
       <Section>
-        <div className="cta-band">
-          <div>
-            <h2>Support Our Mission</h2>
-            <p>{statements.charityStatus}</p>
-          </div>
-          <Link className="btn btn-on-dark" to="/donate">
-            Donate
-          </Link>
-        </div>
+        <SupportBand />
       </Section>
     </main>
   );

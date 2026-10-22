@@ -1179,6 +1179,22 @@ ul {
 
 /* ---------- Contact ---------- */
 
+.contact-card {
+  gap: 0.9rem;
+  align-content: start;
+}
+
+.contact-card-name {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.contact-card address {
+  font-style: normal;
+}
+
 .contact-layout {
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
@@ -1222,22 +1238,6 @@ ul {
   outline: none;
   border-color: var(--maroon);
   box-shadow: 0 0 0 3px rgba(139, 42, 46, 0.15);
-}
-
-.directory {
-  display: grid;
-  gap: 0.9rem;
-  margin: 0;
-}
-
-.directory dt {
-  font-weight: 600;
-}
-
-.directory dd {
-  margin: 0.1rem 0 0;
-  color: var(--ink-muted);
-  font-size: 0.95rem;
 }
 
 /* ---------- Tables ---------- */
@@ -1596,8 +1596,4 @@ ul {
   min-height: 0;
   text-align: left;
   place-content: start;
-}
-
-.statement-spaced {
-  margin-top: 1.5rem;
 }

@@ -40,7 +40,6 @@ export function TransparencyPage() {
     <main>
       <PageHeader
         title="Transparency"
-        lead={statements.transparency}
       />
 
       <Section tone="tint" title="IRS Documents and Financial Reports">

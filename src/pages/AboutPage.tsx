@@ -3,30 +3,26 @@ import { Card } from "../components/common/Card";
 import { PageHeader } from "../components/common/PageHeader";
 import { Placeholder } from "../components/common/Placeholder";
 import { Section } from "../components/common/Section";
+import { SupportBand } from "../components/common/SupportBand";
 import { statements } from "../data/organization";
-import { programs } from "../data/programs";
+import { programSummary, programs } from "../data/programs";
 import { leadership } from "../data/siteContent";
 import { usePageTitle } from "../hooks/usePageTitle";
 
 export function AboutPage() {
-  usePageTitle("About");
+  usePageTitle("Who We Are");
 
   return (
     <main>
       <PageHeader
-        title="Opening access to arts, science, and research."
-        lead="ARISE Foundation is a Pennsylvania nonprofit and a 501(c)(3) public charity that runs hands-on science education and research programs for students and early-career researchers."
+        title="Who We Are"
+        eyebrow="Mission"
+        lead={statements.mission}
         image="students-library"
         actions={[
           { label: "Meet The Board", to: "/board" },
           { label: "View What We Do", to: "/programs", variant: "secondary" },
         ]}
-        aside={
-          <>
-            <p className="eyebrow">Mission</p>
-            <p>{statements.mission}</p>
-          </>
-        }
       />
 
       <Section
@@ -59,9 +55,7 @@ export function AboutPage() {
           {programs.map((program) => (
             <Card key={program.slug} to={`/programs/${program.slug}`}>
               <h3>{program.name}</h3>
-              <p className="small">
-                <span className="label">Who it serves:</span> {program.serves}
-              </p>
+              <p className="muted small">{programSummary(program)}</p>
               <span className="card-more">View program</span>
             </Card>
           ))}
@@ -94,18 +88,7 @@ export function AboutPage() {
       </Section>
 
       <Section>
-        <div className="cta-band">
-          <div>
-            <h2>Donations</h2>
-            <p>
-              ARISE is recognized by the IRS as a 501(c)(3) public charity, so
-              contributions are tax-deductible to the extent allowed by law.
-            </p>
-          </div>
-          <Link className="btn btn-on-dark" to="/donate">
-            Donate
-          </Link>
-        </div>
+        <SupportBand />
       </Section>
     </main>
   );

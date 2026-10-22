@@ -143,3 +143,19 @@ export const scholarsApplication: ProgramApplication = {
     "Parent or guardian permissions",
   ],
 };
+
+/** "Active" or "In development": the status without its trailing sentence(s). */
+export function statusLabel(program: Program) {
+  return program.status.split(".")[0];
+}
+
+/** Anything the status says beyond the label, e.g. which program it includes. */
+export function statusNote(program: Program) {
+  return program.status.slice(program.status.indexOf(".") + 1).trim();
+}
+
+/** One-line card summary: the first sentence of what ARISE provides. */
+export function programSummary(program: Program) {
+  const end = program.provides.indexOf(". ");
+  return end === -1 ? program.provides : program.provides.slice(0, end + 1);
+}

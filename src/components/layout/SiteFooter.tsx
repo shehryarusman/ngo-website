@@ -12,11 +12,6 @@ export function SiteFooter() {
             <p className="footer-tagline">
               Charitable, educational, scientific, and community-led.
             </p>
-            <p>
-              We partner with local educational institutions and community
-              spaces to deliver initiatives opening doors to accessible arts,
-              science, and research-based opportunities.
-            </p>
           </div>
 
           <div className="footer-column">

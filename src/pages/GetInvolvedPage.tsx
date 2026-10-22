@@ -13,7 +13,7 @@ export function GetInvolvedPage() {
   return (
     <main>
       <PageHeader
-        title="Apply, partner, or donate."
+        title="Get Involved"
         image="team-planning"
       />
 
@@ -22,11 +22,6 @@ export function GetInvolvedPage() {
           <Card id="apply">
             <p className="eyebrow">Apply</p>
             <h2 className="h3">Students and Researchers</h2>
-            <p>
-              Students and researchers apply through the ARISE website, through
-              a participating university or school, or directly to ARISE. Each
-              program page states eligibility, timing, and what to submit.
-            </p>
             <ul className="check-list small">
               {programs.map((program) => (
                 <li key={program.slug}>
@@ -69,7 +64,7 @@ export function GetInvolvedPage() {
             <h2 className="h3">Donors</h2>
             <p>
               Donors may give online or by check, or through a donor-advised
-              fund. {statements.charityStatus}
+              fund.
             </p>
             <div className="card-actions">
               <Link className="btn btn-primary" to="/donate">
@@ -77,10 +72,10 @@ export function GetInvolvedPage() {
               </Link>
             </div>
           </Card>
+          <Card className="span-all">
+            <p className="statement">{statements.nondiscrimination}</p>
+          </Card>
         </div>
-        <p className="statement statement-spaced">
-          {statements.nondiscrimination}
-        </p>
       </Section>
 
       <Section

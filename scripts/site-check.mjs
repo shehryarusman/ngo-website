@@ -133,7 +133,7 @@ for (const [vpName, viewport] of Object.entries(viewports)) {
 
 // Every other kind of raised box must move too.
 for (const [route, selector] of [["/", ".cta-band"], ["/", ".home-hero-media img"],
-  ["/programs", ".page-header-media img"], ["/about", ".page-header-aside"],
+  ["/programs", ".page-header-media img"], ["/programs/biomedical-research-internship", ".page-header-aside"],
   ["/news/thailand-pilot-2026", ".story-poster"]]) {
   const page = await browser.newPage({ viewport: viewports.desktop });
   await page.goto(base + route, { waitUntil: "networkidle" });

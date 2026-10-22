@@ -4,8 +4,14 @@ import { PageHeader } from "../components/common/PageHeader";
 import { Placeholder } from "../components/common/Placeholder";
 import { Section } from "../components/common/Section";
 import { stories } from "../data/news";
-import { organization, statements } from "../data/organization";
-import { programs, scholarsApplication, type ProgramApplication } from "../data/programs";
+import { organization } from "../data/organization";
+import {
+  programs,
+  scholarsApplication,
+  statusLabel,
+  statusNote,
+  type ProgramApplication,
+} from "../data/programs";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { NotFoundPage } from "./NotFoundPage";
 
@@ -50,20 +56,18 @@ export function ProgramPage() {
   return (
     <main>
       <PageHeader
+        eyebrow={statusLabel(program)}
         title={program.name}
+        lead={statusNote(program) || undefined}
         image={program.image}
         actions={[
           { label: "How To Apply", to: "#apply" },
           { label: "All Programs", to: "/programs", variant: "secondary" },
         ]}
         aside={
-          <>
-            <p className="eyebrow">Status</p>
-            <p>{program.status}</p>
-            {program.statusApproval ? (
-              <Placeholder kind="approval" what={program.statusApproval} />
-            ) : null}
-          </>
+          program.statusApproval ? (
+            <Placeholder kind="approval" what={program.statusApproval} />
+          ) : undefined
         }
       />
 
@@ -146,7 +150,6 @@ export function ProgramPage() {
             Questions about applications may be sent to{" "}
             <a href={`mailto:${organization.inboxes.apply}`}>{organization.inboxes.apply}</a>.
           </p>
-          <p className="statement">{statements.nondiscrimination}</p>
         </Card>
       </Section>
     </main>
