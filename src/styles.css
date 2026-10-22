@@ -1205,6 +1205,13 @@ ul {
 
 /* ---------- Contact ---------- */
 
+/* Who a Get Involved path is for, under its heading. */
+.card-audience {
+  margin-top: -0.35rem;
+  font-weight: 600;
+  color: var(--maroon);
+}
+
 .contact-card {
   gap: 0.9rem;
   align-content: start;

@@ -20,8 +20,8 @@ export function GetInvolvedPage() {
       <Section tone="tint">
         <div className="grid grid-3">
           <Card id="apply">
-            <p className="eyebrow">Apply</p>
-            <h2 className="h3">Students and Researchers</h2>
+            <h2 className="h3">Apply</h2>
+            <p className="card-audience">Students and Researchers</p>
             <ul className="check-list small">
               {programs.map((program) => (
                 <li key={program.slug}>
@@ -41,8 +41,8 @@ export function GetInvolvedPage() {
           </Card>
 
           <Card id="partner">
-            <p className="eyebrow">Partner</p>
-            <h2 className="h3">Universities, Laboratories, and Schools</h2>
+            <h2 className="h3">Partner</h2>
+            <p className="card-audience">Universities, Laboratories, and Schools</p>
             <p>
               Universities, laboratories, and schools may propose a partnership
               or request support for a specific researcher or group of
@@ -60,8 +60,7 @@ export function GetInvolvedPage() {
           </Card>
 
           <Card id="donate">
-            <p className="eyebrow">Donate</p>
-            <h2 className="h3">Donors</h2>
+            <h2 className="h3">Donate</h2>
             <p>
               Donors may give online or by check, or through a donor-advised
               fund.
