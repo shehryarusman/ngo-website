@@ -2,6 +2,7 @@ import { Card } from "../components/common/Card";
 import { PageHeader } from "../components/common/PageHeader";
 import { Placeholder } from "../components/common/Placeholder";
 import { Section } from "../components/common/Section";
+import { TitledGrid } from "../components/common/TitledGrid";
 import { organization, statements } from "../data/organization";
 import { usePageTitle } from "../hooks/usePageTitle";
 
@@ -15,8 +16,8 @@ export function DonationPage() {
         image="students-collaborating"
       />
 
-      <Section tone="tint" title="How to Donate">
-        <div className="grid grid-3">
+      <Section tone="tint">
+        <TitledGrid title="How to Donate" cols={3}>
           <Card>
             <h3>Online</h3>
             <Placeholder
@@ -45,7 +46,7 @@ export function DonationPage() {
             </p>
             <p className="statement">{statements.paDisclosure}</p>
           </Card>
-        </div>
+        </TitledGrid>
       </Section>
     </main>
   );

@@ -3,6 +3,7 @@ import { Card } from "../components/common/Card";
 import { PageHeader } from "../components/common/PageHeader";
 import { Placeholder } from "../components/common/Placeholder";
 import { Section } from "../components/common/Section";
+import { TitledGrid } from "../components/common/TitledGrid";
 import { SupportBand } from "../components/common/SupportBand";
 import { statements } from "../data/organization";
 import { programSummary, programs } from "../data/programs";
@@ -25,13 +26,12 @@ export function AboutPage() {
         ]}
       />
 
-      <Section
-        id="story"
-        tone="tint"
-        title="About ARISE"
-        intro="The name stands for Arts, Research, Innovation, Science and Education."
-      >
-        <div className="grid grid-2">
+      <Section id="story" tone="tint">
+        <TitledGrid
+          title="About ARISE"
+          intro="The name stands for Arts, Research, Innovation, Science and Education."
+          cols={2}
+        >
           <Card className="span-all">
             <h3>Our Story</h3>
             <Placeholder what="History of ARISE Foundation (one to two paragraphs): the purpose of its founding, its founders, and its activities since establishment in 2025." />
@@ -44,14 +44,11 @@ export function AboutPage() {
             <h3>Where ARISE Works</h3>
             <p>{statements.whereWeWork}</p>
           </Card>
-        </div>
+        </TitledGrid>
       </Section>
 
-      <Section
-        id="role"
-        title="Programs"
-      >
-        <div className="grid grid-4">
+      <Section id="role">
+        <TitledGrid title="Programs" cols={2}>
           {programs.map((program) => (
             <Card key={program.slug} to={`/programs/${program.slug}`}>
               <h3>{program.name}</h3>
@@ -59,15 +56,11 @@ export function AboutPage() {
               <span className="card-more">View program</span>
             </Card>
           ))}
-        </div>
+        </TitledGrid>
       </Section>
 
-      <Section
-        id="board"
-        tone="tint"
-        title="Board of Directors"
-      >
-        <div className="grid grid-3">
+      <Section id="board" tone="tint">
+        <TitledGrid title="Board of Directors" cols={3}>
           {leadership.map((member) => (
             <Card key={member.name}>
               <h3>{member.name}</h3>
@@ -84,7 +77,7 @@ export function AboutPage() {
               </Link>
             </Card>
           ))}
-        </div>
+        </TitledGrid>
       </Section>
 
       <Section>

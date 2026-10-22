@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Card } from "../components/common/Card";
 import { Picture } from "../components/common/Picture";
 import { Section } from "../components/common/Section";
+import { TitledGrid } from "../components/common/TitledGrid";
 import { SupportBand } from "../components/common/SupportBand";
 import { StoryImage } from "../components/common/StoryImage";
 import { stories } from "../data/news";
@@ -99,11 +100,8 @@ export function HomePage() {
         </div>
       </Section>
 
-      <Section
-        tone="tint"
-        title="Our Programs"
-      >
-        <div className="grid grid-4">
+      <Section tone="tint">
+        <TitledGrid title="Our Programs" cols={2}>
           {programs.map((program) => (
             <Card key={program.slug} to={`/programs/${program.slug}`}>
               <div className="card-media">
@@ -114,7 +112,7 @@ export function HomePage() {
               <span className="card-more">View program</span>
             </Card>
           ))}
-        </div>
+        </TitledGrid>
       </Section>
 
       <Section>

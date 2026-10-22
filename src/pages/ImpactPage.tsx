@@ -3,6 +3,7 @@ import { Card } from "../components/common/Card";
 import { PageHeader } from "../components/common/PageHeader";
 import { Placeholder } from "../components/common/Placeholder";
 import { Section } from "../components/common/Section";
+import { TitledGrid } from "../components/common/TitledGrid";
 import { SupportBand } from "../components/common/SupportBand";
 import { organizationFacts } from "../data/siteContent";
 import { usePageTitle } from "../hooks/usePageTitle";
@@ -21,19 +22,19 @@ export function ImpactPage() {
         ]}
       />
 
-      <Section id="operations" tone="tint" title="ARISE at a Glance">
-        <div className="grid grid-4">
+      <Section id="operations" tone="tint">
+        <TitledGrid title="ARISE at a Glance" cols={2}>
           {organizationFacts.map((fact) => (
             <Card key={fact.figure}>
               <p className="fact-figure">{fact.figure}</p>
               <p className="muted">{fact.label}</p>
             </Card>
           ))}
-        </div>
+        </TitledGrid>
       </Section>
 
-      <Section id="governance" title="Oversight and Reporting">
-        <div className="grid grid-2">
+      <Section id="governance">
+        <TitledGrid title="Oversight and Reporting" cols={2}>
           <Card>
             <h3>Board Oversight</h3>
             <Placeholder what="Description of how the Board of Directors oversees programs and grants (one paragraph), per the board's approved governance policies" />
@@ -44,7 +45,7 @@ export function ImpactPage() {
               View the Transparency page
             </Link>
           </Card>
-        </div>
+        </TitledGrid>
       </Section>
 
       <Section id="funding">

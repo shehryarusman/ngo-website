@@ -3,6 +3,7 @@ import { PageHeader } from "../components/common/PageHeader";
 import { Picture } from "../components/common/Picture";
 import { Placeholder } from "../components/common/Placeholder";
 import { Section } from "../components/common/Section";
+import { TitledGrid } from "../components/common/TitledGrid";
 import { programSummary, programs, statusLabel } from "../data/programs";
 import { programAreas } from "../data/siteContent";
 import { usePageTitle } from "../hooks/usePageTitle";
@@ -21,8 +22,8 @@ export function ProgramsPage() {
         ]}
       />
 
-      <Section id="programs" tone="tint" title="Our Programs">
-        <div className="grid grid-2">
+      <Section id="programs" tone="tint">
+        <TitledGrid title="Our Programs" cols={2}>
           {programs.map((program) => (
             <Card key={program.slug} to={`/programs/${program.slug}`}>
               <div className="card-media">
@@ -42,14 +43,11 @@ export function ProgramsPage() {
               development.
             </p>
           </Card>
-        </div>
+        </TitledGrid>
       </Section>
 
-      <Section
-        id="areas"
-        title="Areas of Impact"
-      >
-        <div className="grid grid-3">
+      <Section id="areas">
+        <TitledGrid title="Areas of Impact" cols={3}>
           {programAreas.map((area) => {
             const body = (
               <>
@@ -69,15 +67,11 @@ export function ProgramsPage() {
               <Card key={area.title}>{body}</Card>
             );
           })}
-        </div>
+        </TitledGrid>
       </Section>
 
-      <Section
-        id="locations-history"
-        tone="tint"
-        title="Where ARISE Works"
-      >
-        <div className="grid grid-4">
+      <Section id="locations-history" tone="tint">
+        <TitledGrid title="Where ARISE Works" cols={2}>
           <Card>
             <h3>Philadelphia Area</h3>
             <p className="muted">Headquarters of ARISE Foundation.</p>
@@ -94,7 +88,7 @@ export function ProgramsPage() {
             <h3>History</h3>
             <Placeholder what="Timeline of key milestones since the establishment of ARISE Foundation in 2025" />
           </Card>
-        </div>
+        </TitledGrid>
       </Section>
     </main>
   );

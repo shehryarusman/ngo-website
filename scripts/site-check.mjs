@@ -28,7 +28,11 @@ const routes = [
 const forbidden = [/Penn(?!sylvania)/, /Rutgers/, /Weissman Lab/, /\$\d/, /quarterly/i,
   /(ilya|elena|jessica)@/i, /\bAPI\b/, /demo_/, /Plum/i, /lorem/i];
 
-const viewports = { desktop: { width: 1366, height: 900 }, mobile: { width: 390, height: 844 } };
+const viewports = {
+  desktop: { width: 1366, height: 900 },
+  tablet: { width: 768, height: 1024 },
+  mobile: { width: 390, height: 844 },
+};
 const problems = [];
 const placeholders = {};
 const links = new Set();
@@ -80,7 +84,7 @@ for (const [vpName, viewport] of Object.entries(viewports)) {
         // Cards sharing a grid row must have their CTA on the same baseline.
         misaligned: [...document.querySelectorAll(".grid")].flatMap((grid) => {
           const rows = new Map();
-          for (const card of grid.querySelectorAll(":scope > .card")) {
+          for (const card of grid.querySelectorAll(":scope > .card:not(.card--title)")) {
             const cta = card.querySelector(":scope > .card-more, :scope > .card-actions");
             if (!cta) continue;
             const top = Math.round(card.getBoundingClientRect().top);
@@ -89,6 +93,28 @@ for (const [vpName, viewport] of Object.entries(viewports)) {
           return [...rows.values()].filter((b) => b.length > 1 && Math.max(...b) - Math.min(...b) > 2)
             .map((b) => b.map(Math.round).join("/"));
         }),
+        // A section title tile carries the section's only heading and, beside
+        // the cards, runs from the first card's top to the last card's bottom.
+        titleTiles: [...document.querySelectorAll(".titled-grid")].flatMap((grid) => {
+          const tile = grid.querySelector(":scope > .card--title");
+          const name = tile?.querySelector("h2")?.textContent ?? "untitled grid";
+          const issues = [];
+          if (!tile || tile.querySelectorAll("h2").length !== 1) issues.push(`${name}: tile needs exactly one h2`);
+          if (grid.closest(".section")?.querySelector(".section-header")) issues.push(`${name}: section also has a header`);
+          // Beside the cards (not a full-width band above them).
+          if (tile && Math.round(tile.getBoundingClientRect().width) < Math.round(grid.getBoundingClientRect().width) - 2) {
+            const cards = [...grid.children].filter((c) => c !== tile).map((c) => c.getBoundingClientRect());
+            const T = tile.getBoundingClientRect();
+            const top = Math.min(...cards.map((c) => c.top)), bottom = Math.max(...cards.map((c) => c.bottom));
+            if (Math.abs(T.top - top) > 2 || Math.abs(T.bottom - bottom) > 2) issues.push(`${name}: tile does not span the cards' rows`);
+          }
+          return issues;
+        }).concat(
+          // Tiles share one width, so the cards beside them start at one edge.
+          new Set([...document.querySelectorAll(".titled-grid > .card--title")]
+            .map((tile) => Math.round(tile.getBoundingClientRect().width))).size > 1
+            ? ["title tiles differ in width"] : []
+        ),
       };
     });
 
@@ -104,6 +130,7 @@ for (const [vpName, viewport] of Object.entries(viewports)) {
     if (info.h1 !== 1) problems.push(`${vpName} ${route}: ${info.h1} <h1> elements`);
     if (info.nestedCards) problems.push(`${vpName} ${route}: ${info.nestedCards} card(s) nested inside another card`);
     if (info.flatCards) problems.push(`${vpName} ${route}: ${info.flatCards} card(s) lost the cursor highlight background`);
+    if (info.titleTiles.length) problems.push(`${vpName} ${route}: ${info.titleTiles.join("; ")}`);
     if (info.misaligned.length) problems.push(`${vpName} ${route}: card CTAs not aligned (${info.misaligned.join(", ")})`);
     if (vpName === "desktop") placeholders[route] = info.placeholders;
     if (shotsDir) {
@@ -216,7 +243,9 @@ for (const viewport of Object.values(viewports)) {
       .filter((el) => el.getBoundingClientRect().top < innerHeight).length);
     await page.evaluate(async () => {
       for (let y = 0; y <= document.body.scrollHeight; y += innerHeight / 2) {
-        scrollTo(0, y);
+        // Instant steps: the page scrolls smoothly, which would still be
+        // moving when the wait below starts.
+        scrollTo({ top: y, behavior: "instant" });
         await new Promise((done) => setTimeout(done, 80));
       }
     });

@@ -895,6 +895,63 @@ ul {
   grid-column: 1 / -1;
 }
 
+/* Section title tile in column 1, spanning every row of cards beside it.
+   TitledGrid writes the wide and compact counts; --cols/--rows pick one. */
+.titled-grid {
+  --cols: var(--cols-wide);
+  --rows: var(--rows-wide);
+  /* A share of the container, not an fr, so the tile is equally wide beside
+     two columns or three. */
+  grid-template-columns: clamp(200px, 24%, 300px) repeat(var(--cols), minmax(0, 1fr));
+}
+
+.titled-grid > .card--title {
+  grid-column: 1;
+  grid-row: 1 / span var(--rows);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.titled-grid > .span-all {
+  grid-column: 2 / -1;
+}
+
+.card-title-intro {
+  color: rgba(251, 247, 239, 0.85);
+  max-width: 28ch;
+}
+
+@media (max-width: 1120px) {
+  .titled-grid {
+    --cols: var(--cols-compact);
+    --rows: var(--rows-compact);
+  }
+}
+
+/* Title first as a short band, cards two-up beneath; one column on phones. */
+@media (max-width: 960px) {
+  .titled-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .titled-grid > .card--title {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    padding-block: 22px;
+  }
+
+  .titled-grid > .span-all {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .titled-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 .card {
   position: relative;
   display: flex;
