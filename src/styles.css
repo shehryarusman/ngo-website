@@ -723,6 +723,23 @@ ul {
   border-radius: var(--radius-card);
 }
 
+/* Title-only headers (no lead, no note): anchor the title to the bottom of
+   the tile, set it larger, and use a wide photo so the pair is shorter. */
+.page-header--image .page-header-grid:not(:has(.lead, .page-header-aside)) .page-header-copy {
+  justify-content: flex-end;
+}
+
+/* Short page names only; long program names keep the standard size. */
+.page-header--image .page-header-grid:not(:has(.lead, .page-header-aside, .eyebrow)) h1 {
+  font-size: clamp(2.6rem, 5vw, 4rem);
+}
+
+.page-header--image .page-header-grid:not(:has(.lead, .page-header-aside)) .page-header-media img {
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 16 / 9;
+}
+
 /* Doubled class so the gold edge wins over the card's own border. */
 .card.page-header-aside {
   border-left: 3px solid var(--gold);
