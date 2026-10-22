@@ -78,9 +78,10 @@
   --card-border: rgba(42, 37, 34, 0.14);
   --card-border-hover: rgba(42, 37, 34, 0.22);
 
-  --container: 1160px;
-  --gutter: clamp(16px, 4vw, 32px);
-  --section-space: clamp(48px, 7vw, 88px);
+  --container: 1440px;
+  --gutter: clamp(20px, 4vw, 56px);
+  /* Vertical gap between consecutive blocks; each block pads half of it. */
+  --block-gap: clamp(48px, 5.5vw, 76px);
 }
 
 /* ---------- Base ---------- */
@@ -678,7 +679,7 @@ ul {
 /* ---------- Page header (inner pages) ---------- */
 
 .page-header {
-  padding: clamp(36px, 6vw, 72px) 0 calc(var(--section-space) * 0.75);
+  padding: calc(var(--block-gap) / 2) 0;
 }
 
 /* Bento header: maroon title tile (7 of 12 columns), photo tile (5), and the
@@ -730,10 +731,10 @@ ul {
 
 /* ---------- Sections ---------- */
 
-/* Sections share one page background, so adjacent paddings add up; each
-   side is three quarters of the section spacing. */
+/* Sections share one page background, so adjacent paddings add up to one
+   block gap. */
 .section {
-  padding: calc(var(--section-space) * 0.75) 0;
+  padding: calc(var(--block-gap) / 2) 0;
 }
 
 .section-header {
@@ -786,7 +787,8 @@ ul {
   /* A faint gold glow follows the cursor via --gloss-x/--gloss-y (useCardMotion). */
   background:
     radial-gradient(
-      circle at var(--gloss-x, 40%) var(--gloss-y, 16%),
+      /* Defaults equal useCardMotion's neutral position, so letting go never jumps. */
+      circle at var(--gloss-x, 50%) var(--gloss-y, 22%),
       rgba(224, 161, 0, calc(0.04 + 0.05 * var(--card-lift, 0))) 0%,
       rgba(224, 161, 0, 0) 48%
     ),
@@ -828,7 +830,8 @@ ul {
 .card--maroon {
   background:
     radial-gradient(
-      120% 140% at var(--gloss-x, 100%) var(--gloss-y, 0%),
+      /* Rests top-right; offset from the same neutral as the white cards. */
+      120% 140% at calc(var(--gloss-x, 50%) + 50%) calc(var(--gloss-y, 22%) - 22%),
       rgba(224, 161, 0, 0.16) 0%,
       rgba(224, 161, 0, 0) 45%
     ),
@@ -985,7 +988,7 @@ ul {
 /* ---------- Home ---------- */
 
 .home-hero {
-  padding: clamp(28px, 5vw, 56px) 0 calc(var(--section-space) * 0.75);
+  padding: calc(var(--block-gap) / 2) 0;
 }
 
 .home-hero-grid {
@@ -1160,6 +1163,11 @@ ul {
 .board-profile-body {
   display: grid;
   gap: 1rem;
+}
+
+/* Keep biography lines readable on the wider layout. */
+.board-profile-body p {
+  max-width: 72ch;
 }
 
 .board-role {
@@ -1447,7 +1455,7 @@ ul {
 /* ---------- 404 ---------- */
 
 .not-found {
-  padding: var(--section-space) 0;
+  padding: var(--block-gap) 0;
 }
 
 .not-found .container {
