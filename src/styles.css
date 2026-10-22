@@ -79,6 +79,10 @@
   --card-border-hover: rgba(42, 37, 34, 0.22);
 
   --container: 1440px;
+  --header-h: 118px;
+  --header-h-condensed: 86px;
+  --logo-w: 210px;
+  --logo-w-condensed: 160px; /* brand guideline minimum for the horizontal logo */
   --gutter: clamp(20px, 4vw, 56px);
   /* Vertical gap between consecutive blocks; each block pads half of it. */
   --block-gap: clamp(48px, 5.5vw, 76px);
@@ -198,7 +202,8 @@ ul {
 }
 
 [id] {
-  scroll-margin-top: 24px;
+  /* Anchored sections clear the fixed (condensed) header. */
+  scroll-margin-top: calc(var(--header-h-condensed) + 24px);
 }
 
 .container {
@@ -328,11 +333,30 @@ ul {
 
 /* ---------- Header and navigation ---------- */
 
+/* The header is fixed, shrinks once the page scrolls, and on compact screens
+   slides away while scrolling down (SiteHeader). A spacer of the full header
+   height stays in the page flow, so content never moves. */
+.site-header-spacer {
+  height: var(--header-h);
+}
+
 .site-header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 50;
   background: var(--maroon-dark);
   color: var(--cream);
-  position: relative;
-  z-index: 20;
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+}
+
+.site-header.is-condensed {
+  box-shadow: 0 6px 22px rgba(42, 37, 34, 0.22);
+}
+
+.site-header.is-hidden {
+  transform: translateY(-100%);
 }
 
 .site-header :focus-visible {
@@ -348,7 +372,13 @@ ul {
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding-block: 12px;
+  min-height: var(--header-h);
+  padding-block: 7px;
+  transition: min-height 0.3s ease;
+}
+
+.is-condensed .site-header-inner {
+  min-height: var(--header-h-condensed);
 }
 
 /* The full-colour logo has a maroon wordmark, so on the maroon header it sits
@@ -360,7 +390,15 @@ ul {
   background: var(--cream);
   border-radius: 14px;
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset, 0 4px 14px rgba(0, 0, 0, 0.18);
-  transition: transform 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    padding 0.3s ease,
+    border-radius 0.3s ease;
+}
+
+.is-condensed .brand {
+  padding: 4px 9px 4px 6px;
+  border-radius: 12px;
 }
 
 .brand:hover {
@@ -368,8 +406,13 @@ ul {
 }
 
 .brand img {
-  width: 210px;
+  width: var(--logo-w);
   height: auto;
+  transition: width 0.3s ease;
+}
+
+.is-condensed .brand img {
+  width: var(--logo-w-condensed);
 }
 
 .site-nav {
@@ -405,6 +448,7 @@ ul {
   font-weight: 600;
   font-size: 0.95rem;
   text-decoration: none;
+  white-space: nowrap;
   border-radius: var(--radius-sm);
 }
 
@@ -499,7 +543,7 @@ ul {
 
 .nav-dropdown a {
   display: block;
-  padding: 0.68rem 0.86rem;
+  padding: 0.68rem 1.1rem 0.68rem 1rem;
   border: 1px solid rgba(255, 255, 255, 0.62);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.94);
@@ -507,7 +551,7 @@ ul {
   backdrop-filter: blur(10px);
   box-shadow: 0 12px 28px rgba(42, 37, 34, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.9);
   color: var(--ink);
-  text-align: center;
+  text-align: left;
   text-decoration: none;
   font-size: 0.95rem;
   white-space: nowrap;
@@ -530,6 +574,11 @@ ul {
   display: flex;
   gap: 0.5rem;
   flex: 0 0 auto;
+}
+
+/* Compact screens: shown while the header is slid away; opens the menu. */
+.menu-fab {
+  display: none;
 }
 
 .menu-toggle {
@@ -576,13 +625,58 @@ ul {
   top: 5px;
 }
 
-@media (max-width: 1020px) {
-  .site-header-inner {
-    flex-wrap: wrap;
+@media (max-width: 1120px) {
+  :root {
+    --header-h: 98px;
+    --header-h-condensed: 84px;
+    --logo-w: 170px;
   }
 
-  .brand img {
-    width: 170px;
+  .site-header-inner {
+    flex-wrap: wrap;
+    align-content: center;
+  }
+
+  /* With the menu open the header scrolls within the screen, so Contact and
+     Donate stay reachable however tall the menu gets. */
+  .site-header.is-menu-open {
+    max-height: 100dvh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .menu-fab {
+    display: grid;
+    place-items: center;
+    position: fixed;
+    top: 14px;
+    right: var(--gutter);
+    z-index: 51;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border: 1.5px solid rgba(251, 247, 239, 0.35);
+    border-radius: 50%;
+    background: var(--maroon-dark);
+    color: var(--cream);
+    box-shadow: 0 10px 30px rgba(42, 37, 34, 0.3);
+    cursor: pointer;
+    opacity: 0;
+    transform: scale(0.85);
+    pointer-events: none;
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease;
+  }
+
+  .menu-fab.is-visible {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  .menu-fab:focus-visible {
+    outline-color: var(--cream);
   }
 
   .menu-toggle {
@@ -1599,6 +1693,39 @@ ul {
   .reveal-in {
     opacity: 1;
     animation: none;
+  }
+
+  /* Print the header once, at the top. */
+  .site-header {
+    position: static;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .site-header-spacer,
+  .menu-fab {
+    display: none;
+  }
+}
+
+/* Narrow phones: the menu button drops its label so the logo and button
+   always share one row (the spacer assumes a single-row header). */
+@media (max-width: 380px) {
+  :root {
+    --logo-w: 160px;
+  }
+
+  .menu-toggle {
+    padding-inline: 0.75rem;
+  }
+
+  .menu-toggle-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
   }
 }
 

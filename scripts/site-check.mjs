@@ -3,7 +3,8 @@
 // text, missing/duplicate <h1>, broken images, forbidden text, card calls to
 // action that don't line up across a row, nested cards, cards missing the
 // cursor highlight, any raised box (card, band, photo, note) that stopped
-// following the mouse, or scroll-reveal content left hidden.
+// following the mouse, scroll-reveal content left hidden, or a header that
+// moves content, disappears on desktop, or doesn't hide and return on phones.
 //
 // Usage: npm run build && npm run preview & npm run check:site [baseUrl]
 // Optional: SHOTS_DIR=./shots to save full-page screenshots.
@@ -144,6 +145,64 @@ for (const [route, selector] of [["/", ".cta-band"], ["/", ".home-hero-media img
   await page.waitForTimeout(600);
   const shift = await target.evaluate((el) => parseFloat(getComputedStyle(el).translate) || 0);
   if (!(shift > 0.5)) problems.push(`${route} ${selector} does not move on hover (${shift}px)`);
+  await page.close();
+}
+
+// Header: fixed over a full-height spacer, so it must fit the spacer (on the
+// narrowest phone and at the desktop widths where the nav is tightest) and
+// changing it must never move the page.
+for (const width of [320, 1024, 1121, 1366]) {
+  const page = await browser.newPage({ viewport: { width, height: 800 } });
+  await page.goto(base + "/", { waitUntil: "networkidle" });
+  const fit = await page.evaluate(() => [".site-header", ".site-header-spacer"]
+    .map((sel) => Math.round(document.querySelector(sel)?.getBoundingClientRect().height ?? 0)));
+  if (fit[0] > fit[1]) problems.push(`${width}px: header (${fit[0]}px) taller than its spacer (${fit[1]}px)`);
+  await page.close();
+}
+// Desktop: the header stays visible and shrinks while scrolling.
+{
+  const page = await browser.newPage({ viewport: viewports.desktop });
+  await page.goto(base + "/", { waitUntil: "networkidle" });
+  const state = () => page.evaluate(() => {
+    const header = document.querySelector(".site-header").getBoundingClientRect();
+    return { top: Math.round(header.top), height: Math.round(header.height),
+      h1: Math.round(document.querySelector("h1").getBoundingClientRect().top + scrollY) };
+  });
+  const start = await state();
+  for (let i = 0; i < 15; i++) await page.mouse.wheel(0, 120);
+  await page.waitForTimeout(700);
+  const scrolled = await state();
+  if (scrolled.top !== 0) problems.push(`desktop: header not visible after scrolling (top ${scrolled.top}px)`);
+  if (!(scrolled.height < start.height)) problems.push("desktop: header did not shrink on scroll");
+  if (scrolled.h1 !== start.h1) problems.push("desktop: header change moved page content");
+  await page.close();
+}
+// Phones: scrolling down slides the header away and shows the round menu
+// button; scrolling up brings the header back; the button opens the menu.
+{
+  const page = await browser.newPage({ viewport: viewports.mobile });
+  await page.goto(base + "/", { waitUntil: "networkidle" });
+  const state = () => page.evaluate(() => ({
+    headerBottom: Math.round(document.querySelector(".site-header").getBoundingClientRect().bottom),
+    fab: document.querySelector(".menu-fab") ? getComputedStyle(document.querySelector(".menu-fab")).opacity : "missing",
+    menuOpen: document.querySelector(".site-nav").classList.contains("is-open"),
+  }));
+  for (let i = 0; i < 12; i++) { await page.mouse.wheel(0, 120); await page.waitForTimeout(40); }
+  await page.waitForTimeout(600);
+  const down = await state();
+  if (down.headerBottom > 0) problems.push("phone: header still showing after scrolling down");
+  if (down.fab !== "1") problems.push("phone: round menu button not shown after scrolling down");
+  if (down.fab === "1") await page.click(".menu-fab");
+  await page.waitForTimeout(500);
+  const opened = await state();
+  if (!opened.menuOpen || opened.headerBottom <= 0) problems.push("phone: round menu button did not open the menu");
+  await page.keyboard.press("Escape");
+  for (let i = 0; i < 4; i++) { await page.mouse.wheel(0, 120); await page.waitForTimeout(40); }
+  await page.waitForTimeout(500);
+  await page.mouse.wheel(0, -60);
+  await page.waitForTimeout(600);
+  const up = await state();
+  if (up.headerBottom <= 0) problems.push("phone: header did not return on scrolling up");
   await page.close();
 }
 
