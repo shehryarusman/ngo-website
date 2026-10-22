@@ -830,8 +830,9 @@ ul {
 .card--maroon {
   background:
     radial-gradient(
-      /* Rests top-right; offset from the same neutral as the white cards. */
-      120% 140% at calc(var(--gloss-x, 50%) + 50%) calc(var(--gloss-y, 22%) - 22%),
+      /* Rests top-right; follows the cursor while the tile is lifted. */
+      120% 140% at calc(var(--gloss-x, 50%) + 50% * (1 - var(--card-lift, 0)))
+        calc(var(--gloss-y, 22%) - 22% * (1 - var(--card-lift, 0))),
       rgba(224, 161, 0, 0.16) 0%,
       rgba(224, 161, 0, 0) 45%
     ),
