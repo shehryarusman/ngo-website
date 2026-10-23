@@ -56,7 +56,7 @@ export function PageHeader({
         </div>
         {image ? (
           <div className="page-header-media">
-            <Picture name={image} priority sizes="(min-width: 960px) 40vw, 100vw" />
+            <Picture name={image} priority sizes="(min-width: 961px) 840px, 110vw" />
           </div>
         ) : null}
         {aside ? <aside className="card page-header-aside">{aside}</aside> : null}

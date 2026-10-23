@@ -24,7 +24,7 @@ export function Picture({
     <img
       className={className}
       src={`/images/${name}-1600.webp`}
-      srcSet={`/images/${name}-800.webp 800w, /images/${name}-1600.webp 1600w`}
+      srcSet={`/images/${name}-800.webp 800w, /images/${name}-1200.webp 1200w, /images/${name}-1600.webp 1600w, /images/${name}-2400.webp 2400w`}
       sizes={sizes}
       width={photo.width}
       height={photo.height}

@@ -55,7 +55,7 @@ export function HomePage() {
             </div>
           </div>
           <div className="home-hero-media">
-            <Picture name="lab-glassware" priority sizes="(min-width: 960px) 40vw, 100vw" />
+            <Picture name="teaching-lab" priority sizes="(min-width: 961px) 1080px, 110vw" />
           </div>
         </div>
       </section>
@@ -107,7 +107,7 @@ export function HomePage() {
           {programs.map((program) => (
             <Card key={program.slug} to={`/programs/${program.slug}`}>
               <div className="card-media">
-                <Picture name={program.image} alt="" sizes="(min-width: 960px) 22vw, (min-width: 640px) 45vw, 100vw" />
+                <Picture name={program.image} alt="" sizes="(min-width: 961px) 28vw, (min-width: 641px) 56vw, 110vw" />
               </div>
               <h3>{program.name}</h3>
               <p className="muted small">{programSummary(program)}</p>

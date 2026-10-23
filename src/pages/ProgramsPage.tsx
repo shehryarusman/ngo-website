@@ -14,7 +14,7 @@ export function ProgramsPage() {
     <main>
       <PageHeader
         title="What We Do"
-        image="lab-pipette"
+        image="lab-workstation"
         actions={[
           { label: "View Programs", to: "#programs" },
           { label: "Support Programs", to: "/donate", variant: "secondary" },
@@ -26,7 +26,7 @@ export function ProgramsPage() {
           {programs.map((program) => (
             <Card key={program.slug} to={`/programs/${program.slug}`}>
               <div className="card-media">
-                <Picture name={program.image} alt="" sizes="(min-width: 960px) 45vw, 100vw" />
+                <Picture name={program.image} alt="" sizes="(min-width: 961px) 56vw, 110vw" />
               </div>
               <p className="eyebrow">{statusLabel(program)}</p>
               <h3>{program.name}</h3>
@@ -54,7 +54,7 @@ export function ProgramsPage() {
             const body = (
               <>
                 <div className="card-media">
-                  <Picture name={area.image} alt="" sizes="(min-width: 960px) 30vw, 100vw" />
+                  <Picture name={area.image} alt="" sizes="(min-width: 961px) 38vw, 110vw" />
                 </div>
                 <h3>{area.title}</h3>
                 <p className="muted">{area.summary}</p>

@@ -14,7 +14,7 @@ export function ImpactPage() {
     <main>
       <PageHeader
         title="How We Work"
-        image="documents-review"
+        image="document-review"
         actions={[
           { label: "Transparency", to: "/transparency" },
           { label: "Support This Work", to: "/donate", variant: "secondary" },

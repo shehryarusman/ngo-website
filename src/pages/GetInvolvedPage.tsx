@@ -14,7 +14,7 @@ export function GetInvolvedPage() {
     <main>
       <PageHeader
         title="Get Involved"
-        image="team-planning"
+        image="working-table"
       />
 
       <Section tone="tint">
