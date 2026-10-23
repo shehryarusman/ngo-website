@@ -18,7 +18,7 @@ export function AboutPage() {
         title="Who We Are"
         eyebrow="Mission"
         lead={statements.mission}
-        image="students-library"
+        image="mentor-session"
         actions={[
           { label: "Meet The Board", to: "/board" },
           { label: "View What We Do", to: "/programs", variant: "secondary" },

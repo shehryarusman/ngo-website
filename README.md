@@ -36,7 +36,7 @@ replace a placeholder with invented text.
 
 - Fonts are self-hosted in `public/fonts` (SIL Open Font License) and the
   critical files are preloaded in `index.html`.
-- Photos are WebP at 800 px and 1600 px. To add one, export both widths into
+- Photos are WebP at 800, 1200, 1600 and 2400 px. To add one, export all four widths into
   `public/images/` and add an entry to `src/data/images.ts`.
 - Logo files are in `public/brand`; the frame uses rounded corners.
 

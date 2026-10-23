@@ -100,36 +100,36 @@ export const programAreas: Array<{
   {
     title: "Art",
     summary: "Furthering culture and expression by fostering creativity and community.",
-    image: "art-brushes",
+    image: "painter-easel",
   },
   {
     title: "Research",
     summary:
       "Opening doors and destabilizing barriers to research by funding travel to conferences, as well as fellowship opportunities.",
-    image: "lab-glassware",
+    image: "lab-bench",
   },
   {
     title: "Innovation",
     summary: "Pushing boundaries of what is known by promoting discovery of the unknown.",
-    image: "cells-microscopy",
+    image: "soldering-bench",
   },
   {
     title: "Science",
     summary:
       "Expanding knowledge and advancing science through educational and research-based programs.",
-    image: "lab-pipette",
+    image: "field-notebook",
   },
   {
     title: "Education",
     summary:
       "Extending horizons for young academics by creating opportunities for accessible education.",
-    image: "graduation",
+    image: "lecture-hall",
   },
   {
     title: "Mission",
     summary:
       "Read about ARISE Foundation's mission to impassion, inspire, and educate across Arts, Research, Innovation, Science, and Education.",
-    image: "students-collaborating",
+    image: "campus-brick",
     to: "/about",
   },
 ];

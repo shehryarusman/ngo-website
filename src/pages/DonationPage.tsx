@@ -12,7 +12,7 @@ export function DonationPage() {
     <main>
       <PageHeader
         title="Donate"
-        image="students-collaborating"
+        image="library-desk"
       />
 
       <Section tone="tint" title="How to Donate">

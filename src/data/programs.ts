@@ -33,7 +33,7 @@ export const programs: Program[] = [
     statusApproval:
       "Names of partner universities, to be published only with each university's written permission",
     timing: "Internships last one to ten weeks, typically during the summer.",
-    image: "lab-pipette",
+    image: "test-tubes",
     application: {
       submittedBy:
         "The student. A parent or guardian co-signs for applicants under 18.",
@@ -62,7 +62,7 @@ export const programs: Program[] = [
     provides:
       "Fellowship funding through the researcher's university, with travel support where needed.",
     status: "Active.",
-    image: "cells-microscopy",
+    image: "lab-instrument",
     application: {
       submittedBy:
         "The researcher, or the laboratory or university on the researcher's behalf.",
@@ -90,7 +90,7 @@ export const programs: Program[] = [
     provides:
       "Travel grants to attend and present at scientific conferences, covering conference registration, travel, lodging and meals. Grants are awarded to individuals or to their schools and institutions.",
     status: "Active. Includes the ARISE High School Scholars Program.",
-    image: "students-collaborating",
+    image: "poster-session",
     application: {
       submittedBy: "The student, young researcher, or laboratory.",
       information: [
@@ -114,7 +114,7 @@ export const programs: Program[] = [
     provides:
       "Support for exhibitions, workshops, small awards and public programs.",
     status: "In development.",
-    image: "art-brushes",
+    image: "piano-practice",
     application: {
       submittedBy: "The artist or organization.",
       information: [
