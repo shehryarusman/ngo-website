@@ -72,7 +72,7 @@ export function HomePage() {
               <StoryImage story={latestStory} sizes="(min-width: 960px) 40vw, 100vw" decorative />
             </Link>
             <div className="feature-story-copy">
-              <p className="eyebrow">Latest Story · {latestStory.dateLabel}</p>
+              <p className="eyebrow">{latestStory.dateLabel}</p>
               <h2>{latestStory.title}</h2>
               <div className="button-row">
                 <Link className="btn btn-primary" to={`/news/${latestStory.slug}`}>
