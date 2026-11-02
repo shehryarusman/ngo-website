@@ -16,6 +16,28 @@ export const organization = {
   },
 } as const;
 
+/**
+ * Give Lively, the approved online donation processor. The embed options
+ * mirror the snippet from the client's Give Lively admin portal.
+ */
+const giveLivelyHost = "https://secure.givelively.org";
+const giveLivelySlug = "arise-foundation-huntingdon-vy-pa";
+const giveLivelyWidgetOptions = {
+  show_suggested_amount_buttons: false,
+  show_in_honor_of: false,
+  address_required: false,
+  has_required_custom_question: false,
+};
+
+export const giveLively = {
+  slug: giveLivelySlug,
+  /** Hosted donation page; the fallback while the widget loads or is blocked. */
+  donatePageUrl: `${giveLivelyHost}/donate/${giveLivelySlug}`,
+  widgetScriptUrl: `${giveLivelyHost}/widgets/simple_donation/${giveLivelySlug}.js?${new URLSearchParams(
+    Object.entries(giveLivelyWidgetOptions).map(([key, value]) => [key, String(value)])
+  )}`,
+} as const;
+
 export type InboxKey = keyof typeof organization.inboxes;
 
 /** Contact form topics and the inbox each one routes to. */

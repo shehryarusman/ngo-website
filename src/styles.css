@@ -1011,6 +1011,17 @@ ul {
   border-color: var(--card-border-hover);
 }
 
+/* The Give Lively form brings 10px of its own padding; offset it so the
+   form lines up with the card's heading and text. Until the form arrives
+   the empty element takes no space beside the fallback link. */
+.gl-simple-donation-widget {
+  margin: -10px;
+}
+
+.gl-simple-donation-widget:empty {
+  display: none;
+}
+
 .card--link {
   text-decoration: none;
 }
