@@ -1,13 +1,12 @@
 import { Link } from "react-router-dom";
 import { Card } from "../components/common/Card";
-import { Draft } from "../components/common/Draft";
 import { PageHeader } from "../components/common/PageHeader";
 import { Placeholder } from "../components/common/Placeholder";
 import { Section } from "../components/common/Section";
 import { SupportBand } from "../components/common/SupportBand";
 import { statements } from "../data/organization";
 import { programSummary, programs } from "../data/programs";
-import { leadership } from "../data/siteContent";
+import { leadership, ourStory } from "../data/siteContent";
 import { usePageTitle } from "../hooks/usePageTitle";
 
 export function AboutPage() {
@@ -33,12 +32,17 @@ export function AboutPage() {
         intro="The name stands for Arts, Research, Innovation, Science and Education."
       >
         <div className="grid grid-2">
-          <Draft>
-            <Card className="span-all">
-              <h3>Our Story</h3>
-              <Placeholder what="History of ARISE Foundation (one to two paragraphs): the purpose of its founding, its founders, and its activities since establishment in 2025." />
-            </Card>
-          </Draft>
+          <Card className="span-all">
+            <h3>Our Story</h3>
+            <Placeholder
+              kind="review"
+              what="History of ARISE Foundation (one to two paragraphs): the purpose of its founding, its founders, and its activities since establishment in 2025."
+            >
+              {ourStory.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </Placeholder>
+          </Card>
           <Card>
             <h3>How ARISE Works</h3>
             <p>{statements.howWeWork}</p>
@@ -75,7 +79,14 @@ export function AboutPage() {
             <Card key={member.name}>
               <h3>{member.name}</h3>
               <p className="board-role">{member.role}</p>
-              {member.bio ? (
+              {member.bio && member.draft ? (
+                <Placeholder
+                  kind="review"
+                  what={`Summary of ${member.name}'s role at ARISE Foundation (one to two sentences), consistent in style with the other directors' summaries.`}
+                >
+                  <p className="muted">{member.bio}</p>
+                </Placeholder>
+              ) : member.bio ? (
                 <p className="muted">{member.bio}</p>
               ) : (
                 <Placeholder

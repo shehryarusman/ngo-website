@@ -56,6 +56,7 @@ export function ProgramPage() {
   const scholarsStory = stories.find((story) => story.slug === "thailand-pilot-2026");
   // Without its placeholder, the Timing card only shows when there is a timing line.
   const showTiming = SHOW_PLACEHOLDERS || Boolean(program.timing);
+  const eligibilityNote = `Eligibility criteria and selection process for ${program.name}, per the final program guidelines (under review by ARISE's attorneys)`;
 
   return (
     <main>
@@ -94,14 +95,23 @@ export function ProgramPage() {
               />
             </Card>
           ) : null}
-          <Draft>
+          {program.eligibility ? (
             <Card className="span-all">
               <h2 className="h3">Eligibility</h2>
-              <Placeholder
-                what={`Eligibility criteria and selection process for ${program.name}, per the final program guidelines (under review by ARISE's attorneys)`}
-              />
+              <Placeholder kind="review" what={eligibilityNote}>
+                {program.eligibility.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </Placeholder>
             </Card>
-          </Draft>
+          ) : (
+            <Draft>
+              <Card className="span-all">
+                <h2 className="h3">Eligibility</h2>
+                <Placeholder what={eligibilityNote} />
+              </Card>
+            </Draft>
+          )}
         </div>
       </Section>
 

@@ -1601,6 +1601,16 @@ ul {
   border-color: var(--maroon);
 }
 
+/* Drafted copy: the note stays small; the content inside renders as published. */
+.placeholder-content {
+  display: grid;
+  gap: 0.65rem;
+  margin-top: 0.6rem;
+  color: var(--ink);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
 /* ---------- 404 ---------- */
 
 .not-found {

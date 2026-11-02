@@ -4,7 +4,6 @@ import { Placeholder } from "../components/common/Placeholder";
 import { Section } from "../components/common/Section";
 import { StoryImage } from "../components/common/StoryImage";
 import { stories } from "../data/news";
-import { SHOW_PLACEHOLDERS } from "../drafts";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { NotFoundPage } from "./NotFoundPage";
 
@@ -26,20 +25,26 @@ export function NewsStoryPage() {
               <Link to="/news">News</Link> · {story.dateLabel}
             </p>
             <h1>{story.title}</h1>
-            <Placeholder what="Introductory announcement (two to three sentences), to be published before November 9, 2026. Participating schools and students may be named only with their written permission." />
+            {story.intro && story.introReview ? (
+              <Placeholder kind="review" what={story.introReview}>
+                <p className="lead">{story.intro}</p>
+              </Placeholder>
+            ) : story.intro ? (
+              <p className="lead">{story.intro}</p>
+            ) : null}
 
             <dl className="story-facts">
               {story.facts.map((fact) => (
                 <div key={fact.label}>
                   <dt>{fact.label}</dt>
                   <dd>
-                    {fact.text}
-                    {SHOW_PLACEHOLDERS && fact.todo ? (
-                      <>
-                        {" "}
-                        <Placeholder inline what={fact.todo} />
-                      </>
-                    ) : null}
+                    {fact.review ? (
+                      <Placeholder kind="review" what={fact.review}>
+                        {fact.text}
+                      </Placeholder>
+                    ) : (
+                      fact.text
+                    )}
                   </dd>
                 </div>
               ))}
