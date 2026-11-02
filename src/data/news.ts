@@ -1,8 +1,8 @@
 export interface NewsFact {
   label: string;
   text: string;
-  /** Detail still to be confirmed by ARISE; rendered as a placeholder. */
-  todo?: string;
+  /** Text drafted for ARISE to confirm: the note on its review box in development. */
+  review?: string;
 }
 
 export interface NewsStory {
@@ -11,6 +11,9 @@ export interface NewsStory {
   dateLabel: string;
   /** Portrait poster image, exported at 420w and 712w (WebP). */
   image: { base: string; width: number; height: number; alt: string };
+  intro?: string;
+  /** Intro drafted for ARISE to confirm: the note on its review box in development. */
+  introReview?: string;
   facts: NewsFact[];
 }
 
@@ -27,11 +30,15 @@ export const stories: NewsStory[] = [
       height: 1601,
       alt: "ARISE High School Scholars Program Thailand Pilot 2026 banner: Inspiring the Next Generation of Young Scientists, with partner logos",
     },
+    intro:
+      "The ARISE High School Scholars Program begins with its pilot in Thailand: students from five secondary schools and their Guardian STEM Teachers take part in the Vaccine & Therapeutic RNA Research Forum 2026 in Bangkok.",
+    introReview:
+      "Introductory announcement (two to three sentences), to be published before November 9, 2026. Participating schools and students may be named only with their written permission.",
     facts: [
       {
         label: "Who",
-        text: "The inaugural ARISE High School Scholars cohort: students in Grades 10–11 (Mathayom 4–5), accompanied by their Guardian STEM Teachers.",
-        todo: "Confirmed number of participating students and secondary schools in Thailand",
+        text: "The inaugural ARISE High School Scholars cohort: seventeen students from five secondary schools in Thailand, accompanied by five Guardian STEM Teachers.",
+        review: "Confirmed number of participating students and secondary schools in Thailand",
       },
       {
         label: "When and where",

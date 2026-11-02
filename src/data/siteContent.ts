@@ -1,6 +1,28 @@
 import type { PhotoName } from "./images";
 
-export const leadership = [
+// Drafted from ARISE's program documents for the client to review; published
+// as written and shown in "Draft for review" boxes in development.
+export const ourStory = [
+  "ARISE Foundation was incorporated in the Commonwealth of Pennsylvania on November 12, 2025, and is governed by a three-member Board of Directors.",
+  "In November 2026, the first cohort of ARISE High School Scholars, from five secondary schools in Thailand, takes part in the Vaccine & Therapeutic RNA Research Forum 2026 in Bangkok.",
+];
+
+export const milestones = [
+  { date: "November 2025", text: "Incorporated in Pennsylvania" },
+  { date: "September 2026", text: "Classified by the IRS as a 501(c)(3) public charity" },
+  { date: "November 2026", text: "First ARISE High School Scholars cohort, Bangkok" },
+];
+
+export const boardOversight =
+  "The Board of Directors sets the guidelines for each ARISE program and determines its funding. The Board, or its delegate, reviews applications and selects participants on objective, program-related criteria. ARISE keeps a record of the selection criteria and outcomes of each program cycle, and host universities report to ARISE on the progress of ARISE-supported fellows.";
+
+/** draft: the director's text was drafted for review (see ourStory). */
+export const leadership: Array<{
+  name: string;
+  role: string;
+  bio: string | null;
+  draft?: boolean;
+}> = [
   {
     name: "Dr. Elena Atochina-Vasserman, M.D., Ph.D.",
     role: "President and Director",
@@ -14,7 +36,8 @@ export const leadership = [
   {
     name: "Ilya Vasserman",
     role: "Treasurer, CFO and Director",
-    bio: null,
+    bio: "Ilya oversees ARISE's financial management, including budgeting, grant disbursement, and financial reporting.",
+    draft: true,
   },
 ];
 
@@ -23,7 +46,10 @@ export const boardMembers: Array<{
   role: string;
   pronouns?: string;
   intro?: string;
-  sections: Array<{ title: string; body: string }>;
+  /** The director's text was drafted for review (see ourStory). */
+  draft?: boolean;
+  /** In display order. A section without a body is still to be written. */
+  sections: Array<{ title: string; body?: string }>;
 }> = [
   {
     name: "Dr. Elena Atochina-Vasserman, M.D., Ph.D.",
@@ -86,7 +112,22 @@ export const boardMembers: Array<{
   {
     name: "Ilya Vasserman",
     role: "Treasurer, CFO and Director",
-    sections: [],
+    draft: true,
+    intro:
+      "Ilya is a technology, finance, and operations executive who specializes in building scalable back-office platforms. He brings experience in financial systems, operations, and organizational growth across several industries to the ARISE Foundation.",
+    sections: [
+      {
+        title: "Professional Background",
+        body:
+          "As a Managing Partner at Ramius, Ilya designs and oversees the systems and infrastructure that allow growing businesses to operate with clarity, efficiency, and real-time insight. He previously served as Chief Information Officer of Azzur Group, where he led financial systems, IT infrastructure, and digital transformation across 14 entities, including executive dashboards, automated financial workflows, and modernized cloud and hybrid environments. Earlier in his career, he founded a real estate development firm that managed more than $50 million in projects, and held senior technology leadership roles in the consulting, insurance, and healthcare sectors.",
+      },
+      { title: "Why He Serves" },
+      { title: "Personal Touch" },
+      {
+        title: "Role at ARISE",
+        body: "Ilya oversees ARISE's financial management, including budgeting, grant disbursement, and financial reporting.",
+      },
+    ],
   },
 ];
 

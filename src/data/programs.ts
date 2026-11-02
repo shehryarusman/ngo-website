@@ -18,6 +18,8 @@ export interface Program {
   /** Status detail that needs written permission before it can be published. */
   statusApproval?: string;
   timing?: string;
+  /** Eligibility and selection, one string per paragraph. Drafted for review. */
+  eligibility?: string[];
   image: PhotoName;
   application: ProgramApplication;
 }
@@ -33,6 +35,10 @@ export const programs: Program[] = [
     statusApproval:
       "Names of partner universities, to be published only with each university's written permission",
     timing: "Internships last one to ten weeks, typically during the summer.",
+    eligibility: [
+      "Applicants must be high school students ages 16 to 18 or early undergraduate students, currently enrolled, with a demonstrated interest in biomedical research and the ability to commit to the full internship. Applicants must meet any requirements of the host university, and international applicants must be eligible for the necessary visa. Applicants under 18 require the consent of a parent or guardian.",
+      "Participants are selected on academic performance, demonstrated interest in research, recommendations, and their potential to benefit from the program. Certain international students may not be eligible for stipends because of visa or other legal restrictions.",
+    ],
     image: "test-tubes",
     application: {
       submittedBy:
@@ -62,6 +68,10 @@ export const programs: Program[] = [
     provides:
       "Fellowship funding through the researcher's university, with travel support where needed.",
     status: "Active.",
+    eligibility: [
+      "Applicants must be graduate students or postdoctoral researchers at an accredited institution, affiliated with a biomedical research laboratory and working on a defined research project, with documented financial need or justification for support.",
+      "Applications are assessed on the applicant's credentials, the merit of the research, its potential contribution to the field, and the reasonableness of the budget. All fellowship support is subject to approval by the Board of Directors.",
+    ],
     image: "lab-instrument",
     application: {
       submittedBy:
