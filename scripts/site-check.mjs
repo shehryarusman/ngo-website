@@ -30,6 +30,12 @@ const routes = [
 // dollar figures, personal inboxes, developer copy).
 const forbidden = [/Penn(?!sylvania)/, /Rutgers/, /Weissman Lab/, /\$\d/, /quarterly/i,
   /(ilya|elena|jessica)@/i, /\bAPI\b/, /demo_/, /Plum/i, /lorem/i];
+// Dollar figures the client has approved for publication. These are removed
+// from the page text before the forbidden check, so any other figure still fails.
+// Grant and award amounts must never be added here.
+const approvedText = [
+  "$50 million in projects", // Ilya Vasserman's career history (ramiusbrm.com/about)
+];
 
 const viewports = { desktop: { width: 1366, height: 900 }, mobile: { width: 390, height: 844 } };
 const problems = [];
@@ -97,8 +103,9 @@ for (const [vpName, viewport] of Object.entries(viewports)) {
 
     info.links.filter((h) => h.startsWith("/") || h.startsWith("#"))
       .forEach((h) => links.add(h.startsWith("#") ? route + h : h));
+    const checkedText = approvedText.reduce((text, phrase) => text.split(phrase).join(""), info.text);
     for (const re of forbidden) {
-      const match = info.text.match(re);
+      const match = checkedText.match(re);
       if (match) problems.push(`${route}: forbidden text "${match[0]}"`);
     }
     if (info.clipped.length) problems.push(`${vpName} ${route}: clipped text ${info.clipped.join(" | ")}`);
