@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 
 // Every raised box moves; styles.css gives the same list the moving shadow.
+// A .card--still holds a third-party form and stays put while it is used.
 const MOVABLE =
-  ".card, .cta-band, .page-header-aside, .home-hero-media img, .page-header-media img, .story-poster";
+  ".card:not(.card--still), .cta-band, .page-header-aside, .home-hero-media img, .page-header-media img, .story-poster";
 
 // How far (px) a card drifts toward the pointer at its edges, and how far it tilts.
 const MAX_SHIFT_X = 8;

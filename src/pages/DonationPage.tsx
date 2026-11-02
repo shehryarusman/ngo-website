@@ -1,10 +1,8 @@
 import { Card } from "../components/common/Card";
-import { Draft } from "../components/common/Draft";
+import { GiveLivelyWidget } from "../components/common/GiveLivelyWidget";
 import { PageHeader } from "../components/common/PageHeader";
-import { Placeholder } from "../components/common/Placeholder";
 import { Section } from "../components/common/Section";
 import { organization, statements } from "../data/organization";
-import { SHOW_PLACEHOLDERS } from "../drafts";
 import { usePageTitle } from "../hooks/usePageTitle";
 
 export function DonationPage() {
@@ -18,16 +16,11 @@ export function DonationPage() {
       />
 
       <Section tone="tint" title="How to Donate">
-        <div className={SHOW_PLACEHOLDERS ? "grid grid-3" : "grid grid-2"}>
-          <Draft>
-            <Card>
-              <h3>Online</h3>
-              <Placeholder
-                kind="approval"
-                what="Secure online donation form, to be added once ARISE selects a payment processor and confirms its Pennsylvania charitable solicitation registration"
-              />
-            </Card>
-          </Draft>
+        <div className="grid grid-3">
+          <Card className="card--still">
+            <h3>Online</h3>
+            <GiveLivelyWidget />
+          </Card>
           <Card>
             <h3>By Check</h3>
             <p>Checks may be made payable to ARISE Foundation and mailed to:</p>
