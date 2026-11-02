@@ -39,7 +39,9 @@ export function ProgramsPage() {
           <Card className="span-all">
             <p>
               ARISE also sponsors seminars and speaking engagements by
-              scientists and educators. An industry laboratory internship with
+              scientists and educators. ARISE does not pay any indirect costs
+              on predoctoral and postdoctoral fellowships, or on institutional
+              awards for undergraduate student training. An industry laboratory internship with
               a commercial testing laboratory in the Lehigh Valley is in
               development.
             </p>
