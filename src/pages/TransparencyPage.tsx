@@ -1,3 +1,4 @@
+import { Draft } from "../components/common/Draft";
 import { PageHeader } from "../components/common/PageHeader";
 import { Placeholder } from "../components/common/Placeholder";
 import { Section } from "../components/common/Section";
@@ -50,7 +51,9 @@ export function TransparencyPage() {
                 <th scope="col">Document</th>
                 <th scope="col">Description</th>
                 <th scope="col">Availability</th>
-                <th scope="col">File</th>
+                <Draft>
+                  <th scope="col">File</th>
+                </Draft>
               </tr>
             </thead>
             <tbody>
@@ -59,9 +62,11 @@ export function TransparencyPage() {
                   <td className="label" data-label="Document">{doc.name}</td>
                   <td data-label="Description">{doc.detail}</td>
                   <td data-label="Availability">{doc.when}</td>
-                  <td data-label="File">
-                    <Placeholder kind="document" className="placeholder-compact" what={doc.pending} />
-                  </td>
+                  <Draft>
+                    <td data-label="File">
+                      <Placeholder kind="document" className="placeholder-compact" what={doc.pending} />
+                    </td>
+                  </Draft>
                 </tr>
               ))}
             </tbody>

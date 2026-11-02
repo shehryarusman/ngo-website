@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
 import { Card } from "../components/common/Card";
+import { Draft } from "../components/common/Draft";
 import { PageHeader } from "../components/common/PageHeader";
 import { Placeholder } from "../components/common/Placeholder";
 import { Section } from "../components/common/Section";
 import { SupportBand } from "../components/common/SupportBand";
 import { organizationFacts } from "../data/siteContent";
+import { SHOW_PLACEHOLDERS } from "../drafts";
 import { usePageTitle } from "../hooks/usePageTitle";
 
 export function ImpactPage() {
@@ -34,11 +36,13 @@ export function ImpactPage() {
 
       <Section id="governance" title="Oversight and Reporting">
         <div className="grid grid-2">
-          <Card>
-            <h3>Board Oversight</h3>
-            <Placeholder what="Description of how the Board of Directors oversees programs and grants (one paragraph), per the board's approved governance policies" />
-          </Card>
-          <Card>
+          <Draft>
+            <Card>
+              <h3>Board Oversight</h3>
+              <Placeholder what="Description of how the Board of Directors oversees programs and grants (one paragraph), per the board's approved governance policies" />
+            </Card>
+          </Draft>
+          <Card className={SHOW_PLACEHOLDERS ? undefined : "span-all"}>
             <h3>Public Documents</h3>
             <Link className="card-more" to="/transparency">
               View the Transparency page
