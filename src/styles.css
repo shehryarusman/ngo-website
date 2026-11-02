@@ -1287,6 +1287,11 @@ ul {
   align-items: start;
 }
 
+/* No portrait yet: the biography takes the full width. */
+.board-profile--no-photo {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .board-profile-photo.placeholder {
   min-height: 220px;
 }

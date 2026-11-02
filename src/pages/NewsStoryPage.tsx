@@ -1,8 +1,10 @@
 import { Link, useParams } from "react-router-dom";
+import { Draft } from "../components/common/Draft";
 import { Placeholder } from "../components/common/Placeholder";
 import { Section } from "../components/common/Section";
 import { StoryImage } from "../components/common/StoryImage";
 import { stories } from "../data/news";
+import { SHOW_PLACEHOLDERS } from "../drafts";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { NotFoundPage } from "./NotFoundPage";
 
@@ -32,7 +34,7 @@ export function NewsStoryPage() {
                   <dt>{fact.label}</dt>
                   <dd>
                     {fact.text}
-                    {fact.todo ? (
+                    {SHOW_PLACEHOLDERS && fact.todo ? (
                       <>
                         {" "}
                         <Placeholder inline what={fact.todo} />
@@ -43,16 +45,18 @@ export function NewsStoryPage() {
               ))}
             </dl>
 
-            <h2>Recap</h2>
-            <Placeholder what="Program recap, to be published after November 10, 2026: summary of student activities and learning outcomes, and next steps for the program." />
-            <Placeholder
-              kind="image"
-              what="Photographs from the forum and closing session, to be published only with school and parent or guardian consent"
-            />
-            <Placeholder
-              kind="approval"
-              what="Brief quotation from a Guardian STEM Teacher or participating student; name and school to be included only with written consent"
-            />
+            <Draft>
+              <h2>Recap</h2>
+              <Placeholder what="Program recap, to be published after November 10, 2026: summary of student activities and learning outcomes, and next steps for the program." />
+              <Placeholder
+                kind="image"
+                what="Photographs from the forum and closing session, to be published only with school and parent or guardian consent"
+              />
+              <Placeholder
+                kind="approval"
+                what="Brief quotation from a Guardian STEM Teacher or participating student; name and school to be included only with written consent"
+              />
+            </Draft>
 
             <div className="button-row">
               <Link className="btn btn-secondary" to="/news">

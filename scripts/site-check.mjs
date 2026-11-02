@@ -5,14 +5,17 @@
 // cursor highlight, any raised box (card, band, photo, note) that stopped
 // following the mouse, scroll-reveal content left hidden, or a header that
 // moves content, disappears on desktop, or doesn't hide and return on phones.
+// The production build must render no placeholders on any route.
 //
 // Usage: npm run build && npm run preview & npm run check:site [baseUrl]
 // Optional: SHOTS_DIR=./shots to save full-page screenshots.
+// Optional: ALLOW_PLACEHOLDERS=1 when checking a dev or drafts build.
 import { chromium } from "playwright";
 import { mkdirSync } from "node:fs";
 
 const base = process.argv[2] ?? "http://localhost:4173";
 const shotsDir = process.env.SHOTS_DIR;
+const allowPlaceholders = Boolean(process.env.ALLOW_PLACEHOLDERS);
 if (shotsDir) mkdirSync(shotsDir, { recursive: true });
 
 const routes = [
@@ -106,6 +109,9 @@ for (const [vpName, viewport] of Object.entries(viewports)) {
     if (info.flatCards) problems.push(`${vpName} ${route}: ${info.flatCards} card(s) lost the cursor highlight background`);
     if (info.misaligned.length) problems.push(`${vpName} ${route}: card CTAs not aligned (${info.misaligned.join(", ")})`);
     if (vpName === "desktop") placeholders[route] = info.placeholders;
+    if (info.placeholders && !allowPlaceholders) {
+      problems.push(`${vpName} ${route}: ${info.placeholders} placeholder(s) rendered on the public site`);
+    }
     if (shotsDir) {
       const name = (route === "/" ? "home" : route.slice(1).replaceAll("/", "_")) + `-${vpName}.png`;
       await page.screenshot({ path: `${shotsDir}/${name}`, fullPage: true });
@@ -139,6 +145,8 @@ for (const [route, selector] of [["/", ".cta-band"], ["/", ".home-hero-media img
   const page = await browser.newPage({ viewport: viewports.desktop });
   await page.goto(base + route, { waitUntil: "networkidle" });
   const target = page.locator(selector).first();
+  // The program status note is draft-only, so it is absent from the public build.
+  if (selector === ".page-header-aside" && !(await target.count())) { await page.close(); continue; }
   await target.scrollIntoViewIfNeeded();
   const box = await target.boundingBox();
   await page.mouse.move(box.x + box.width - 6, box.y + box.height / 2, { steps: 4 });

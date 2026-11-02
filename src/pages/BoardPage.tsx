@@ -3,6 +3,7 @@ import { PageHeader } from "../components/common/PageHeader";
 import { Placeholder } from "../components/common/Placeholder";
 import { Section } from "../components/common/Section";
 import { boardMembers } from "../data/siteContent";
+import { SHOW_PLACEHOLDERS } from "../drafts";
 import { usePageTitle } from "../hooks/usePageTitle";
 
 export function BoardPage() {
@@ -17,7 +18,10 @@ export function BoardPage() {
       <Section>
         <div className="board-list">
           {boardMembers.map((member) => (
-            <Card key={member.name} className="board-profile">
+            <Card
+              key={member.name}
+              className={SHOW_PLACEHOLDERS ? "board-profile" : "board-profile board-profile--no-photo"}
+            >
               <Placeholder
                 kind="image"
                 className="board-profile-photo"

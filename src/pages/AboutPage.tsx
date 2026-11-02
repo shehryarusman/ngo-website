@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Card } from "../components/common/Card";
+import { Draft } from "../components/common/Draft";
 import { PageHeader } from "../components/common/PageHeader";
 import { Placeholder } from "../components/common/Placeholder";
 import { Section } from "../components/common/Section";
@@ -32,10 +33,12 @@ export function AboutPage() {
         intro="The name stands for Arts, Research, Innovation, Science and Education."
       >
         <div className="grid grid-2">
-          <Card className="span-all">
-            <h3>Our Story</h3>
-            <Placeholder what="History of ARISE Foundation (one to two paragraphs): the purpose of its founding, its founders, and its activities since establishment in 2025." />
-          </Card>
+          <Draft>
+            <Card className="span-all">
+              <h3>Our Story</h3>
+              <Placeholder what="History of ARISE Foundation (one to two paragraphs): the purpose of its founding, its founders, and its activities since establishment in 2025." />
+            </Card>
+          </Draft>
           <Card>
             <h3>How ARISE Works</h3>
             <p>{statements.howWeWork}</p>

@@ -1,10 +1,12 @@
 import { Card } from "../components/common/Card";
+import { Draft } from "../components/common/Draft";
 import { PageHeader } from "../components/common/PageHeader";
 import { Picture } from "../components/common/Picture";
 import { Placeholder } from "../components/common/Placeholder";
 import { Section } from "../components/common/Section";
 import { programSummary, programs, statusLabel } from "../data/programs";
 import { programAreas } from "../data/siteContent";
+import { SHOW_PLACEHOLDERS } from "../drafts";
 import { usePageTitle } from "../hooks/usePageTitle";
 
 export function ProgramsPage() {
@@ -77,7 +79,7 @@ export function ProgramsPage() {
         tone="tint"
         title="Where ARISE Works"
       >
-        <div className="grid grid-4">
+        <div className={SHOW_PLACEHOLDERS ? "grid grid-4" : "grid grid-3"}>
           <Card>
             <h3>Philadelphia Area</h3>
             <p className="muted">Headquarters of ARISE Foundation.</p>
@@ -90,10 +92,12 @@ export function ProgramsPage() {
             <h3>Asia</h3>
             <p className="muted">Beginning with Thailand in 2026.</p>
           </Card>
-          <Card>
-            <h3>History</h3>
-            <Placeholder what="Timeline of key milestones since the establishment of ARISE Foundation in 2025" />
-          </Card>
+          <Draft>
+            <Card>
+              <h3>History</h3>
+              <Placeholder what="Timeline of key milestones since the establishment of ARISE Foundation in 2025" />
+            </Card>
+          </Draft>
         </div>
       </Section>
     </main>

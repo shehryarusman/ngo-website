@@ -1,5 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import { Card } from "../components/common/Card";
+import { Draft } from "../components/common/Draft";
 import { PageHeader } from "../components/common/PageHeader";
 import { Placeholder } from "../components/common/Placeholder";
 import { Section } from "../components/common/Section";
@@ -12,6 +13,7 @@ import {
   statusNote,
   type ProgramApplication,
 } from "../data/programs";
+import { SHOW_PLACEHOLDERS } from "../drafts";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { NotFoundPage } from "./NotFoundPage";
 
@@ -52,6 +54,8 @@ export function ProgramPage() {
   }
 
   const scholarsStory = stories.find((story) => story.slug === "thailand-pilot-2026");
+  // Without its placeholder, the Timing card only shows when there is a timing line.
+  const showTiming = SHOW_PLACEHOLDERS || Boolean(program.timing);
 
   return (
     <main>
@@ -65,14 +69,14 @@ export function ProgramPage() {
           { label: "All Programs", to: "/programs", variant: "secondary" },
         ]}
         aside={
-          program.statusApproval ? (
+          SHOW_PLACEHOLDERS && program.statusApproval ? (
             <Placeholder kind="approval" what={program.statusApproval} />
           ) : undefined
         }
       />
 
       <Section tone="tint">
-        <div className="grid grid-3">
+        <div className={showTiming ? "grid grid-3" : "grid grid-2"}>
           <Card>
             <h2 className="h3">Who It Serves</h2>
             <p>{program.serves}</p>
@@ -81,19 +85,23 @@ export function ProgramPage() {
             <h2 className="h3">What ARISE Provides</h2>
             <p>{program.provides}</p>
           </Card>
-          <Card>
-            <h2 className="h3">Timing</h2>
-            {program.timing ? <p>{program.timing}</p> : null}
-            <Placeholder
-              what={`Application deadlines and program dates for ${program.name}, per the final program guidelines`}
-            />
-          </Card>
-          <Card className="span-all">
-            <h2 className="h3">Eligibility</h2>
-            <Placeholder
-              what={`Eligibility criteria and selection process for ${program.name}, per the final program guidelines (under review by ARISE's attorneys)`}
-            />
-          </Card>
+          {showTiming ? (
+            <Card>
+              <h2 className="h3">Timing</h2>
+              {program.timing ? <p>{program.timing}</p> : null}
+              <Placeholder
+                what={`Application deadlines and program dates for ${program.name}, per the final program guidelines`}
+              />
+            </Card>
+          ) : null}
+          <Draft>
+            <Card className="span-all">
+              <h2 className="h3">Eligibility</h2>
+              <Placeholder
+                what={`Eligibility criteria and selection process for ${program.name}, per the final program guidelines (under review by ARISE's attorneys)`}
+              />
+            </Card>
+          </Draft>
         </div>
       </Section>
 
