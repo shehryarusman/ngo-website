@@ -37,7 +37,7 @@ export const stories: NewsStory[] = [
     facts: [
       {
         label: "Who",
-        text: "The inaugural ARISE High School Scholars cohort: seventeen students from five secondary schools in Thailand, accompanied by five Guardian STEM Teachers.",
+        text: "The inaugural ARISE High School Scholars cohort: seventeen students in Grades 10–11 (Mathayom 4–5) from five secondary schools in Thailand, accompanied by their Guardian STEM Teachers.",
         review: "Confirmed number of participating students and secondary schools in Thailand",
       },
       {

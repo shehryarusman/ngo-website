@@ -4,7 +4,6 @@ import { PageHeader } from "../components/common/PageHeader";
 import { Placeholder } from "../components/common/Placeholder";
 import { Section } from "../components/common/Section";
 import { boardMembers } from "../data/siteContent";
-import { SHOW_PLACEHOLDERS } from "../drafts";
 import { usePageTitle } from "../hooks/usePageTitle";
 
 const introNote = (name: string) =>
@@ -25,14 +24,19 @@ export function BoardPage() {
       <Section>
         <div className="board-list">
           {boardMembers.map((member) => (
-            <Card
-              key={member.name}
-              className={SHOW_PLACEHOLDERS ? "board-profile" : "board-profile board-profile--no-photo"}
-            >
-              <Placeholder
-                kind="image"
+            <Card key={member.name} className="board-profile">
+              <img
                 className="board-profile-photo"
-                what={`Formal portrait photograph of ${member.name}`}
+                src={`/images/${member.photo.base}-${member.photo.widths[0]}.webp`}
+                srcSet={member.photo.widths
+                  .map((w) => `/images/${member.photo.base}-${w}.webp ${w}w`)
+                  .join(", ")}
+                sizes="(max-width: 640px) 220px, 180px"
+                width={180}
+                height={240}
+                alt={`Portrait of ${member.name}`}
+                loading="lazy"
+                decoding="async"
               />
               <div className="board-profile-body">
                 <div>
@@ -41,11 +45,7 @@ export function BoardPage() {
                   {member.pronouns ? <p className="muted small">{member.pronouns}</p> : null}
                 </div>
 
-                {member.intro && member.draft ? (
-                  <Placeholder kind="review" what={introNote(member.name)}>
-                    <p>{member.intro}</p>
-                  </Placeholder>
-                ) : member.intro ? (
+                {member.intro ? (
                   <p>{member.intro}</p>
                 ) : (
                   <Placeholder what={introNote(member.name)} />
@@ -63,13 +63,7 @@ export function BoardPage() {
                     ) : (
                       <section key={section.title}>
                         <h3>{section.title}</h3>
-                        {member.draft ? (
-                          <Placeholder kind="review" what={sectionNote(member.name, section.title)}>
-                            <p className="muted">{section.body}</p>
-                          </Placeholder>
-                        ) : (
-                          <p className="muted">{section.body}</p>
-                        )}
+                        <p className="muted">{section.body}</p>
                       </section>
                     )
                   )}

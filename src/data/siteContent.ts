@@ -16,12 +16,10 @@ export const milestones = [
 export const boardOversight =
   "The Board of Directors sets the guidelines for each ARISE program and determines its funding. The Board, or its delegate, reviews applications and selects participants on objective, program-related criteria. ARISE keeps a record of the selection criteria and outcomes of each program cycle, and host universities report to ARISE on the progress of ARISE-supported fellows.";
 
-/** draft: the director's text was drafted for review (see ourStory). */
 export const leadership: Array<{
   name: string;
   role: string;
   bio: string | null;
-  draft?: boolean;
 }> = [
   {
     name: "Dr. Elena Atochina-Vasserman, M.D., Ph.D.",
@@ -36,8 +34,7 @@ export const leadership: Array<{
   {
     name: "Ilya Vasserman",
     role: "Treasurer, CFO and Director",
-    bio: "Ilya oversees ARISE's financial management, including budgeting, grant disbursement, and financial reporting.",
-    draft: true,
+    bio: null,
   },
 ];
 
@@ -46,8 +43,8 @@ export const boardMembers: Array<{
   role: string;
   pronouns?: string;
   intro?: string;
-  /** The director's text was drafted for review (see ourStory). */
-  draft?: boolean;
+  /** Portrait in public/images, exported as <base>-<width>.webp at each width (3:4). */
+  photo: { base: string; widths: number[] };
   /** In display order. A section without a body is still to be written. */
   sections: Array<{ title: string; body?: string }>;
 }> = [
@@ -55,6 +52,7 @@ export const boardMembers: Array<{
     name: "Dr. Elena Atochina-Vasserman, M.D., Ph.D.",
     role: "President and Director",
     pronouns: "she/her",
+    photo: { base: "board-elena", widths: [180, 240, 320] },
     intro:
       "As a distinguished scientist and educator with more than three decades of experience in immunology, pulmonary biology, and advanced therapeutic delivery systems, working extensively with mRNA vaccine technology, Elena brings deep scientific insight and a commitment to fostering education and research to the ARISE Foundation.",
     sections: [
@@ -84,6 +82,7 @@ export const boardMembers: Array<{
     name: "Jessica Vasserman",
     role: "Secretary and Director, Arts & Research",
     pronouns: "she/her",
+    photo: { base: "board-jessica", widths: [180, 240, 320] },
     intro:
       "Jess is an emerging leader in biomedical research and a passionate advocate for increasing accessibility to science and the arts. With experience in cutting-edge mRNA research and personal foundation in creative expression, Jess brings an interdisciplinary perspective to the ARISE Foundation.",
     sections: [
@@ -112,21 +111,19 @@ export const boardMembers: Array<{
   {
     name: "Ilya Vasserman",
     role: "Treasurer, CFO and Director",
-    draft: true,
+    photo: { base: "board-ilya", widths: [180, 270, 360, 511] },
+    // From his biography at ramiusbrm.com/about, as published there.
     intro:
-      "Ilya is a technology, finance, and operations executive who specializes in building scalable back-office platforms. He brings experience in financial systems, operations, and organizational growth across several industries to the ARISE Foundation.",
+      "Ilya is a technology, finance, and operations executive specializing in building scalable back-office platforms.",
     sections: [
       {
         title: "Professional Background",
         body:
-          "As a Managing Partner at Ramius, Ilya designs and oversees the systems and infrastructure that allow growing businesses to operate with clarity, efficiency, and real-time insight. He previously served as Chief Information Officer of Azzur Group, where he led financial systems, IT infrastructure, and digital transformation across 14 entities, including executive dashboards, automated financial workflows, and modernized cloud and hybrid environments. Earlier in his career, he founded a real estate development firm that managed more than $50 million in projects, and held senior technology leadership roles in the consulting, insurance, and healthcare sectors.",
+          "As a Managing Partner at Ramius, he designs and oversees the systems and infrastructure that allow growing businesses to operate with clarity, efficiency, and real-time insight. Previously, Ilya served as CIO of Azzur Group, where he led financial systems, IT infrastructure, and digital transformation across 14 entities. His work included implementing executive dashboards, automating financial workflows, and modernizing cloud and hybrid environments to support rapid organizational growth. Earlier in his career, Ilya founded a real estate development firm managing more than $50M in projects and held senior technology leadership roles across consulting, insurance, and healthcare sectors.",
       },
       { title: "Why He Serves" },
       { title: "Personal Touch" },
-      {
-        title: "Role at ARISE",
-        body: "Ilya oversees ARISE's financial management, including budgeting, grant disbursement, and financial reporting.",
-      },
+      { title: "Role at ARISE" },
     ],
   },
 ];

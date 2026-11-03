@@ -79,14 +79,7 @@ export function AboutPage() {
             <Card key={member.name}>
               <h3>{member.name}</h3>
               <p className="board-role">{member.role}</p>
-              {member.bio && member.draft ? (
-                <Placeholder
-                  kind="review"
-                  what={`Summary of ${member.name}'s role at ARISE Foundation (one to two sentences), consistent in style with the other directors' summaries.`}
-                >
-                  <p className="muted">{member.bio}</p>
-                </Placeholder>
-              ) : member.bio ? (
+              {member.bio ? (
                 <p className="muted">{member.bio}</p>
               ) : (
                 <Placeholder

@@ -22,3 +22,7 @@ All photographs are used under the Pexels License or the Unsplash License, both 
 | campus-brick | Jerome Cha | https://unsplash.com/photos/iEFWwGDGnko | Unsplash License |
 
 Each photo is exported at 800, 1200, 1600 and 2400 px wide as WebP, from the full-resolution original. Program photography will replace stock imagery as it becomes available.
+
+## Board portraits
+
+- `board-elena-*`, `board-jessica-*`, `board-ilya-*`: the directors' own published professional portraits, used with ARISE Foundation's approval; cropped to 3:4.

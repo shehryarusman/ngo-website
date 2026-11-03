@@ -34,7 +34,7 @@ const forbidden = [/Penn(?!sylvania)/, /Rutgers/, /Weissman Lab/, /\$\d/, /quart
 // from the page text before the forbidden check, so any other figure still fails.
 // Grant and award amounts must never be added here.
 const approvedText = [
-  "$50 million in projects", // Ilya Vasserman's career history (ramiusbrm.com/about)
+  "$50M in projects", // Ilya Vasserman's career history, quoted from ramiusbrm.com/about
 ];
 
 const viewports = { desktop: { width: 1366, height: 900 }, mobile: { width: 390, height: 844 } };
